@@ -14,3 +14,6 @@ class Operation(BaseModel):
     kind: OperationKind
     amount: Decimal
     description: Optional[str]
+
+    class Config:
+        orm_mode = True
