@@ -22,3 +22,6 @@ class Operation(BaseOperation):
 
 class OperationCreate(BaseOperation):
     pass
+
+class OperationUpdate(BaseOperation):
+    pass
