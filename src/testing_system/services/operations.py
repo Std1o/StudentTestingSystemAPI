@@ -1,5 +1,5 @@
 from typing import List, Optional
-from fastapi import Depends
+from fastapi import Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from ..database import get_session
 from .. import tables
@@ -16,6 +16,15 @@ class OperationService:
             query = query.filter_by(kind=kind)
         operations = query.all()
         return operations
+
+    def get(self, operation_id: int) -> tables.Operation:
+        operation = (self.session
+                     .query(tables.Operation)
+                     .filter_by(id=operation_id)
+                     .first())
+        if not operation:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
+        return operation
 
     def create(self, operation_data: OperationCreate) -> tables.Operation:
         operation = tables.Operation(**operation_data.dict())
