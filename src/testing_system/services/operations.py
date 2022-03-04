@@ -3,7 +3,7 @@ from fastapi import Depends
 from sqlalchemy.orm import Session
 from ..database import get_session
 from .. import tables
-from ..models.operations import OperationKind
+from ..models.operations import OperationKind, OperationCreate
 
 
 class OperationService:
@@ -16,3 +16,9 @@ class OperationService:
             query = query.filter_by(kind=kind)
         operations = query.all()
         return operations
+
+    def create(self, operation_data: OperationCreate) -> tables.Operation:
+        operation = tables.Operation(**operation_data.dict())
+        self.session.add(operation)
+        self.session.commit()
+        return operation
