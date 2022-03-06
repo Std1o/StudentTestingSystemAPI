@@ -41,11 +41,13 @@ class CourseService:
         self.session.commit()
         return course
 
-    def _get(self, course_id: int) -> tables.Course:
-        course = (self.session
-                  .query(tables.Course)
-                  .filter_by(id=course_id)
-                  .first())
+    def _get(self, user_id: int, course_id: int) -> tables.Course:
+        query = self.session.query(tables.Course)
+        query = query.filter(tables.Course.id.in_(self.get_course_ids(user_id)))
+        course = query.filter_by(id=course_id).first()
         if not course:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
         return course
+
+    def get(self, user_id: int, course_id: int) -> tables.Operation:
+        return self._get(user_id, course_id)

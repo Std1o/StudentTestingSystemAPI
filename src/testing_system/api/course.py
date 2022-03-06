@@ -16,3 +16,7 @@ def get_courses(user: User = Depends(get_current_user), service: CourseService =
 @router.post('/', response_model=Course)
 def create_course(course_data: BaseCourse, user: User = Depends(get_current_user), service: CourseService = Depends()):
     return service.create(user.id, course_data)
+
+@router.get('/{course_id}', response_model=Course)
+def get_course(course_id: int, user: User = Depends(get_current_user), service: CourseService = Depends()):
+    return service.get(user.id, course_id)
