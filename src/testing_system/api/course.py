@@ -1,6 +1,6 @@
 from typing import List
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Response, status
 
 from testing_system.models.auth import User
 from testing_system.models.course import Course, CourseCreate, BaseCourse, CourseUpdate
@@ -32,3 +32,8 @@ def update_course(
         service: CourseService = Depends(),
         user: User = Depends(get_current_user)):
     return service.update(user.id, course_id, course_data)
+
+@router.delete('/{course_id}')
+def delete_course(course_id: int, user: User = Depends(get_current_user), service: CourseService = Depends()):
+    service.delete(user.id, course_id)
+    return Response(status_code=status.HTTP_204_NO_CONTENT)

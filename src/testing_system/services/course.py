@@ -49,12 +49,21 @@ class CourseService:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
         return course
 
-    def get(self, user_id: int, course_id: int) -> tables.Operation:
+    def get(self, user_id: int, course_id: int) -> tables.Course:
         return self._get(user_id, course_id)
 
     def update(self, user_id: int, course_id: int, course_data: BaseCourse) -> tables.Course:
         course = self._get(user_id, course_id)
+        if course.owner_id != user_id:
+            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN)
         for field, value in course_data:
             setattr(course, field, value)
         self.session.commit()
         return course
+
+    def delete(self, user_id: int, course_id: int):
+        course = self._get(user_id, course_id)
+        if course.owner_id != user_id:
+            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN)
+        self.session.delete(course)
+        self.session.commit()
