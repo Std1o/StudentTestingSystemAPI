@@ -27,7 +27,8 @@ class CourseCreate(BaseCourse):
 
 
 class CourseUpdate(BaseCourse):
-    pass
+    img: str
+    owner_id: int
 
 class Participants(BaseModel):
     user_id: int

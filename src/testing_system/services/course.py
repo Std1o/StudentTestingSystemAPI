@@ -51,3 +51,10 @@ class CourseService:
 
     def get(self, user_id: int, course_id: int) -> tables.Operation:
         return self._get(user_id, course_id)
+
+    def update(self, user_id: int, course_id: int, course_data: BaseCourse) -> tables.Course:
+        course = self._get(user_id, course_id)
+        for field, value in course_data:
+            setattr(course, field, value)
+        self.session.commit()
+        return course
