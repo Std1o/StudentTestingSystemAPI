@@ -1,6 +1,7 @@
 from typing import List
 
 from fastapi import Depends, HTTPException, status
+from sqlalchemy import select
 from sqlalchemy.orm import Session
 from sqlalchemy.inspection import inspect
 
@@ -14,8 +15,10 @@ class CourseService:
         self.session = session
 
     def get_courses(self, user_id: int) -> List[tables.Course]:
+        statement = select(tables.Participants.course_id).filter_by(user_id=user_id)
+        course_ids = self.session.execute(statement).scalars().all()
         query = self.session.query(tables.Course)
-        query = query.filter(tables.Course.participant_ids.split().has(user_id))
+        query = query.filter(tables.Course.id.in_(course_ids))
         courses = query.all()
         return courses
 
