@@ -14,11 +14,13 @@ class CourseService:
     def __init__(self, session: Session = Depends(get_session)):
         self.session = session
 
-    def get_courses(self, user_id: int) -> List[tables.Course]:
+    def get_course_ids(self, user_id: int) -> List[int]:
         statement = select(tables.Participants.course_id).filter_by(user_id=user_id)
-        course_ids = self.session.execute(statement).scalars().all()
+        return self.session.execute(statement).scalars().all()
+
+    def get_courses(self, user_id: int) -> List[tables.Course]:
         query = self.session.query(tables.Course)
-        query = query.filter(tables.Course.id.in_(course_ids))
+        query = query.filter(tables.Course.id.in_(self.get_course_ids(user_id)))
         courses = query.all()
         return courses
 
@@ -39,8 +41,11 @@ class CourseService:
         self.session.commit()
         return course
 
-    def last_row(self, Table: type):  # -> Table
-        primary_key = inspect(Table).primary_key[0].name  # must be an arithmetic type
-        primary_key_row = getattr(Table, primary_key)
-        # get first, sorted by negative ID (primary key)
-        return self.session.query(Table).order_by(-primary_key_row).first()
+    def _get(self, course_id: int) -> tables.Course:
+        course = (self.session
+                  .query(tables.Course)
+                  .filter_by(id=course_id)
+                  .first())
+        if not course:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
+        return course
