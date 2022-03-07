@@ -39,9 +39,7 @@ class CourseCreate(BaseCourse):
 
 
 class CourseUpdate(BaseCourse):
-    img: str
-    owner_id: int
-    course_code: str
+    pass
 
 
 class Participants(BaseModel):
