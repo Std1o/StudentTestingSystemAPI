@@ -1,3 +1,5 @@
+import datetime
+
 import sqlalchemy as sa
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -40,3 +42,29 @@ class Participants(Base):
     id = sa.Column(sa.Integer, primary_key=True)
     user_id = sa.Column(sa.Integer, sa.ForeignKey(User.id))
     course_id = sa.Column(sa.Integer, sa.ForeignKey(Course.owner_id))
+
+
+class Answers(Base):
+    __tablename__ = 'answers'
+
+    id = sa.Column(sa.Integer, primary_key=True)
+    question_id = sa.Column(sa.Integer)
+    answer = sa.Column(sa.String)
+    is_right = sa.Column(sa.Boolean)
+
+
+class Questions(Base):
+    __tablename__ = 'questions'
+
+    id = sa.Column(sa.Integer, primary_key=True)
+    test_id = sa.Column(sa.Integer)
+    question = sa.Column(sa.String)
+
+
+class Test(Base):
+    __tablename__ = 'tests'
+
+    id = sa.Column(sa.Integer, primary_key=True)
+    course_id = sa.Column(sa.Integer)
+    name = sa.Column(sa.String)
+    creation_time = sa.Column(sa.Date)
