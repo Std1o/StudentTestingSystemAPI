@@ -7,7 +7,7 @@ from sqlalchemy.inspection import inspect
 
 from .. import tables
 from ..database import get_session
-from ..models.course import CourseCreate, Participants, BaseCourse
+from ..models.course import CourseCreate, Participants, BaseCourse, Course
 
 
 class CourseService:
@@ -30,13 +30,18 @@ class CourseService:
             users.append(user)
         return users
 
-    def get_courses(self, user_id: int) -> List[tables.Course]:
+    def get_courses(self, user_id: int) -> List[Course]:
         query = self.session.query(tables.Course)
         query = query.filter(tables.Course.id.in_(self.get_course_ids(user_id)))
-        courses = query.all()
+
+        courses = []
+        for course_row in query.all():
+            course: Course = course_row
+            course.participants = self.get_participants(course.id)
+            courses.append(course)
         return courses
 
-    def create(self, user_id: int, course_data: BaseCourse) -> tables.Course:
+    def create(self, user_id: int, course_data: BaseCourse) -> Course:
         course_dict = course_data.dict()
         course_dict['img'] = 'placeholder'
         course_dict['owner_id'] = user_id
@@ -52,6 +57,8 @@ class CourseService:
         participants = Participants(user_id=course_dict['owner_id'], course_id=courses[-1].id)
         self.session.add(tables.Participants(**participants.dict()))
         self.session.commit()
+        course: Course = course
+        course.participants = self.get_participants(course.id)
         return course
 
     def _get(self, user_id: int, course_id: int) -> tables.Course:

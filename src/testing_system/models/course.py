@@ -1,10 +1,7 @@
-from typing import List, Any, Optional
-
+from typing import List
 from pydantic import BaseModel
 import random
-
 from .auth import User
-from .. import tables
 
 
 class BaseCourse(BaseModel):
@@ -26,7 +23,7 @@ def generate_course_code() -> str:
     seq = "abcdefghijklmnopqrstuvwxyz0123456789"
     code = ''
     for i in range(0, 6):
-        code += seq[random.randint(0, len(seq))]
+        code += random.choice(seq)
     return code.upper()
 
 
