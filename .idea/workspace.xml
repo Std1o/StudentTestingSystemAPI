@@ -4,8 +4,6 @@
     <list default="true" id="92b7f236-a5d9-4998-a0b9-55e63b873691" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/database.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/testing_system/api/course.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/testing_system/api/course.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/testing_system/models/course.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/testing_system/models/course.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/testing_system/services/course.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/testing_system/services/course.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -103,6 +101,7 @@
       <workItem from="1646640291392" duration="1139000" />
       <workItem from="1646644716423" duration="4209000" />
       <workItem from="1646649505144" duration="1121000" />
+      <workItem from="1646650799632" duration="188000" />
     </task>
     <servers />
   </component>
@@ -121,6 +120,6 @@
     </option>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/StudentTestingSystemAPI$uvicorn.coverage" NAME="uvicorn Coverage Results" MODIFIED="1646650677301" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/StudentTestingSystemAPI$uvicorn.coverage" NAME="uvicorn Coverage Results" MODIFIED="1646650888154" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

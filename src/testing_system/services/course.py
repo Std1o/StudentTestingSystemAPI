@@ -61,18 +61,20 @@ class CourseService:
         course.participants = self.get_participants(course.id)
         return course
 
-    def _get(self, user_id: int, course_id: int) -> tables.Course:
+    def _get(self, user_id: int, course_id: int) -> Course:
         query = self.session.query(tables.Course)
         query = query.filter(tables.Course.id.in_(self.get_course_ids(user_id)))
         course = query.filter_by(id=course_id).first()
         if not course:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
+        course: Course = course
+        course.participants = self.get_participants(course.id)
         return course
 
-    def get(self, user_id: int, course_id: int) -> tables.Course:
+    def get(self, user_id: int, course_id: int) -> Course:
         return self._get(user_id, course_id)
 
-    def update(self, user_id: int, course_id: int, course_data: BaseCourse) -> tables.Course:
+    def update(self, user_id: int, course_id: int, course_data: BaseCourse) -> Course:
         course = self._get(user_id, course_id)
         if course.owner_id != user_id:
             raise HTTPException(status_code=status.HTTP_403_FORBIDDEN)
