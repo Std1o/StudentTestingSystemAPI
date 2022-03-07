@@ -89,3 +89,11 @@ class CourseService:
             raise HTTPException(status_code=status.HTTP_403_FORBIDDEN)
         self.session.delete(course)
         self.session.commit()
+
+    def join(self, user_id: int, course_id) -> Course:
+        if user_id in self.get_participants_ids(course_id):
+            raise HTTPException(status_code=418, detail="You have already joined the course")
+        participants = Participants(user_id=user_id, course_id=course_id)
+        self.session.add(tables.Participants(**participants.dict()))
+        self.session.commit()
+        return self._get(user_id, course_id)
