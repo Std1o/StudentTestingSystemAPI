@@ -20,3 +20,7 @@ def create_test(test_data: BaseTest,
 @router.get('/', response_model=List[Test])
 def get_tests(course_id: int, user: User = Depends(get_current_user), service: TestService = Depends()):
     return service.get_tests(user.id, course_id)
+
+@router.get('/{test_id}', response_model=Test)
+def get_course(course_id: int, test_id: int, user: User = Depends(get_current_user), service: TestService = Depends()):
+    return service.get(user.id, course_id, test_id)

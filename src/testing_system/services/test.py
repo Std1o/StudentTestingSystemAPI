@@ -95,3 +95,13 @@ class TestService:
                 test.questions.append(question)
             tests.append(test)
         return tests
+
+    def _get(self, user_id: int, course_id: int, test_id: int) -> Test:
+        tests = self.get_tests(user_id, course_id)
+        tests = [test for test in tests if test.course_id == course_id and test.id == test_id]
+        if not tests:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
+        return tests[0]
+
+    def get(self, user_id: int, course_id: int, test_id: int) -> Test:
+        return self._get(user_id, course_id, test_id)
