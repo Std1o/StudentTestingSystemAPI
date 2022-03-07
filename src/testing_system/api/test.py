@@ -8,8 +8,5 @@ router = APIRouter(prefix='/tests')
 
 
 @router.post('/', response_model=Test)
-def create_test(course_id: int,
-                  test_data: BaseTest,
-                  user: User = Depends(get_current_user),
-                  service: TestService = Depends()):
-    return service.create(user.id, course_id, test_data)
+def create_test(test_data: BaseTest, service: TestService = Depends()):
+    return service.create(test_data)
