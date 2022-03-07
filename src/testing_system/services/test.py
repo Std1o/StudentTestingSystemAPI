@@ -4,6 +4,7 @@ from ..database import get_session
 from .. import tables
 from ..models.test import BaseTest, Test, BaseQuestion
 import datetime
+from .. import constants
 
 
 class TestService:
@@ -44,7 +45,9 @@ class TestService:
         self.session.add(answer_row)
         self.session.commit()
 
-    def create(self, test_data: BaseTest) -> Test:
+    def create(self, user_id: int, course_owner_id: int, test_data: BaseTest) -> Test:
+        if course_owner_id != user_id:
+            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=constants.ACCESS_ERROR)
         test = self.create_test(test_data)
         test_id = self.get_last_test_id(test_data)
         for question in test_data.questions:

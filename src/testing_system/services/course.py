@@ -3,7 +3,7 @@ from typing import List
 from fastapi import Depends, HTTPException, status
 from sqlalchemy import select
 from sqlalchemy.orm import Session
-from sqlalchemy.inspection import inspect
+from .. import constants
 
 from .. import tables
 from ..database import get_session
@@ -77,7 +77,7 @@ class CourseService:
     def update(self, user_id: int, course_id: int, course_data: BaseCourse) -> Course:
         course = self._get(user_id, course_id)
         if course.owner_id != user_id:
-            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN)
+            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=constants.ACCESS_ERROR)
         for field, value in course_data:
             setattr(course, field, value)
         self.session.commit()
@@ -86,7 +86,7 @@ class CourseService:
     def delete(self, user_id: int, course_id: int):
         course = self._get(user_id, course_id)
         if course.owner_id != user_id:
-            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN)
+            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=constants.ACCESS_ERROR)
         self.session.delete(course)
         self.session.commit()
 
