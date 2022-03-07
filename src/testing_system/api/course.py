@@ -12,7 +12,12 @@ router = APIRouter(prefix='/courses')
 
 @router.get('/', response_model=List[Course])
 def get_courses(user: User = Depends(get_current_user), service: CourseService = Depends()):
-    return service.get_courses(user.id)
+    courses = []
+    for course_table in service.get_courses(user.id):
+        course: Course = course_table
+        course.participants = service.get_participants(course.id)
+        courses.append(course)
+    return courses
 
 
 @router.post('/', response_model=Course)

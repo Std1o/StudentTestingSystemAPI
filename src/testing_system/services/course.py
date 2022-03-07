@@ -18,6 +18,18 @@ class CourseService:
         statement = select(tables.Participants.course_id).filter_by(user_id=user_id)
         return self.session.execute(statement).scalars().all()
 
+    def get_participants_ids(self, course_id: int) -> List[int]:
+        statement = select(tables.Participants.user_id).filter_by(course_id=course_id)
+        return self.session.execute(statement).scalars().all()
+
+    def get_participants(self, course_id: int) -> List[tables.User]:
+        participants_ids = self.get_participants_ids(course_id)
+        users: List[tables.User] = []
+        for user_id in participants_ids:
+            user = self.session.query(tables.User).filter_by(id=user_id).first()
+            users.append(user)
+        return users
+
     def get_courses(self, user_id: int) -> List[tables.Course]:
         query = self.session.query(tables.Course)
         query = query.filter(tables.Course.id.in_(self.get_course_ids(user_id)))

@@ -3,6 +3,9 @@ from typing import List, Any, Optional
 from pydantic import BaseModel
 import random
 
+from .auth import User
+from .. import tables
+
 
 class BaseCourse(BaseModel):
     name: str
@@ -13,6 +16,7 @@ class Course(BaseCourse):
     owner_id: int
     img: str
     course_code: str
+    participants: List[User]
 
     class Config:
         orm_mode = True
