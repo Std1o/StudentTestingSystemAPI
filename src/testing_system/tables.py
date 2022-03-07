@@ -29,7 +29,9 @@ class Course(Base):
     id = sa.Column(sa.Integer, primary_key=True)
     owner_id = sa.Column(sa.Integer, sa.ForeignKey(User.id))
     name = sa.Column(sa.String)
+    course_code = sa.Column(sa.String)
     img = sa.Column(sa.String)
+    sa.UniqueConstraint('course_code')
 
 
 class Participants(Base):

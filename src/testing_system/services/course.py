@@ -28,6 +28,7 @@ class CourseService:
         course_dict = course_data.dict()
         course_dict['img'] = 'placeholder'
         course_dict['owner_id'] = user_id
+        course_dict['course_code'] = 'placeholder'
         course_creator = CourseCreate(**course_dict)
         course = tables.Course(**course_creator.dict())
         self.session.add(course)
