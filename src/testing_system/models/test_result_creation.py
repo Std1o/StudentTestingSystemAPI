@@ -9,6 +9,7 @@ class AnswerResultCreation(BaseModel):
 
 class QuestionResultCreation(BaseModel):
     question_id: int
+    answers: List[AnswerResultCreation]
 
 
 class TestResultCreation(BaseModel):

@@ -133,26 +133,34 @@ class TestService:
 
     def calculate_result(self, user_id: int, course_id: int,
                          test_id: int,
-                         questions: List[QuestionResultCreation],
-                         answers: List[AnswerResultCreation]):
+                         questions: List[QuestionResultCreation]):
         self.check_accessibility(user_id, course_id)
+
+        global_score: float = 0
+
+        for question in questions:
+            score: float = 0
+            for answer_result in question.answers:
+                self.create_user_answer(user_id, answer_result)
+                answer = self.get_answer(answer_result.answer_id)
+
+                ans_score = 1.0 / len(self.get_right_answers(question.answers))
+                if answer.is_right == answer_result.is_selected:
+                    score += ans_score
+                else:
+                    score -= ans_score
+                global_score += score
+                if score < 0:
+                    score = 0
+            self.create_question_result(user_id, question.question_id, score)
+        if global_score < 0:
+            global_score = 0
+        self.create_test_result(user_id, len(questions), global_score, test_id)
+
+    def get_right_answers(self, answers: List[AnswerResultCreation]):
         right_answers = []
         for ans in answers:
             answer = self.get_answer(ans.answer_id)
             if answer.is_right:
                 right_answers.append(ans)
-        score: float = 0
-        for answer_result in answers:
-            self.create_user_answer(user_id, answer_result)
-            answer = self.get_answer(answer_result.answer_id)
-
-            ans_score = 1.0 / len(right_answers)
-            if answer.is_right == answer_result.is_selected:
-                score += ans_score
-            else:
-                score -= ans_score
-            if score < 0:
-                score = 0
-        for question in questions:
-            self.create_question_result(user_id, question.question_id, score)
-        self.create_test_result(user_id, len(questions), score, test_id)
+        return right_answers

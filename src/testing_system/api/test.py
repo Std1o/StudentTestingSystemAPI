@@ -33,8 +33,7 @@ def get_test(course_id: int, test_id: int, user: User = Depends(get_current_user
 def calculate_result(course_id: int,
                      test_id: int,
                      questions: List[QuestionResultCreation],
-                     answers: List[AnswerResultCreation],
                      service: TestService = Depends(),
                      user: User = Depends(get_current_user)):
-    service.calculate_result(user.id, course_id, test_id, questions, answers)
+    service.calculate_result(user.id, course_id, test_id, questions)
     return Response(status_code=status.HTTP_204_NO_CONTENT)
