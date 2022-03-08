@@ -4,8 +4,6 @@
     <list default="true" id="92b7f236-a5d9-4998-a0b9-55e63b873691" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/database.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/testing_system/api/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/testing_system/api/test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/testing_system/models/test_result_creation.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/testing_system/models/test_result_creation.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/testing_system/services/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/testing_system/services/test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -117,6 +115,7 @@
       <workItem from="1646747899530" duration="723000" />
       <workItem from="1646749427784" duration="4558000" />
       <workItem from="1646758453796" duration="648000" />
+      <workItem from="1646759141825" duration="974000" />
     </task>
     <servers />
   </component>
@@ -135,6 +134,6 @@
     </option>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/StudentTestingSystemAPI$uvicorn.coverage" NAME="uvicorn Coverage Results" MODIFIED="1646759067279" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/StudentTestingSystemAPI$uvicorn.coverage" NAME="uvicorn Coverage Results" MODIFIED="1646760629229" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

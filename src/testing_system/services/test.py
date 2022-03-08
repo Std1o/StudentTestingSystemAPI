@@ -140,18 +140,17 @@ class TestService:
 
         for question in questions:
             score: float = 0
+            ans_score = len(self.get_right_answers(question.answers)) / len(question.answers)
             for answer_result in question.answers:
                 self.create_user_answer(user_id, answer_result)
                 answer = self.get_answer(answer_result.answer_id)
-
-                ans_score = 1.0 / len(self.get_right_answers(question.answers))
                 if answer.is_right == answer_result.is_selected:
                     score += ans_score
                 else:
                     score -= ans_score
-                global_score += score
                 if score < 0:
                     score = 0
+            global_score += score
             self.create_question_result(user_id, question.question_id, score)
         if global_score < 0:
             global_score = 0
