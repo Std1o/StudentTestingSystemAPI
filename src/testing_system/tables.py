@@ -68,3 +68,30 @@ class Test(Base):
     course_id = sa.Column(sa.Integer)
     name = sa.Column(sa.String)
     creation_time = sa.Column(sa.Date)
+
+
+class UsersAnswers(Base):
+    __tablename__ = 'users_answers'
+
+    id = sa.Column(sa.Integer, primary_key=True)
+    user_id = sa.Column(sa.Integer, sa.ForeignKey(User.id))
+    answer_id = sa.Column(sa.Integer, sa.ForeignKey(Answers.id))
+    is_selected = sa.Column(sa.Boolean)
+
+class QuestionsResults(Base):
+    __tablename__ = 'questions_results'
+
+    id = sa.Column(sa.Integer, primary_key=True)
+    user_id = sa.Column(sa.Integer, sa.ForeignKey(User.id))
+    question_id = sa.Column(sa.Integer, sa.ForeignKey(Questions.id))
+    score = sa.Column(sa.Float)
+
+
+class Results(Base):
+    __tablename__ = 'results'
+
+    id = sa.Column(sa.Integer, primary_key=True)
+    user_id = sa.Column(sa.Integer, sa.ForeignKey(User.id))
+    test_id = sa.Column(sa.Integer, sa.ForeignKey(Test.id))
+    max_score = sa.Column(sa.Integer)
+    score = sa.Column(sa.Float)
