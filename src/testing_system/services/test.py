@@ -87,11 +87,10 @@ class TestService:
             for question_row in self.get_questions(test.id):
                 answers: List[BaseAnswer] = []
                 for ans in self.get_answers(question_row.id):
-                    answers.append(BaseAnswer(answer=ans.answer, is_right=ans.is_right))
+                    answers.append(BaseAnswer(answer=ans.answer, is_right=None))
                 question = Question(id=question_row.id,
                                     question=question_row.question,
-                                    answers=answers,
-                                    rightAnswers=None)
+                                    answers=answers)
                 test.questions.append(question)
             tests.append(test)
         return tests
