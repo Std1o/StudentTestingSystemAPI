@@ -91,7 +91,7 @@ class TestService:
                 question = Question(id=question_row.id,
                                     question=question_row.question,
                                     answers=answers,
-                                    rightAnswers=[ans for ans in answers if ans in answers])
+                                    rightAnswers=None)
                 test.questions.append(question)
             tests.append(test)
         return tests

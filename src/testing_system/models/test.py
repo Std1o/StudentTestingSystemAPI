@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 from pydantic import BaseModel
 from datetime import date
@@ -7,7 +7,7 @@ from datetime import date
 class BaseQuestion(BaseModel):
     question: str
     answers: List[str]
-    rightAnswers: List[str]
+    rightAnswers: Optional[List[str]]
 
 
 class BaseTest(BaseModel):
