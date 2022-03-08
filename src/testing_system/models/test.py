@@ -4,10 +4,14 @@ from pydantic import BaseModel
 from datetime import date
 
 
+class BaseAnswer(BaseModel):
+    answer: str
+    is_right: Optional[bool]
+
+
 class BaseQuestion(BaseModel):
     question: str
-    answers: List[str]
-    rightAnswers: Optional[List[str]]
+    answers: List[BaseAnswer]
 
 
 class BaseTest(BaseModel):

@@ -4,7 +4,7 @@ from fastapi import Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from ..database import get_session
 from .. import tables
-from ..models.test import BaseTest, Test, BaseQuestion, Question
+from ..models.test import BaseTest, Test, BaseQuestion, Question, BaseAnswer
 import datetime
 from .. import constants
 from sqlalchemy import select
@@ -37,8 +37,8 @@ class TestService:
         statement = select(tables.Questions).filter_by(test_id=test_id)
         return self.session.execute(statement).scalars().all()
 
-    def get_answers(self, question_id: int) -> List[str]:
-        statement = select(tables.Answers.answer).filter_by(question_id=question_id)
+    def get_answers(self, question_id: int) -> List[tables.Answers]:
+        statement = select(tables.Answers).filter_by(question_id=question_id)
         return self.session.execute(statement).scalars().all()
 
     def get_last_test_id(self, test_data: BaseTest):
@@ -56,11 +56,9 @@ class TestService:
         questions = query.all()
         return questions[-1].id
 
-    def create_answer(self, test_id: int, answer: str, question: BaseQuestion):
-        question_id = self.get_last_question_id(test_id)
-        answer_dict = dict(question_id=question_id,
-                           answer=answer,
-                           is_right=(answer in question.rightAnswers))
+    def create_answer(self, test_id: int, answer: BaseAnswer):
+        answer_dict = answer.dict()
+        answer_dict['question_id'] = self.get_last_question_id(test_id)
         answer_row = tables.Answers(**answer_dict)
         self.session.add(answer_row)
         self.session.commit()
@@ -74,7 +72,7 @@ class TestService:
         for question in test_data.questions:
             self.create_question(test_id, question)
             for answer in question.answers:
-                self.create_answer(test_id, answer, question)
+                self.create_answer(test_id, answer)
         test: Test = Test.create(test, test_id, test_data.course_id, test_data.name, test_data.creation_time,
                                  test_data.questions)
         return test
@@ -87,7 +85,9 @@ class TestService:
             test: Test = test
             test.questions = []
             for question_row in self.get_questions(test.id):
-                answers = self.get_answers(question_row.id)
+                answers: List[BaseAnswer] = []
+                for ans in self.get_answers(question_row.id):
+                    answers.append(BaseAnswer(answer=ans.answer, is_right=ans.is_right))
                 question = Question(id=question_row.id,
                                     question=question_row.question,
                                     answers=answers,
