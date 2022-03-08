@@ -4,7 +4,7 @@ from fastapi import Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from ..database import get_session
 from .. import tables
-from ..models.test import BaseTest, Test, BaseQuestion, Question, BaseAnswer
+from ..models.test import BaseTest, Test, BaseQuestion, Question, BaseAnswer, Answer
 import datetime
 from .. import constants
 from sqlalchemy import select
@@ -67,14 +67,12 @@ class TestService:
     def create(self, user_id: int, course_owner_id: int, test_data: BaseTest) -> Test:
         if course_owner_id != user_id:
             raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=constants.ACCESS_ERROR)
-        test = self.create_test(test_data)
         test_id = self.get_last_test_id(test_data)
         for question in test_data.questions:
             self.create_question(test_id, question)
             for answer in question.answers:
                 self.create_answer(test_id, answer)
-        test: Test = Test.create(test, test_id, test_data.course_id, test_data.name, test_data.creation_time,
-                                 test_data.questions)
+        test = self._get(user_id, test_data.course_id, test_id)
         return test
 
     def get_tests(self, user_id: int, course_id: int, ) -> List[Test]:
@@ -85,9 +83,9 @@ class TestService:
             test: Test = test
             test.questions = []
             for question_row in self.get_questions(test.id):
-                answers: List[BaseAnswer] = []
+                answers: List[Answer] = []
                 for ans in self.get_answers(question_row.id):
-                    answers.append(BaseAnswer(answer=ans.answer, is_right=None))
+                    answers.append(Answer(id=ans.id, answer=ans.answer, is_right=None))
                 question = Question(id=question_row.id,
                                     question=question_row.question,
                                     answers=answers)

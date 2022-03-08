@@ -3,22 +3,11 @@ from typing import List, Optional
 from pydantic import BaseModel
 from datetime import date
 
-
-class BaseAnswer(BaseModel):
-    answer: str
-    is_right: Optional[bool]
+from testing_system.models.test_creation import BaseAnswer, BaseQuestion, BaseTest
 
 
-class BaseQuestion(BaseModel):
-    question: str
-    answers: List[BaseAnswer]
-
-
-class BaseTest(BaseModel):
-    course_id: int
-    name: str
-    creation_time: date
-    questions: List[BaseQuestion]
+class Answer(BaseAnswer):
+    id: int
 
     class Config:
         orm_mode = True
@@ -26,6 +15,7 @@ class BaseTest(BaseModel):
 
 class Question(BaseQuestion):
     id: int
+    answers: List[Answer]
 
     class Config:
         orm_mode = True
@@ -33,14 +23,7 @@ class Question(BaseQuestion):
 
 class Test(BaseTest):
     id: int
-
-    def create(self, id: int, course_id: int, name: str, creation_time: date, questions: List[BaseQuestion]):
-        self.id = id
-        self.course_id = course_id
-        self.name = name
-        self.creation_time = creation_time
-        self.questions = questions
-        return self
+    questions: List[Question]
 
     class Config:
         orm_mode = True
