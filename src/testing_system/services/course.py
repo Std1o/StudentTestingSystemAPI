@@ -41,6 +41,10 @@ class CourseService:
             users.append(user)
         return users
 
+    def get_participants_from_table(self, course_id: int) -> List[tables.Participants]:
+        statement = select(tables.Participants).filter_by(course_id=course_id)
+        return self.session.execute(statement).scalars().all()
+
     def check_accessibility(self, user_id, course_id: int):
         course = self._get(user_id, course_id)
         if course.owner_id != user_id:
@@ -107,9 +111,15 @@ class CourseService:
         self.session.commit()
         return course
 
+    def delete_participants(self, course_id: int):
+        for participant in self.get_participants_from_table(course_id):
+            self.session.delete(participant)
+            self.session.commit()
+
     def delete(self, user_id: int, course_id: int):
         course = self._get(user_id, course_id)
         check_accessibility(user_id, course)
+        self.delete_participants(course_id)
         self.session.delete(course)
         self.session.commit()
 
