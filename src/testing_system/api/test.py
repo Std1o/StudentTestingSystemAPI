@@ -4,6 +4,7 @@ from testing_system.models.test import Test, BaseTest
 from testing_system.models.auth import User
 from testing_system.models.test_result import TestResult
 from testing_system.models.test_result_creation import QuestionResultCreation, AnswerResultCreation
+from testing_system.models.test_results import TestResults
 from testing_system.services.auth import get_current_user
 from testing_system.services.course import CourseService
 from testing_system.test_service.result_getter import TestResultService
@@ -11,6 +12,7 @@ from testing_system.test_service.test_getter import TestSearchingService
 from testing_system.test_service.test_creation import TestCreationService
 from testing_system.test_service.test_deletion import TestDeletionService
 from testing_system.test_service.test_result_calculator import TestResultCalculatorService
+from testing_system.test_service.test_results_getter import TestResultsService
 
 router = APIRouter(prefix='/tests')
 
@@ -51,6 +53,12 @@ def delete_test(course_id: int, test_id: int, user: User = Depends(get_current_u
     service.delete(user.id, course_id, test_id)
     return Response(status_code=status.HTTP_204_NO_CONTENT)
 
-@router.get('/results/{test_id}', response_model=TestResult)
+
+@router.get('/result/{test_id}', response_model=TestResult)
 def get_result(course_id: int, test_id: int, user: User = Depends(get_current_user), service: TestResultService = Depends()):
     return service.get_result(user.id, course_id, test_id)
+
+
+@router.get('/results/{test_id}', response_model=TestResults)
+def get_results(course_id: int, test_id: int, user: User = Depends(get_current_user), service: TestResultsService = Depends()):
+    return service.get_results(user.id, course_id, test_id, user.username)
