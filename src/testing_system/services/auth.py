@@ -4,6 +4,7 @@ from fastapi import HTTPException, status, Depends
 from fastapi.security import OAuth2PasswordBearer
 from passlib.hash import bcrypt
 from pydantic import ValidationError
+from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from ..database import get_session
@@ -67,7 +68,13 @@ class AuthService:
     def __init__(self, session: Session = Depends(get_session)):
         self.session = session
 
+    def get_user_by_email(self, email: str) -> tables.User:
+        statement = select(tables.User).filter_by(email=email)
+        return self.session.execute(statement).scalars().first()
+
     def reg(self, user_data: UserCreate) -> Token:
+        if self.get_user_by_email(user_data.email):
+            raise HTTPException(status_code=418, detail="User with this email already exists")
         user = tables.User(
             email=user_data.email,
             username=user_data.username,
