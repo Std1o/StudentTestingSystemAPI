@@ -4,8 +4,8 @@
     <list default="true" id="92b7f236-a5d9-4998-a0b9-55e63b873691" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/database.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/testing_system/models/course.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/testing_system/models/course.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/testing_system/services/course.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/testing_system/services/course.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/testing_system/api/course.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/testing_system/api/course.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/testing_system/test_service/test_deletion.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/testing_system/test_service/test_deletion.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -136,6 +136,9 @@
       <workItem from="1646832974427" duration="360000" />
       <workItem from="1646833362242" duration="426000" />
       <workItem from="1646833849245" duration="441000" />
+      <workItem from="1646834581174" duration="163000" />
+      <workItem from="1646834757250" duration="27000" />
+      <workItem from="1646853678995" duration="808000" />
     </task>
     <servers />
   </component>
@@ -154,6 +157,6 @@
     </option>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/StudentTestingSystemAPI$uvicorn.coverage" NAME="uvicorn Coverage Results" MODIFIED="1646834227984" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/StudentTestingSystemAPI$uvicorn.coverage" NAME="uvicorn Coverage Results" MODIFIED="1646854391274" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

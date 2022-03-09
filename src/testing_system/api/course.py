@@ -6,6 +6,7 @@ from testing_system.models.auth import User
 from testing_system.models.course import Course, CourseCreate, BaseCourse, CourseUpdate
 from testing_system.services.auth import get_current_user
 from testing_system.services.course import CourseService
+from testing_system.test_service.test_deletion import TestDeletionService
 
 router = APIRouter(prefix='/courses')
 
@@ -34,7 +35,10 @@ def update_course(
     return service.update(user.id, course_id, course_data)
 
 @router.delete('/{course_id}')
-def delete_course(course_id: int, user: User = Depends(get_current_user), service: CourseService = Depends()):
+def delete_course(course_id: int, user: User = Depends(get_current_user),
+                  service: CourseService = Depends(),
+                  test_deletion_service: TestDeletionService = Depends()):
+    test_deletion_service.delete_all_course_tests(user.id, course_id)
     service.delete(user.id, course_id)
     return Response(status_code=status.HTTP_204_NO_CONTENT)
 
