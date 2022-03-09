@@ -1,7 +1,7 @@
 from typing import List
 
 from fastapi import Depends
-from testing_system.test_service.search_engine import TestSearchingService
+from testing_system.test_service.test_getter import TestSearchingService
 from sqlalchemy.orm import Session
 from ..database import get_session
 from sqlalchemy import select

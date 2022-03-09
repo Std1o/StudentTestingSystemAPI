@@ -3,7 +3,6 @@ from fastapi import Depends
 from sqlalchemy.orm import Session
 
 from .base_test_service import BaseTestService
-from .search_engine import TestSearchingService
 from .. import tables
 from ..database import get_session
 from ..models.test_result_creation import QuestionResultCreation, AnswerResultCreation

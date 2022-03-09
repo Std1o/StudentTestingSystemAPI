@@ -5,7 +5,7 @@ from testing_system.models.auth import User
 from testing_system.models.test_result_creation import QuestionResultCreation, AnswerResultCreation
 from testing_system.services.auth import get_current_user
 from testing_system.services.course import CourseService
-from testing_system.test_service.search_engine import TestSearchingService
+from testing_system.test_service.test_getter import TestSearchingService
 from testing_system.test_service.test_creation import TestCreationService
 from testing_system.test_service.test_deletion import TestDeletionService
 from testing_system.test_service.test_result_calculator import TestResultCalculatorService
