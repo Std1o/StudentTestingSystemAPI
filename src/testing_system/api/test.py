@@ -7,6 +7,7 @@ from testing_system.services.auth import get_current_user
 from testing_system.services.course import CourseService
 from testing_system.test_service.search_engine import TestSearchingService
 from testing_system.test_service.test_creation import TestCreationService
+from testing_system.test_service.test_deletion import TestDeletionService
 from testing_system.test_service.test_result_calculator import TestResultCalculatorService
 
 router = APIRouter(prefix='/tests')
@@ -40,4 +41,10 @@ def calculate_result(course_id: int,
                      service: TestResultCalculatorService = Depends(),
                      user: User = Depends(get_current_user)):
     service.calculate_result(user.id, course_id, test_id, questions)
+    return Response(status_code=status.HTTP_204_NO_CONTENT)
+
+
+@router.delete('/{test_id}')
+def delete_test(course_id: int, test_id: int, user: User = Depends(get_current_user), service: TestDeletionService = Depends()):
+    service.delete(user.id, course_id, test_id)
     return Response(status_code=status.HTTP_204_NO_CONTENT)
