@@ -10,6 +10,11 @@ from ..database import get_session
 from ..models.course import CourseCreate, Participants, BaseCourse, Course
 
 
+def check_accessibility(user_id, course: Course):
+    if course.owner_id != user_id:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=constants.ACCESS_ERROR)
+
+
 class CourseService:
     def __init__(self, session: Session = Depends(get_session)):
         self.session = session
@@ -29,6 +34,11 @@ class CourseService:
             user = self.session.query(tables.User).filter_by(id=user_id).first()
             users.append(user)
         return users
+
+    def check_accessibility(self, user_id, course_id: int):
+        course = self._get(user_id, course_id)
+        if course.owner_id != user_id:
+            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=constants.ACCESS_ERROR)
 
     def get_courses(self, user_id: int) -> List[Course]:
         query = self.session.query(tables.Course)
@@ -76,8 +86,7 @@ class CourseService:
 
     def update(self, user_id: int, course_id: int, course_data: BaseCourse) -> Course:
         course = self._get(user_id, course_id)
-        if course.owner_id != user_id:
-            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=constants.ACCESS_ERROR)
+        check_accessibility(user_id, course)
         for field, value in course_data:
             setattr(course, field, value)
         self.session.commit()
@@ -85,8 +94,7 @@ class CourseService:
 
     def delete(self, user_id: int, course_id: int):
         course = self._get(user_id, course_id)
-        if course.owner_id != user_id:
-            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=constants.ACCESS_ERROR)
+        check_accessibility(user_id, course)
         self.session.delete(course)
         self.session.commit()
 
