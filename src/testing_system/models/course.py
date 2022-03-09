@@ -19,14 +19,6 @@ class Course(BaseCourse):
         orm_mode = True
 
 
-def generate_course_code() -> str:
-    seq = "abcdefghijklmnopqrstuvwxyz0123456789"
-    code = ''
-    for i in range(0, 6):
-        code += random.choice(seq)
-    return code.upper()
-
-
 class CourseCreate(BaseCourse):
     img: str
     owner_id: int
@@ -35,7 +27,6 @@ class CourseCreate(BaseCourse):
     def __init__(self, **data: BaseCourse):
         super().__init__(**data)
         self.img = f"img{random.randint(1, 8)}"
-        self.course_code = generate_course_code()
 
 
 class CourseUpdate(BaseCourse):

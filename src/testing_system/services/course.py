@@ -1,10 +1,9 @@
 from typing import List
-
 from fastapi import Depends, HTTPException, status
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 from .. import constants
-
+import random
 from .. import tables
 from ..database import get_session
 from ..models.course import CourseCreate, Participants, BaseCourse, Course
@@ -13,6 +12,13 @@ from ..models.course import CourseCreate, Participants, BaseCourse, Course
 def check_accessibility(user_id, course: Course):
     if course.owner_id != user_id:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=constants.ACCESS_ERROR)
+
+def generate_course_code() -> str:
+    seq = "abcdefghijklmnopqrstuvwxyz0123456789"
+    code = ''
+    for i in range(0, 6):
+        code += random.choice(seq)
+    return code.upper()
 
 
 class CourseService:
@@ -59,7 +65,12 @@ class CourseService:
         course_dict = course_data.dict()
         course_dict['img'] = 'placeholder'
         course_dict['owner_id'] = user_id
-        course_dict['course_code'] = 'placeholder'
+        course_dict['course_code'] = generate_course_code()
+
+        '''The probability that the code is already occupied is extremely small, 
+        but if this happens, we generate a new code'''
+        if self.get_course_by_code(course_dict['course_code']):
+            course_dict['course_code'] = generate_course_code()
         course_creator = CourseCreate(**course_dict)
         course = tables.Course(**course_creator.dict())
         self.session.add(course)
