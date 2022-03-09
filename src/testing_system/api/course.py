@@ -39,5 +39,5 @@ def delete_course(course_id: int, user: User = Depends(get_current_user), servic
     return Response(status_code=status.HTTP_204_NO_CONTENT)
 
 @router.post('/{course_id}', response_model=Course)
-def join_the_course(course_id: int, user: User = Depends(get_current_user), service: CourseService = Depends()):
-    return service.join(user.id, course_id)
+def join_the_course(course_code: str, user: User = Depends(get_current_user), service: CourseService = Depends()):
+    return service.join(user.id, course_code)

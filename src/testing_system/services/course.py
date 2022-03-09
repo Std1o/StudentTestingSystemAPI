@@ -40,6 +40,10 @@ class CourseService:
         if course.owner_id != user_id:
             raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=constants.ACCESS_ERROR)
 
+    def get_course_by_code(self, course_code: str) -> tables.Course:
+        statement = select(tables.Course).filter_by(course_code=course_code)
+        return self.session.execute(statement).scalars().first()
+
     def get_courses(self, user_id: int) -> List[Course]:
         query = self.session.query(tables.Course)
         query = query.filter(tables.Course.id.in_(self.get_course_ids(user_id)))
@@ -98,7 +102,9 @@ class CourseService:
         self.session.delete(course)
         self.session.commit()
 
-    def join(self, user_id: int, course_id) -> Course:
+    def join(self, user_id: int, course_code: str) -> Course:
+        course = self.get_course_by_code(course_code)
+        course_id = course.id
         if user_id in self.get_participants_ids(course_id):
             raise HTTPException(status_code=418, detail="You have already joined the course")
         participants = Participants(user_id=user_id, course_id=course_id)
