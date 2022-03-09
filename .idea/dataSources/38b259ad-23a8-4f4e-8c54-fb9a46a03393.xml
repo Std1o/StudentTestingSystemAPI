@@ -1392,235 +1392,235 @@
       <RefColNames>id</RefColNames>
       <RefTableName>users</RefTableName>
     </foreign-key>
-    <key id="513" parent="492">
+    <index id="513" parent="492" name="sqlite_autoindex_courses_1">
+      <ColNames>course_code</ColNames>
+      <ColumnCollations></ColumnCollations>
+      <NameSurrogate>1</NameSurrogate>
+      <Unique>1</Unique>
+    </index>
+    <key id="514" parent="492">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="514" parent="493" name="id">
+    <key id="515" parent="492">
+      <ColNames>course_code</ColNames>
+      <UnderlyingIndexName>sqlite_autoindex_courses_1</UnderlyingIndexName>
+    </key>
+    <column id="516" parent="493" name="id">
       <DataType>INTEGER|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="515" parent="493" name="user_id">
+    <column id="517" parent="493" name="user_id">
       <DataType>INTEGER|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="516" parent="493" name="date">
+    <column id="518" parent="493" name="date">
       <DataType>DATE|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="517" parent="493" name="kind">
+    <column id="519" parent="493" name="kind">
       <DataType>VARCHAR|0s</DataType>
       <Position>4</Position>
     </column>
-    <column id="518" parent="493" name="amount">
+    <column id="520" parent="493" name="amount">
       <DataType>NUMERIC(10,2 digit)|0s</DataType>
       <Position>5</Position>
     </column>
-    <column id="519" parent="493" name="description">
+    <column id="521" parent="493" name="description">
       <DataType>VARCHAR|0s</DataType>
       <Position>6</Position>
     </column>
-    <foreign-key id="520" parent="493">
+    <foreign-key id="522" parent="493">
       <ColNames>user_id</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>users</RefTableName>
     </foreign-key>
-    <key id="521" parent="493">
+    <key id="523" parent="493">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="522" parent="494" name="id">
+    <column id="524" parent="494" name="id">
       <DataType>INTEGER|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="523" parent="494" name="user_id">
+    <column id="525" parent="494" name="user_id">
       <DataType>INTEGER|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="524" parent="494" name="course_id">
+    <column id="526" parent="494" name="course_id">
       <DataType>INTEGER|0s</DataType>
       <Position>3</Position>
     </column>
-    <foreign-key id="525" parent="494">
+    <foreign-key id="527" parent="494">
       <ColNames>user_id</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>users</RefTableName>
     </foreign-key>
-    <foreign-key id="526" parent="494">
+    <foreign-key id="528" parent="494">
       <ColNames>course_id</ColNames>
       <RefColNames>owner_id</RefColNames>
       <RefTableName>courses</RefTableName>
     </foreign-key>
-    <key id="527" parent="494">
+    <key id="529" parent="494">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="528" parent="495" name="id">
+    <column id="530" parent="495" name="id">
       <DataType>INTEGER|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="529" parent="495" name="test_id">
+    <column id="531" parent="495" name="test_id">
       <DataType>INTEGER|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="530" parent="495" name="question">
+    <column id="532" parent="495" name="question">
       <DataType>VARCHAR|0s</DataType>
       <Position>3</Position>
     </column>
-    <key id="531" parent="495">
+    <key id="533" parent="495">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="532" parent="496" name="id">
+    <column id="534" parent="496" name="id">
       <DataType>INTEGER|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="533" parent="496" name="user_id">
+    <column id="535" parent="496" name="user_id">
       <DataType>INTEGER|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="534" parent="496" name="question_id">
+    <column id="536" parent="496" name="question_id">
       <DataType>INTEGER|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="535" parent="496" name="score">
+    <column id="537" parent="496" name="score">
       <DataType>FLOAT|0s</DataType>
       <Position>4</Position>
     </column>
-    <foreign-key id="536" parent="496">
+    <foreign-key id="538" parent="496">
       <ColNames>user_id</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>users</RefTableName>
     </foreign-key>
-    <foreign-key id="537" parent="496">
+    <foreign-key id="539" parent="496">
       <ColNames>question_id</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>questions</RefTableName>
     </foreign-key>
-    <key id="538" parent="496">
+    <key id="540" parent="496">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="539" parent="497" name="id">
+    <column id="541" parent="497" name="id">
       <DataType>INTEGER|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="540" parent="497" name="user_id">
+    <column id="542" parent="497" name="user_id">
       <DataType>INTEGER|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="541" parent="497" name="test_id">
+    <column id="543" parent="497" name="test_id">
       <DataType>INTEGER|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="542" parent="497" name="max_score">
+    <column id="544" parent="497" name="max_score">
       <DataType>INTEGER|0s</DataType>
       <Position>4</Position>
     </column>
-    <column id="543" parent="497" name="score">
+    <column id="545" parent="497" name="score">
       <DataType>FLOAT|0s</DataType>
       <Position>5</Position>
     </column>
-    <foreign-key id="544" parent="497">
+    <foreign-key id="546" parent="497">
       <ColNames>user_id</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>users</RefTableName>
     </foreign-key>
-    <foreign-key id="545" parent="497">
+    <foreign-key id="547" parent="497">
       <ColNames>test_id</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>tests</RefTableName>
     </foreign-key>
-    <key id="546" parent="497">
+    <key id="548" parent="497">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="547" parent="498" name="type">
+    <column id="549" parent="498" name="type">
       <DataType>text|0s</DataType>
       <Position>1</Position>
     </column>
-    <column id="548" parent="498" name="name">
+    <column id="550" parent="498" name="name">
       <DataType>text|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="549" parent="498" name="tbl_name">
+    <column id="551" parent="498" name="tbl_name">
       <DataType>text|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="550" parent="498" name="rootpage">
+    <column id="552" parent="498" name="rootpage">
       <DataType>int|0s</DataType>
       <Position>4</Position>
     </column>
-    <column id="551" parent="498" name="sql">
+    <column id="553" parent="498" name="sql">
       <DataType>text|0s</DataType>
       <Position>5</Position>
     </column>
-    <column id="552" parent="499" name="id">
+    <column id="554" parent="499" name="id">
       <DataType>INTEGER|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="553" parent="499" name="course_id">
+    <column id="555" parent="499" name="course_id">
       <DataType>INTEGER|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="554" parent="499" name="name">
+    <column id="556" parent="499" name="name">
       <DataType>VARCHAR|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="555" parent="499" name="creation_time">
+    <column id="557" parent="499" name="creation_time">
       <DataType>DATE|0s</DataType>
       <Position>4</Position>
     </column>
-    <key id="556" parent="499">
+    <key id="558" parent="499">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="557" parent="500" name="id">
+    <column id="559" parent="500" name="id">
       <DataType>INTEGER|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="558" parent="500" name="email">
+    <column id="560" parent="500" name="email">
       <DataType>TEXT|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="559" parent="500" name="username">
+    <column id="561" parent="500" name="username">
       <DataType>TEXT|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="560" parent="500" name="password_hash">
+    <column id="562" parent="500" name="password_hash">
       <DataType>TEXT|0s</DataType>
       <Position>4</Position>
     </column>
-    <index id="561" parent="500" name="sqlite_autoindex_users_1">
+    <index id="563" parent="500" name="sqlite_autoindex_users_1">
       <ColNames>email</ColNames>
       <ColumnCollations></ColumnCollations>
       <NameSurrogate>1</NameSurrogate>
       <Unique>1</Unique>
     </index>
-    <index id="562" parent="500" name="sqlite_autoindex_users_2">
-      <ColNames>username</ColNames>
-      <ColumnCollations></ColumnCollations>
-      <NameSurrogate>1</NameSurrogate>
-      <Unique>1</Unique>
-    </index>
-    <key id="563" parent="500">
+    <key id="564" parent="500">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="564" parent="500">
+    <key id="565" parent="500">
       <ColNames>email</ColNames>
       <UnderlyingIndexName>sqlite_autoindex_users_1</UnderlyingIndexName>
-    </key>
-    <key id="565" parent="500">
-      <ColNames>username</ColNames>
-      <UnderlyingIndexName>sqlite_autoindex_users_2</UnderlyingIndexName>
     </key>
     <column id="566" parent="501" name="id">
       <DataType>INTEGER|0s</DataType>
