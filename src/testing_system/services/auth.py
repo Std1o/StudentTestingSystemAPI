@@ -83,7 +83,7 @@ class AuthService:
         self.session.commit()
         return self.create_token(user)
 
-    def auth(self, username: str, password: str) -> Token:
+    def auth(self, email: str, password: str) -> Token:
         exception = HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail='Incorrect username or password',
@@ -91,7 +91,7 @@ class AuthService:
                 'WWW-Authenticate': 'Bearer'
             }
         )
-        user = self.session.query(tables.User).filter_by(username=username).first()
+        user = self.session.query(tables.User).filter_by(email=email).first()
         if not user:
             raise exception
         if not self.verify_password(password, user.password_hash):
