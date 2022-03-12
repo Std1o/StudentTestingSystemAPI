@@ -125,6 +125,8 @@ class CourseService:
 
     def join(self, user_id: int, course_code: str) -> Course:
         course = self.get_course_by_code(course_code)
+        if not course:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
         course_id = course.id
         if user_id in self.get_participants_ids(course_id):
             raise HTTPException(status_code=418, detail="You have already joined the course")
