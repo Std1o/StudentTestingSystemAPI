@@ -1,6 +1,6 @@
 from typing import List
 
-from fastapi import Depends
+from fastapi import Depends, HTTPException, status
 
 from testing_system.test_service.base_test_service import BaseTestService
 from sqlalchemy.orm import Session
@@ -23,6 +23,8 @@ class TestResultService(TestSearchingService):
 
     def get_answer_result(self, ans: Answer) -> AnswerResult:
         user_answer = self.get_user_answer(ans.id)
+        if not user_answer:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
         answer = AnswerResult(is_selected=user_answer.is_selected,
                               id=ans.id,
                               answer=ans.answer,
