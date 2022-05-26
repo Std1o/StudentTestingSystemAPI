@@ -54,9 +54,12 @@ class TestResultService(TestSearchingService):
             for ans in question.answers:
                 answers.append(self.get_answer_result(ans))
             questions.append(self.get_question_result(question, answers))
+        score = self.get_test_score(user_id, test_id)
+        if not score:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
         test_result = TestResult(questions=questions,
                                  max_score=len(questions),
-                                 score=self.get_test_score(user_id, test_id),
+                                 score=score,
                                  id=test_id,
                                  course_id=test.course_id,
                                  name=test.name,
