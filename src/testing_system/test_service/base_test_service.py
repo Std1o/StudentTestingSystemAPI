@@ -20,6 +20,10 @@ class BaseTestService:
         statement = select(tables.Participants.course_id).filter_by(user_id=user_id)
         return self.session.execute(statement).scalars().all()
 
+    def get_user_by_id(self, user_id: int) -> tables.User:
+        statement = select(tables.User).filter_by(id=user_id)
+        return self.session.execute(statement).scalars().first()
+
     def check_accessibility(self, user_id: int, course_id: int):
         if course_id not in self.get_course_ids(user_id):
             raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=constants.ACCESS_ERROR)
