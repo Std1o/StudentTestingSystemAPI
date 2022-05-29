@@ -83,3 +83,11 @@ class Results(Base):
     test_id = sa.Column(sa.Integer, sa.ForeignKey(Test.id))
     max_score = sa.Column(sa.Integer)
     score = sa.Column(sa.Float)
+
+
+class Moderators(Base):
+    __tablename__ = 'moderators'
+
+    id = sa.Column(sa.Integer, primary_key=True)
+    user_id = sa.Column(sa.Integer, sa.ForeignKey(User.id))
+    course_id = sa.Column(sa.Integer, sa.ForeignKey(Course.owner_id))

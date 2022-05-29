@@ -1,9 +1,10 @@
 from typing import List
 
-from fastapi import APIRouter, Depends, Response, status
+from fastapi import APIRouter, Depends, Response, status, HTTPException
 
+from testing_system import constants
 from testing_system.models.auth import User
-from testing_system.models.course import Course, CourseCreate, BaseCourse, CourseUpdate
+from testing_system.models.course import Course, BaseCourse, CourseUpdate
 from testing_system.services.auth import get_current_user
 from testing_system.services.course import CourseService
 from testing_system.test_service.test_deletion import TestDeletionService
@@ -34,13 +35,17 @@ def update_course(
         user: User = Depends(get_current_user)):
     return service.update(user.id, course_id, course_data)
 
+
 @router.delete('/{course_id}')
-def delete_course(course_id: int, user: User = Depends(get_current_user),
+def delete_course(course_id: int, course_owner_id: int, user: User = Depends(get_current_user),
                   service: CourseService = Depends(),
                   test_deletion_service: TestDeletionService = Depends()):
-    test_deletion_service.delete_all_course_tests(user.id, course_id)
+    if course_owner_id != user.id:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=constants.ACCESS_ERROR)
+    test_deletion_service.delete_all_course_tests(user.id, course_id, course_owner_id)
     service.delete(user.id, course_id)
     return Response(status_code=status.HTTP_204_NO_CONTENT)
+
 
 @router.post('/{course_code}', response_model=Course)
 def join_the_course(course_code: str, user: User = Depends(get_current_user), service: CourseService = Depends()):

@@ -3,7 +3,7 @@ from fastapi import APIRouter, Depends, Response, status
 from testing_system.models.test import Test, BaseTest
 from testing_system.models.auth import User
 from testing_system.models.test_result import TestResult
-from testing_system.models.test_result_creation import QuestionResultCreation, AnswerResultCreation
+from testing_system.models.test_result_creation import QuestionResultCreation
 from testing_system.models.test_results import TestResults
 from testing_system.services.auth import get_current_user
 from testing_system.services.course import CourseService
@@ -34,7 +34,8 @@ def get_tests(course_id: int, user: User = Depends(get_current_user), service: T
 
 
 @router.get('/{test_id}', response_model=Test)
-def get_test(course_id: int, test_id: int, user: User = Depends(get_current_user), service: TestSearchingService = Depends()):
+def get_test(course_id: int, test_id: int, user: User = Depends(get_current_user),
+             service: TestSearchingService = Depends()):
     return service.get(user.id, course_id, test_id, False)
 
 
@@ -49,13 +50,15 @@ def calculate_result(course_id: int,
 
 
 @router.delete('/{test_id}')
-def delete_test(course_id: int, test_id: int, user: User = Depends(get_current_user), service: TestDeletionService = Depends()):
-    service.delete(user.id, course_id, test_id)
+def delete_test(course_id: int, test_id: int, course_owner_id: int, user: User = Depends(get_current_user),
+                service: TestDeletionService = Depends()):
+    service.delete(user.id, course_id, test_id, course_owner_id)
     return Response(status_code=status.HTTP_204_NO_CONTENT)
 
 
 @router.get('/result/{test_id}', response_model=TestResult)
-def get_result(course_id: int, test_id: int, user: User = Depends(get_current_user), service: TestResultService = Depends()):
+def get_result(course_id: int, test_id: int, user: User = Depends(get_current_user),
+               service: TestResultService = Depends()):
     return service.get_result(user.id, course_id, test_id)
 
 

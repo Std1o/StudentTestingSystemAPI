@@ -44,8 +44,7 @@ class TestCreationService(BaseTestService):
         self.session.commit()
 
     def create(self, user_id: int, course_owner_id: int, test_data: BaseTest):
-        if course_owner_id != user_id:
-            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=constants.ACCESS_ERROR)
+        self.check_for_moderator_rights(user_id, test_data.course_id, course_owner_id)
         self.create_test(test_data)
         test_id = self.get_last_test_id(test_data)
         for question in test_data.questions:

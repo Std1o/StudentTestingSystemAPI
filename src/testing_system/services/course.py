@@ -2,6 +2,8 @@ from typing import List
 from fastapi import Depends, HTTPException, status
 from sqlalchemy import select
 from sqlalchemy.orm import Session
+
+from .base_course_service import BaseCourseService
 from .. import constants
 import random
 from .. import tables
@@ -13,6 +15,7 @@ def check_accessibility(user_id, course: Course):
     if course.owner_id != user_id:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=constants.ACCESS_ERROR)
 
+
 def generate_course_code() -> str:
     seq = "abcdefghijklmnopqrstuvwxyz0123456789"
     code = ''
@@ -21,8 +24,9 @@ def generate_course_code() -> str:
     return code.upper()
 
 
-class CourseService:
+class CourseService(BaseCourseService):
     def __init__(self, session: Session = Depends(get_session)):
+        super().__init__(session)
         self.session = session
 
     def get_course_ids(self, user_id: int) -> List[int]:
@@ -62,6 +66,7 @@ class CourseService:
         for course_row in query.all():
             course: Course = course_row
             course.participants = self.get_participants(course.id)
+            course.moderators = self.get_moderators(course.id)
             courses.append(course)
         return courses
 
@@ -98,6 +103,7 @@ class CourseService:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
         course: Course = course
         course.participants = self.get_participants(course.id)
+        course.moderators = self.get_moderators(course.id)
         return course
 
     def get(self, user_id: int, course_id: int) -> Course:
@@ -118,8 +124,8 @@ class CourseService:
 
     def delete(self, user_id: int, course_id: int):
         course = self._get(user_id, course_id)
-        check_accessibility(user_id, course)
         self.delete_participants(course_id)
+        self.delete_moderators(course_id)
         self.session.delete(course)
         self.session.commit()
 

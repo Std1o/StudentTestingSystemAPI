@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 from pydantic import BaseModel
 import random
 from .auth import User
@@ -14,6 +14,7 @@ class Course(BaseCourse):
     img: str
     course_code: str
     participants: List[User]
+    moderators: Optional[List[User]]
 
     class Config:
         orm_mode = True
@@ -34,5 +35,10 @@ class CourseUpdate(BaseCourse):
 
 
 class Participants(BaseModel):
+    user_id: int
+    course_id: int
+
+
+class Moderator(BaseModel):
     user_id: int
     course_id: int
