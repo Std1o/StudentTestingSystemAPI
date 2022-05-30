@@ -93,6 +93,7 @@ class CourseService(BaseCourseService):
         self.session.commit()
         course: Course = course
         course.participants = self.get_participants(course.id)
+        course.moderators = []
         return course
 
     def _get(self, user_id: int, course_id: int) -> Course:
