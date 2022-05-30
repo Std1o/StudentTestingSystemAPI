@@ -18,7 +18,7 @@ def add_moderator(course_id: int, course_owner_id: int, moderator_id: int,
     return service.add_moderator(user.id, course_owner_id, moderator_id, course_id)
 
 
-@router.delete('/', response_model=List[Moderator])
+@router.delete('/', response_model=List[User])
 def delete_moderator(course_id: int, course_owner_id: int, moderator_id: int,
                   user: User = Depends(get_current_user), service: CourseModeratorsService = Depends()):
     return service.delete_moderator(user.id, course_owner_id, moderator_id, course_id)
