@@ -31,7 +31,7 @@ class CourseModeratorsService(BaseCourseService):
         moderator = Moderator(user_id=moderator_id, course_id=course_id)
         self.session.add(tables.Moderators(**moderator.dict()))
         self.session.commit()
-        return moderator
+        return self.get_moderators(course_id)
 
     def delete_moderator(self, user_id: int, course_owner_id: int, moderator_id: int, course_id: int):
         check_accessibility_by_owner_id(user_id, course_owner_id)

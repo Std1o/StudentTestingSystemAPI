@@ -12,7 +12,7 @@ from testing_system.test_service.test_deletion import TestDeletionService
 router = APIRouter(prefix='/course/moderators')
 
 
-@router.post('/', response_model=Moderator)
+@router.post('/', response_model=List[User])
 def add_moderator(course_id: int, course_owner_id: int, moderator_id: int,
                   user: User = Depends(get_current_user), service: CourseModeratorsService = Depends()):
     return service.add_moderator(user.id, course_owner_id, moderator_id, course_id)
