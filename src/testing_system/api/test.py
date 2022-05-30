@@ -23,7 +23,7 @@ def create_test(test_data: BaseTest,
                 service: TestCreationService = Depends(),
                 course_service: CourseService = Depends(),
                 searching_service: TestSearchingService = Depends()):
-    course_owner_id = course_service.get(user.id, test_data.course_id).id
+    course_owner_id = course_service.get(user.id, test_data.course_id).owner_id
     test_id = service.create(user.id, course_owner_id, test_data)
     return searching_service.get(user.id, test_data.course_id, test_id, True)
 
