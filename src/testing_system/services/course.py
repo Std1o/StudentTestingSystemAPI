@@ -58,6 +58,10 @@ class CourseService(BaseCourseService):
         statement = select(tables.Course).filter_by(course_code=course_code)
         return self.session.execute(statement).scalars().first()
 
+    def get_participant(self, participant_id: int, course_id) -> tables.Participants:
+        statement = select(tables.Participants).filter_by(user_id=participant_id, course_id=course_id)
+        return self.session.execute(statement).scalars().first()
+
     def get_courses(self, user_id: int) -> List[Course]:
         query = self.session.query(tables.Course)
         query = query.filter(tables.Course.id.in_(self.get_course_ids(user_id)))
@@ -141,3 +145,11 @@ class CourseService(BaseCourseService):
         self.session.add(tables.Participants(**participants.dict()))
         self.session.commit()
         return self._get(user_id, course_id)
+
+    def delete_participant(self, user_id: int, course_owner_id: int, participant_id: int, course_id: int):
+        if course_owner_id != user_id:
+            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=constants.ACCESS_ERROR)
+        participant = self.get_participant(participant_id, course_id)
+        self.session.delete(participant)
+        self.session.commit()
+        return self.get_participants(course_id)
