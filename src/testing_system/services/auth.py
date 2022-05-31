@@ -8,7 +8,7 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from ..database import get_session
-from ..models.auth import User, Token, UserCreate
+from ..models.auth import User, Token, UserCreate, PrivateUser
 from ..settings import settings
 from jose import jwt, JWTError
 from .. import tables
@@ -52,7 +52,7 @@ class AuthService:
         return user
 
     @classmethod
-    def create_token(cls, user: tables.User) -> Token:
+    def create_token(cls, user: tables.User) -> str:
         user_data = User.from_orm(user)
         now = datetime.utcnow()
         payload = {
@@ -63,7 +63,7 @@ class AuthService:
             'user': user_data.dict()
         }
         token = jwt.encode(payload, settings.jwt_sercret, algorithm=settings.jwt_algorithm)
-        return Token(access_token=token)
+        return token
 
     def __init__(self, session: Session = Depends(get_session)):
         self.session = session
@@ -72,7 +72,7 @@ class AuthService:
         statement = select(tables.User).filter_by(email=email)
         return self.session.execute(statement).scalars().first()
 
-    def reg(self, user_data: UserCreate) -> Token:
+    def reg(self, user_data: UserCreate) -> PrivateUser:
         if self.get_user_by_email(user_data.email):
             raise HTTPException(status_code=418, detail="User with this email already exists")
         user = tables.User(
@@ -81,9 +81,14 @@ class AuthService:
             password_hash=self.hash_password(user_data.password))
         self.session.add(user)
         self.session.commit()
-        return self.create_token(user)
+        token = self.create_token(user)
+        created_user = self.session.query(tables.User).filter_by(email=user.email).first()
+        return PrivateUser(email=created_user.email,
+                           username=created_user.username,
+                           id=created_user.id,
+                           access_token=token)
 
-    def auth(self, email: str, password: str) -> Token:
+    def auth(self, email: str, password: str) -> PrivateUser:
         exception = HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail='Incorrect username or password',
@@ -96,4 +101,8 @@ class AuthService:
             raise exception
         if not self.verify_password(password, user.password_hash):
             raise exception
-        return self.create_token(user)
+        token = self.create_token(user)
+        return PrivateUser(email=user.email,
+                           username=user.username,
+                           id=user.id,
+                           access_token=token)
