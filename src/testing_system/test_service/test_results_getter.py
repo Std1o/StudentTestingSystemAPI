@@ -27,8 +27,10 @@ class TestResultsService(BaseTestService):
         max_score = test_result_rows[0].max_score
         results: List[TestResultsItem] = []
         for test_result_row in test_result_rows:
+            user = self.get_user_by_id(test_result_row.user_id)
             result_item = TestResultsItem(user_id=test_result_row.user_id,
-                                          user_name=self.get_user_by_id(test_result_row.user_id).username,
+                                          user_name=user.username,
+                                          user_email=user.email,
                                           score=test_result_row.score)
             results.append(result_item)
             pass
