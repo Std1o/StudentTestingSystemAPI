@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="92b7f236-a5d9-4998-a0b9-55e63b873691" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/38b259ad-23a8-4f4e-8c54-fb9a46a03393.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/38b259ad-23a8-4f4e-8c54-fb9a46a03393.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/testing_system/api/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/testing_system/api/test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/testing_system/models/test_result.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/testing_system/models/test_result.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/testing_system/test_service/result_getter.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/testing_system/test_service/result_getter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/database.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/testing_system/test_service/test_result_calculator.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/testing_system/test_service/test_result_calculator.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -176,6 +175,7 @@
       <workItem from="1662748842642" duration="958000" />
       <workItem from="1662750478676" duration="36000" />
       <workItem from="1662750658101" duration="5453000" />
+      <workItem from="1662757830225" duration="737000" />
     </task>
     <servers />
   </component>

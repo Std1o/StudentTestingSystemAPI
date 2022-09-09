@@ -2,7 +2,6 @@ from typing import List
 from fastapi import Depends
 from sqlalchemy.orm import Session
 
-from .base_test_service import BaseTestService
 from .test_getter import TestSearchingService
 from .. import tables
 from ..database import get_session
