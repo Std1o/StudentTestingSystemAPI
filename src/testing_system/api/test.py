@@ -49,7 +49,7 @@ def calculate_result(course_id: int,
     return Response(status_code=status.HTTP_204_NO_CONTENT)
 
 
-@router.post('/demo_result', response_model=TestResult)
+@router.post('/demo_result/', response_model=TestResult)
 def calculate_demo_result(course_id: int,
                           test_id: int,
                           course_owner_id: int,

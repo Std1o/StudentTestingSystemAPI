@@ -1,5 +1,6 @@
 from typing import List
 from testing_system.models.test import Answer, Question, Test
+from pydantic import BaseModel
 
 
 class AnswerResult(Answer):
@@ -17,7 +18,7 @@ class QuestionResult(Question):
         orm_mode = True
 
 
-class TestResult(Test):
+class TestResult(BaseModel):
     questions: List[QuestionResult]
     max_score: int
     score: float

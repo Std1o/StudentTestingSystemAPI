@@ -59,9 +59,5 @@ class TestResultService(TestSearchingService):
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
         test_result = TestResult(questions=questions,
                                  max_score=len(questions),
-                                 score=score,
-                                 id=test_id,
-                                 course_id=test.course_id,
-                                 name=test.name,
-                                 creation_time=test.creation_time)
+                                 score=score)
         return test_result
