@@ -49,6 +49,16 @@ def calculate_result(course_id: int,
     return Response(status_code=status.HTTP_204_NO_CONTENT)
 
 
+@router.post('/demo_result', response_model=TestResult)
+def calculate_demo_result(course_id: int,
+                          test_id: int,
+                          course_owner_id: int,
+                          questions: List[QuestionResultCreation],
+                          service: TestResultCalculatorService = Depends(),
+                          user: User = Depends(get_current_user)):
+    return service.calculate_demo_result(user.id, course_id, test_id, course_owner_id, questions)
+
+
 @router.delete('/{test_id}')
 def delete_test(course_id: int, test_id: int, course_owner_id: int, user: User = Depends(get_current_user),
                 service: TestDeletionService = Depends()):
