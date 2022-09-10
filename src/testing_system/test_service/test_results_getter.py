@@ -7,7 +7,7 @@ from testing_system.database import get_session
 from testing_system.test_service.base_test_service import BaseTestService
 from sqlalchemy.orm import Session
 
-from ..models.test_results import TestResults, TestResultsItem
+from ..models.test_results import TestResults
 
 
 class TestResultsService(BaseTestService):
@@ -25,14 +25,9 @@ class TestResultsService(BaseTestService):
         if not test_result_rows:
             return TestResults(max_score=0, results=[])
         max_score = test_result_rows[0].max_score
-        results: List[TestResultsItem] = []
-        for test_result_row in test_result_rows:
-            user = self.get_user_by_id(test_result_row.user_id)
-            result_item = TestResultsItem(user_id=test_result_row.user_id,
-                                          user_name=user.username,
-                                          user_email=user.email,
-                                          score=test_result_row.score)
-            results.append(result_item)
-            pass
-        test_result = TestResults(max_score=max_score, results=results)
+        query = self.session.query(
+            tables.Results.user_id, tables.User.username.label("user_name"),
+            tables.User.email.label("user_email"), tables.Results.score
+        ).join(tables.Results).filter(tables.Results.test_id == test_id).all()
+        test_result = TestResults(max_score=max_score, results=query)
         return test_result
