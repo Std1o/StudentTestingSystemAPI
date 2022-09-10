@@ -38,11 +38,9 @@ class CourseService(BaseCourseService):
         return self.session.execute(statement).scalars().all()
 
     def get_participants(self, course_id: int) -> List[tables.User]:
-        participants_ids = self.get_participants_ids(course_id)
-        users: List[tables.User] = []
-        for user_id in participants_ids:
-            user = self.session.query(tables.User).filter_by(id=user_id).first()
-            users.append(user)
+        users = self.session.query(tables.User).join(tables.Participants).filter(
+            tables.Participants.course_id == course_id
+        ).all()
         return users
 
     def get_participants_from_table(self, course_id: int) -> List[tables.Participants]:
