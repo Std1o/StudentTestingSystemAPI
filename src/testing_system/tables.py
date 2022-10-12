@@ -29,7 +29,7 @@ class Participants(Base):
 
     id = sa.Column(sa.Integer, primary_key=True)
     user_id = sa.Column(sa.Integer, sa.ForeignKey(User.id))
-    course_id = sa.Column(sa.Integer, sa.ForeignKey(Course.owner_id))
+    course_id = sa.Column(sa.Integer, sa.ForeignKey(Course.id))
 
 
 class Answers(Base):
@@ -90,4 +90,4 @@ class Moderators(Base):
 
     id = sa.Column(sa.Integer, primary_key=True)
     user_id = sa.Column(sa.Integer, sa.ForeignKey(User.id))
-    course_id = sa.Column(sa.Integer, sa.ForeignKey(Course.owner_id))
+    course_id = sa.Column(sa.Integer, sa.ForeignKey(Course.id))
