@@ -37,8 +37,3 @@ class CourseUpdate(BaseCourse):
 class Participants(BaseModel):
     user_id: int
     course_id: int
-
-
-class Moderator(BaseModel):
-    user_id: int
-    course_id: int

@@ -6,7 +6,6 @@ from sqlalchemy.orm import Session
 from ..database import get_session
 from sqlalchemy import select
 from .. import tables
-from ..models.course import Moderator
 
 
 def check_accessibility_by_owner_id(user_id, course_owner_id: int):
@@ -19,23 +18,25 @@ class CourseModeratorsService(BaseCourseService):
         super().__init__(session)
         self.session = session
 
-    def get_moderator(self, moderator_id: int, course_id) -> tables.Moderators:
-        statement = select(tables.Moderators).filter_by(user_id=moderator_id, course_id=course_id)
+    def get_participant(self, moderator_id: int, course_id) -> tables.Participants:
+        statement = select(tables.Participants).filter_by(user_id=moderator_id, course_id=course_id)
         return self.session.execute(statement).scalars().first()
 
     # main functions
     def add_moderator(self, user_id: int, course_owner_id: int, moderator_id: int, course_id: int):
         check_accessibility_by_owner_id(user_id, course_owner_id)
-        if moderator_id in self.get_moderators_ids(course_id):
+        participant = self.get_participant(moderator_id, course_id)
+        if participant.is_moderator:
             raise HTTPException(status_code=418, detail="The user is already moderator")
-        moderator = Moderator(user_id=moderator_id, course_id=course_id)
-        self.session.add(tables.Moderators(**moderator.dict()))
+        participant.is_moderator = True
         self.session.commit()
         return self.get_moderators(course_id)
 
     def delete_moderator(self, user_id: int, course_owner_id: int, moderator_id: int, course_id: int):
         check_accessibility_by_owner_id(user_id, course_owner_id)
-        moderator = self.get_moderator(moderator_id, course_id)
-        self.session.delete(moderator)
+        participant = self.get_participant(moderator_id, course_id)
+        if not participant.is_moderator:
+            raise HTTPException(status_code=418, detail="The user is not moderator")
+        participant.is_moderator = False
         self.session.commit()
         return self.get_moderators(course_id)

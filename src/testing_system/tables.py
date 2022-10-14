@@ -27,9 +27,9 @@ class Course(Base):
 class Participants(Base):
     __tablename__ = 'participants'
 
-    id = sa.Column(sa.Integer, primary_key=True)
-    user_id = sa.Column(sa.Integer, sa.ForeignKey(User.id))
-    course_id = sa.Column(sa.Integer, sa.ForeignKey(Course.id))
+    user_id = sa.Column(sa.Integer, sa.ForeignKey(User.id), primary_key=True)
+    course_id = sa.Column(sa.Integer, sa.ForeignKey(Course.id), primary_key=True)
+    is_moderator = sa.Column(sa.Boolean)
 
 
 class Answers(Base):
@@ -83,11 +83,3 @@ class Results(Base):
     test_id = sa.Column(sa.Integer, sa.ForeignKey(Test.id))
     max_score = sa.Column(sa.Integer)
     score = sa.Column(sa.Float)
-
-
-class Moderators(Base):
-    __tablename__ = 'moderators'
-
-    id = sa.Column(sa.Integer, primary_key=True)
-    user_id = sa.Column(sa.Integer, sa.ForeignKey(User.id))
-    course_id = sa.Column(sa.Integer, sa.ForeignKey(Course.id))

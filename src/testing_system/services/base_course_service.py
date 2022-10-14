@@ -11,7 +11,7 @@ class BaseCourseService:
         self.session = session
 
     def get_moderators_ids(self, course_id: int) -> List[int]:
-        statement = select(tables.Moderators.user_id).filter_by(course_id=course_id)
+        statement = select(tables.Participants.user_id).filter_by(course_id=course_id, is_moderator=True)
         return self.session.execute(statement).scalars().all()
 
     def get_moderators(self, course_id: int) -> List[tables.User]:
@@ -21,12 +21,3 @@ class BaseCourseService:
             user = self.session.query(tables.User).filter_by(id=user_id).first()
             users.append(user)
         return users
-
-    def get_moderators_from_table(self, course_id: int) -> List[tables.Moderators]:
-        statement = select(tables.Moderators).filter_by(course_id=course_id)
-        return self.session.execute(statement).scalars().all()
-
-    def delete_moderators(self, course_id: int):
-        for moderator in self.get_moderators_from_table(course_id):
-            self.session.delete(moderator)
-            self.session.commit()

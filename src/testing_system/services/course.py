@@ -128,7 +128,6 @@ class CourseService(BaseCourseService):
     def delete(self, user_id: int, course_id: int):
         course = self._get(user_id, course_id)
         self.delete_participants(course_id)
-        self.delete_moderators(course_id)
         self.session.delete(course)
         self.session.commit()
 
