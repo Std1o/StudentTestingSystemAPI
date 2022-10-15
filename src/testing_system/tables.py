@@ -25,7 +25,7 @@ class Participants(Base):
     __tablename__ = 'participants'
 
     user_id = sa.Column(sa.Integer, sa.ForeignKey(User.id), primary_key=True)
-    course_id = sa.Column(sa.Integer, sa.ForeignKey(Course.id), primary_key=True)
+    course_id = sa.Column(sa.Integer, sa.ForeignKey(Course.id, ondelete='CASCADE'), primary_key=True)
     is_moderator = sa.Column(sa.Boolean)
     is_owner = sa.Column(sa.Boolean)
 
@@ -34,7 +34,7 @@ class Test(Base):
     __tablename__ = 'tests'
 
     id = sa.Column(sa.Integer, primary_key=True)
-    course_id = sa.Column(sa.Integer, sa.ForeignKey(Course.id))
+    course_id = sa.Column(sa.Integer, sa.ForeignKey(Course.id, ondelete='CASCADE'))
     name = sa.Column(sa.String)
     creation_time = sa.Column(sa.Date)
 
@@ -43,7 +43,7 @@ class Questions(Base):
     __tablename__ = 'questions'
 
     id = sa.Column(sa.Integer, primary_key=True)
-    test_id = sa.Column(sa.Integer, sa.ForeignKey(Test.id))
+    test_id = sa.Column(sa.Integer, sa.ForeignKey(Test.id, ondelete='CASCADE'))
     question = sa.Column(sa.String)
 
 
@@ -51,7 +51,7 @@ class Answers(Base):
     __tablename__ = 'answers'
 
     id = sa.Column(sa.Integer, primary_key=True)
-    question_id = sa.Column(sa.Integer, sa.ForeignKey(Questions.id))
+    question_id = sa.Column(sa.Integer, sa.ForeignKey(Questions.id, ondelete='CASCADE'))
     answer = sa.Column(sa.String)
     is_right = sa.Column(sa.Boolean)
 

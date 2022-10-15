@@ -1363,6 +1363,7 @@
     </column>
     <foreign-key id="505" parent="491">
       <ColNames>question_id</ColNames>
+      <OnDelete>cascade</OnDelete>
       <RefColNames>id</RefColNames>
       <RefTableName>questions</RefTableName>
     </foreign-key>
@@ -1426,6 +1427,7 @@
     </foreign-key>
     <foreign-key id="519" parent="493">
       <ColNames>course_id</ColNames>
+      <OnDelete>cascade</OnDelete>
       <RefColNames>id</RefColNames>
       <RefTableName>courses</RefTableName>
     </foreign-key>
@@ -1458,6 +1460,7 @@ course_id</ColNames>
     </column>
     <foreign-key id="525" parent="494">
       <ColNames>test_id</ColNames>
+      <OnDelete>cascade</OnDelete>
       <RefColNames>id</RefColNames>
       <RefTableName>tests</RefTableName>
     </foreign-key>
@@ -1570,6 +1573,7 @@ course_id</ColNames>
     </column>
     <foreign-key id="551" parent="498">
       <ColNames>course_id</ColNames>
+      <OnDelete>cascade</OnDelete>
       <RefColNames>id</RefColNames>
       <RefTableName>courses</RefTableName>
     </foreign-key>

@@ -109,8 +109,8 @@ class CourseService(BaseCourseService):
 
     def delete(self, user_id: int, course_id: int):
         self.check_accessibility(user_id, course_id)
-        course = self._get(user_id, course_id)
-        self.delete_participants(course_id)
+        statement = select(tables.Course).filter_by(id=course_id)
+        course = self.session.execute(statement).scalars().first()
         self.session.delete(course)
         self.session.commit()
 

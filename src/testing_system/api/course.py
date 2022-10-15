@@ -38,9 +38,7 @@ def update_course(
 
 @router.delete('/{course_id}')
 def delete_course(course_id: int, user: User = Depends(get_current_user),
-                  service: CourseService = Depends(),
-                  test_deletion_service: TestDeletionService = Depends()):
-    test_deletion_service.delete_all_course_tests(user.id, course_id)
+                  service: CourseService = Depends()):
     service.delete(user.id, course_id)
     return Response(status_code=status.HTTP_204_NO_CONTENT)
 
