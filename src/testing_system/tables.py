@@ -30,30 +30,30 @@ class Participants(Base):
     is_owner = sa.Column(sa.Boolean)
 
 
-class Answers(Base):
-    __tablename__ = 'answers'
+class Test(Base):
+    __tablename__ = 'tests'
 
     id = sa.Column(sa.Integer, primary_key=True)
-    question_id = sa.Column(sa.Integer)
-    answer = sa.Column(sa.String)
-    is_right = sa.Column(sa.Boolean)
+    course_id = sa.Column(sa.Integer, sa.ForeignKey(Course.id))
+    name = sa.Column(sa.String)
+    creation_time = sa.Column(sa.Date)
 
 
 class Questions(Base):
     __tablename__ = 'questions'
 
     id = sa.Column(sa.Integer, primary_key=True)
-    test_id = sa.Column(sa.Integer)
+    test_id = sa.Column(sa.Integer, sa.ForeignKey(Test.id))
     question = sa.Column(sa.String)
 
 
-class Test(Base):
-    __tablename__ = 'tests'
+class Answers(Base):
+    __tablename__ = 'answers'
 
     id = sa.Column(sa.Integer, primary_key=True)
-    course_id = sa.Column(sa.Integer)
-    name = sa.Column(sa.String)
-    creation_time = sa.Column(sa.Date)
+    question_id = sa.Column(sa.Integer, sa.ForeignKey(Questions.id))
+    answer = sa.Column(sa.String)
+    is_right = sa.Column(sa.Boolean)
 
 
 class UsersAnswers(Base):
