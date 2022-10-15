@@ -21,10 +21,8 @@ router = APIRouter(prefix='/tests')
 def create_test(test_data: BaseTest,
                 user: User = Depends(get_current_user),
                 service: TestCreationService = Depends(),
-                course_service: CourseService = Depends(),
                 searching_service: TestSearchingService = Depends()):
-    course_owner_id = course_service.get(user.id, test_data.course_id).owner_id
-    test_id = service.create(user.id, course_owner_id, test_data)
+    test_id = service.create(user.id, test_data)
     return searching_service.get(user.id, test_data.course_id, test_id, True)
 
 
@@ -51,18 +49,16 @@ def calculate_result(course_id: int,
 
 @router.post('/demo_result/', response_model=TestResult)
 def calculate_demo_result(course_id: int,
-                          test_id: int,
-                          course_owner_id: int,
                           questions: List[QuestionResultCreation],
                           service: TestResultCalculatorService = Depends(),
                           user: User = Depends(get_current_user)):
-    return service.calculate_demo_result(user.id, course_id, test_id, course_owner_id, questions)
+    return service.calculate_demo_result(user.id, course_id, questions)
 
 
 @router.delete('/{test_id}')
-def delete_test(course_id: int, test_id: int, course_owner_id: int, user: User = Depends(get_current_user),
+def delete_test(course_id: int, test_id: int, user: User = Depends(get_current_user),
                 service: TestDeletionService = Depends()):
-    service.delete(user.id, course_id, test_id, course_owner_id)
+    service.delete(user.id, course_id, test_id)
     return Response(status_code=status.HTTP_204_NO_CONTENT)
 
 
@@ -73,6 +69,6 @@ def get_result(course_id: int, test_id: int, user: User = Depends(get_current_us
 
 
 @router.get('/results/{test_id}', response_model=TestResults)
-def get_results(course_id: int, test_id: int, course_owner_id: int, user: User = Depends(get_current_user),
+def get_results(course_id: int, test_id: int, user: User = Depends(get_current_user),
                 service: TestResultsService = Depends(), only_max_result: bool = False):
-    return service.get_results(user.id, course_id, test_id, course_owner_id, only_max_result)
+    return service.get_results(user.id, course_id, test_id, only_max_result)

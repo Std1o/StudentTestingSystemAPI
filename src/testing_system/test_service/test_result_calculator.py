@@ -81,10 +81,8 @@ class TestResultCalculatorService(TestSearchingService):
         self.create_test_result(user_id, len(questions), global_score, test_id)
 
     def calculate_demo_result(self, user_id: int, course_id: int,
-                              test_id: int,
-                              course_owner_id: int,
                               questions_in: List[QuestionResultCreation]) -> TestResult:
-        self.check_for_moderator_rights(user_id, course_id, course_owner_id)
+        self.check_for_moderator_rights(user_id, course_id)
 
         global_score: float = 0
         questions: List[QuestionResult] = []

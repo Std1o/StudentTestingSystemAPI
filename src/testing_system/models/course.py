@@ -8,13 +8,16 @@ class BaseCourse(BaseModel):
     name: str
 
 
+class CourseUsers(User):
+    is_moderator: bool
+    is_owner: bool
+
+
 class Course(BaseCourse):
     id: int
-    owner_id: int
     img: str
     course_code: str
-    participants: List[User]
-    moderators: Optional[List[User]]
+    participants: List[CourseUsers]
 
     class Config:
         orm_mode = True
@@ -22,7 +25,6 @@ class Course(BaseCourse):
 
 class CourseCreate(BaseCourse):
     img: str
-    owner_id: int
     course_code: str
 
     def __init__(self, **data: BaseCourse):
@@ -37,3 +39,5 @@ class CourseUpdate(BaseCourse):
 class Participants(BaseModel):
     user_id: int
     course_id: int
+    is_moderator: bool = False
+    is_owner: bool = False

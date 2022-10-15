@@ -1,5 +1,3 @@
-import datetime
-
 import sqlalchemy as sa
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -18,7 +16,6 @@ class Course(Base):
     __tablename__ = 'courses'
 
     id = sa.Column(sa.Integer, primary_key=True)
-    owner_id = sa.Column(sa.Integer, sa.ForeignKey(User.id))
     name = sa.Column(sa.String)
     course_code = sa.Column(sa.String, unique=True)
     img = sa.Column(sa.String)
@@ -30,6 +27,7 @@ class Participants(Base):
     user_id = sa.Column(sa.Integer, sa.ForeignKey(User.id), primary_key=True)
     course_id = sa.Column(sa.Integer, sa.ForeignKey(Course.id), primary_key=True)
     is_moderator = sa.Column(sa.Boolean)
+    is_owner = sa.Column(sa.Boolean)
 
 
 class Answers(Base):

@@ -43,8 +43,8 @@ class TestCreationService(BaseTestService):
         self.session.add(answer_row)
         self.session.commit()
 
-    def create(self, user_id: int, course_owner_id: int, test_data: BaseTest):
-        self.check_for_moderator_rights(user_id, test_data.course_id, course_owner_id)
+    def create(self, user_id: int, test_data: BaseTest):
+        self.check_for_moderator_rights(user_id, test_data.course_id)
         self.create_test(test_data)
         test_id = self.get_last_test_id(test_data)
         for question in test_data.questions:

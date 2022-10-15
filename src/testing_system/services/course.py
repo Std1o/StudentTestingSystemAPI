@@ -8,12 +8,7 @@ from .. import constants
 import random
 from .. import tables
 from ..database import get_session
-from ..models.course import CourseCreate, Participants, BaseCourse, Course
-
-
-def check_accessibility(user_id, course: Course):
-    if course.owner_id != user_id:
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=constants.ACCESS_ERROR)
+from ..models.course import CourseCreate, Participants, BaseCourse, Course, CourseUsers
 
 
 def generate_course_code() -> str:
@@ -29,6 +24,11 @@ class CourseService(BaseCourseService):
         super().__init__(session)
         self.session = session
 
+    def check_accessibility(self, user_id, course_id: int):
+        participant = self.get_participant(user_id, course_id)
+        if not participant.is_owner:
+            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=constants.ACCESS_ERROR)
+
     def get_course_ids(self, user_id: int) -> List[int]:
         statement = select(tables.Participants.course_id).filter_by(user_id=user_id)
         return self.session.execute(statement).scalars().all()
@@ -37,20 +37,9 @@ class CourseService(BaseCourseService):
         statement = select(tables.Participants.user_id).filter_by(course_id=course_id)
         return self.session.execute(statement).scalars().all()
 
-    def get_participants(self, course_id: int) -> List[tables.User]:
-        users = self.session.query(tables.User).join(tables.Participants).filter(
-            tables.Participants.course_id == course_id
-        ).all()
-        return users
-
     def get_participants_from_table(self, course_id: int) -> List[tables.Participants]:
         statement = select(tables.Participants).filter_by(course_id=course_id)
         return self.session.execute(statement).scalars().all()
-
-    def check_accessibility(self, user_id, course_id: int):
-        course = self._get(user_id, course_id)
-        if course.owner_id != user_id:
-            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=constants.ACCESS_ERROR)
 
     def get_course_by_code(self, course_code: str) -> tables.Course:
         statement = select(tables.Course).filter_by(course_code=course_code)
@@ -68,14 +57,12 @@ class CourseService(BaseCourseService):
         for course_row in query.all():
             course: Course = course_row
             course.participants = self.get_participants(course.id)
-            course.moderators = self.get_moderators(course.id)
             courses.append(course)
         return courses
 
     def create(self, user_id: int, course_data: BaseCourse) -> Course:
         course_dict = course_data.dict()
         course_dict['img'] = 'placeholder'
-        course_dict['owner_id'] = user_id
         course_dict['course_code'] = generate_course_code()
 
         '''The probability that the code is already occupied is extremely small, 
@@ -87,15 +74,11 @@ class CourseService(BaseCourseService):
         self.session.add(course)
         self.session.commit()
 
-        query = self.session.query(tables.Course)
-        query = query.filter_by(owner_id=course_dict['owner_id'])
-        courses = query.all()
-        participants = Participants(user_id=course_dict['owner_id'], course_id=courses[-1].id)
-        self.session.add(tables.Participants(**participants.dict()))
+        participant = Participants(user_id=user_id, course_id=course.id, is_owner=True)
+        self.session.add(tables.Participants(**participant.dict()))
         self.session.commit()
         course: Course = course
         course.participants = self.get_participants(course.id)
-        course.moderators = []
         return course
 
     def _get(self, user_id: int, course_id: int) -> Course:
@@ -106,7 +89,6 @@ class CourseService(BaseCourseService):
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
         course: Course = course
         course.participants = self.get_participants(course.id)
-        course.moderators = self.get_moderators(course.id)
         return course
 
     def get(self, user_id: int, course_id: int) -> Course:
@@ -114,7 +96,7 @@ class CourseService(BaseCourseService):
 
     def update(self, user_id: int, course_id: int, course_data: BaseCourse) -> Course:
         course = self._get(user_id, course_id)
-        check_accessibility(user_id, course)
+        self.check_accessibility(user_id, course_id)
         for field, value in course_data:
             setattr(course, field, value)
         self.session.commit()
@@ -126,6 +108,7 @@ class CourseService(BaseCourseService):
             self.session.commit()
 
     def delete(self, user_id: int, course_id: int):
+        self.check_accessibility(user_id, course_id)
         course = self._get(user_id, course_id)
         self.delete_participants(course_id)
         self.session.delete(course)
@@ -143,9 +126,8 @@ class CourseService(BaseCourseService):
         self.session.commit()
         return self._get(user_id, course_id)
 
-    def delete_participant(self, user_id: int, course_owner_id: int, participant_id: int, course_id: int):
-        if course_owner_id != user_id:
-            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=constants.ACCESS_ERROR)
+    def delete_participant(self, user_id: int, participant_id: int, course_id: int):
+        self.check_accessibility(user_id, course_id)
         participant = self.get_participant(participant_id, course_id)
         self.session.delete(participant)
         self.session.commit()

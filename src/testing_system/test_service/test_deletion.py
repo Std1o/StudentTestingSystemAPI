@@ -69,12 +69,12 @@ class TestDeletionService(TestSearchingService):
 
     # main functions
 
-    def delete(self, user_id: int, course_id: int, test_id: int, course_owner_id: int):
-        self.check_for_moderator_rights(user_id, course_id, course_owner_id)
+    def delete(self, user_id: int, course_id: int, test_id: int):
+        self.check_for_moderator_rights(user_id, course_id)
         self.delete_test(test_id)
         self.delete_questions(test_id)
 
-    def delete_all_course_tests(self, user_id: int, course_id: int, course_owner_id: int):
-        self.check_for_moderator_rights(user_id, course_id, course_owner_id)
+    def delete_all_course_tests(self, user_id: int, course_id: int):
+        self.check_for_moderator_rights(user_id, course_id)
         for test in self.get_tests_by_course_id(course_id):
-            self.delete(user_id, course_id, test.id, course_owner_id)
+            self.delete(user_id, course_id, test.id)
