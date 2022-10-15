@@ -61,7 +61,7 @@ class UsersAnswers(Base):
 
     id = sa.Column(sa.Integer, primary_key=True)
     user_id = sa.Column(sa.Integer, sa.ForeignKey(User.id))
-    answer_id = sa.Column(sa.Integer, sa.ForeignKey(Answers.id))
+    answer_id = sa.Column(sa.Integer, sa.ForeignKey(Answers.id, ondelete='CASCADE'))
     is_selected = sa.Column(sa.Boolean)
 
 class QuestionsResults(Base):
@@ -69,7 +69,7 @@ class QuestionsResults(Base):
 
     id = sa.Column(sa.Integer, primary_key=True)
     user_id = sa.Column(sa.Integer, sa.ForeignKey(User.id))
-    question_id = sa.Column(sa.Integer, sa.ForeignKey(Questions.id))
+    question_id = sa.Column(sa.Integer, sa.ForeignKey(Questions.id, ondelete='CASCADE'))
     score = sa.Column(sa.Float)
 
 
@@ -78,6 +78,6 @@ class Results(Base):
 
     id = sa.Column(sa.Integer, primary_key=True)
     user_id = sa.Column(sa.Integer, sa.ForeignKey(User.id))
-    test_id = sa.Column(sa.Integer, sa.ForeignKey(Test.id))
+    test_id = sa.Column(sa.Integer, sa.ForeignKey(Test.id, ondelete='CASCADE'))
     max_score = sa.Column(sa.Integer)
     score = sa.Column(sa.Float)
