@@ -1,8 +1,7 @@
 from sqlalchemy.orm import Session
-from fastapi import Depends, HTTPException, status
+from fastapi import Depends
 from ..database import get_session
 from typing import List
-from sqlalchemy import select
 from .. import tables
 from ..models.course import CourseUsers
 
@@ -13,7 +12,7 @@ class BaseCourseService:
 
     def get_participants(self, course_id: int) -> List[CourseUsers]:
         users = self.session.query(
-            tables.User.email, tables.User.username, tables.User.id,
+            tables.User.email, tables.User.username, tables.Participants.user_id,
             tables.Participants.is_moderator, tables.Participants.is_owner
         ).join(tables.Participants).filter(
             tables.Participants.course_id == course_id

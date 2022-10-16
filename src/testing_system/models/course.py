@@ -1,14 +1,15 @@
 from typing import List, Optional
 from pydantic import BaseModel
 import random
-from .auth import User
+from .auth import User, BaseUser
 
 
 class BaseCourse(BaseModel):
     name: str
 
 
-class CourseUsers(User):
+class CourseUsers(BaseUser):
+    user_id: int
     is_moderator: bool
     is_owner: bool
 
