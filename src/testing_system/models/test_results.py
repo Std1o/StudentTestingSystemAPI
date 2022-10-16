@@ -4,8 +4,8 @@ from pydantic import BaseModel
 
 class TestResultsItem(BaseModel):
     user_id: int
-    user_name: str
-    user_email: str
+    username: str
+    email: str
     score: float
 
 

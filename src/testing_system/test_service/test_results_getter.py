@@ -32,8 +32,8 @@ class TestResultsService(BaseTestService):
             return TestResults(max_score=0, results=[])
         max_score = test_result_rows[0].max_score
         query = self.session.query(
-            tables.Results.user_id, tables.User.username.label("user_name"),
-            tables.User.email.label("user_email"), tables.Results.score
+            tables.Results.user_id, tables.User.username,
+            tables.User.email, tables.Results.score
         ).join(tables.Results).filter(tables.Results.test_id == test_id).all()
         test_result = TestResults(max_score=max_score, results=query)
         return test_result
