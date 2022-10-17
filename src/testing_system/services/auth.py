@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+from typing import Optional
 
 from fastapi import HTTPException, status, Depends
 from fastapi.security import OAuth2PasswordBearer
@@ -7,11 +8,12 @@ from pydantic import ValidationError
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from ..database import get_session
-from ..models.auth import User, Token, UserCreate, PrivateUser
+from ..database import get_session, make_query
+from ..models.auth import User, UserCreate, PrivateUser
+from ..models.tables import User
 from ..settings import settings
 from jose import jwt, JWTError
-from .. import tables
+from ..models import tables
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl='/auth/sign-in')
 
@@ -68,21 +70,23 @@ class AuthService:
     def __init__(self, session: Session = Depends(get_session)):
         self.session = session
 
-    def get_user_by_email(self, email: str) -> tables.User:
-        statement = select(tables.User).filter_by(email=email)
-        return self.session.execute(statement).scalars().first()
+    def get_user_by_email(self, email: str) -> Optional[User]:
+        user = make_query("SELECT * FROM users where email=? LIMIT 1", email)
+        if not user:
+            return None
+        return tables.User(**user)
 
     def reg(self, user_data: UserCreate) -> PrivateUser:
         if self.get_user_by_email(user_data.email):
             raise HTTPException(status_code=418, detail="User with this email already exists")
-        user = tables.User(
-            email=user_data.email,
-            username=user_data.username,
-            password_hash=self.hash_password(user_data.password))
-        self.session.add(user)
-        self.session.commit()
-        token = self.create_token(user)
-        created_user = self.session.query(tables.User).filter_by(email=user.email).first()
+        password_hash = self.hash_password(user_data.password)
+        query = "INSERT INTO users (email, username, password_hash) " \
+                "VALUES ("+f'"{user_data.email}"'+","\
+                + f'"{user_data.username}"'+"," + f'"{password_hash}"'
+        query += ");"
+        make_query(query)
+        created_user = self.get_user_by_email(user_data.email)
+        token = self.create_token(created_user)
         return PrivateUser(email=created_user.email,
                            username=created_user.username,
                            id=created_user.id,
@@ -96,7 +100,7 @@ class AuthService:
                 'WWW-Authenticate': 'Bearer'
             }
         )
-        user = self.session.query(tables.User).filter_by(email=email).first()
+        user = self.get_user_by_email(email)
         if not user:
             raise exception
         if not self.verify_password(password, user.password_hash):

@@ -1,8 +1,8 @@
-from .database import cur
+from .database import make_query
 
 
 def main():
-    cur.execute(
+    make_query(
         """\
         CREATE TABLE users(
             id INTEGER not null primary key,
@@ -13,7 +13,7 @@ def main():
         """
     )
 
-    cur.execute(
+    make_query(
         """\
         CREATE TABLE courses(
             id INTEGER not null primary key,
@@ -24,7 +24,7 @@ def main():
         """
     )
 
-    cur.execute(
+    make_query(
         """\
         CREATE TABLE participants(
             user_id INTEGER not null references users,
@@ -36,7 +36,7 @@ def main():
         """
     )
 
-    cur.execute(
+    make_query(
         """\
         CREATE TABLE tests(
             id INTEGER not null primary key,
@@ -47,7 +47,7 @@ def main():
         """
     )
 
-    cur.execute(
+    make_query(
         """\
         CREATE TABLE questions(
             id INTEGER not null primary key,
@@ -57,7 +57,7 @@ def main():
         """
     )
 
-    cur.execute(
+    make_query(
         """\
         CREATE TABLE answers(
             id INTEGER not null primary key,
@@ -68,7 +68,7 @@ def main():
         """
     )
 
-    cur.execute(
+    make_query(
         """\
         CREATE TABLE users_answers(
             id INTEGER not null primary key,
@@ -79,7 +79,7 @@ def main():
         """
     )
 
-    cur.execute(
+    make_query(
         """\
         CREATE TABLE questions_results(
             id INTEGER not null primary key,
@@ -90,7 +90,7 @@ def main():
         """
     )
 
-    cur.execute(
+    make_query(
         """\
         CREATE TABLE results(
             id INTEGER not null primary key,

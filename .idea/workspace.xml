@@ -2,13 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="92b7f236-a5d9-4998-a0b9-55e63b873691" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/testing_system/models/tables.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/38b259ad-23a8-4f4e-8c54-fb9a46a03393.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/38b259ad-23a8-4f4e-8c54-fb9a46a03393.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database.sqlite3" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/testing_system/database.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/testing_system/database.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/testing_system/database_creator.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/testing_system/database_creator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/testing_system/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/testing_system/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/testing_system/services/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/testing_system/services/auth.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,10 +46,12 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/testing_system/api" />
+    <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/SQL Dialect" value="SQLite" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/testing_system/models" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/testing_system/models" />
       <recent name="$PROJECT_DIR$/src/testing_system/api" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -209,6 +211,7 @@
       <workItem from="1665952969317" duration="105000" />
       <workItem from="1666027698015" duration="597000" />
       <workItem from="1666028302590" duration="1343000" />
+      <workItem from="1666036028541" duration="5736000" />
     </task>
     <servers />
   </component>
@@ -227,6 +230,6 @@
     </option>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/StudentTestingSystemAPI$uvicorn.coverage" NAME="uvicorn Coverage Results" MODIFIED="1666029526739" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/StudentTestingSystemAPI$uvicorn.coverage" NAME="uvicorn Coverage Results" MODIFIED="1666043462067" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
