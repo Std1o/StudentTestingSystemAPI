@@ -16,6 +16,16 @@ def make_query(sql, *args):
         return None
 
 
+def get_list(sql, *args):
+    con = sqlite3.connect(settings.database_name)
+    with closing(con.cursor()) as cursor:
+        cursor.execute(sql, args)
+        data_list = []
+        for row in cursor:
+            data_list.append(dict((column[0], row[index]) for index, column in enumerate(cursor.description)))
+        return data_list
+
+
 engine = create_engine(settings.database_url, connect_args={'check_same_thread': False})
 
 Session = sessionmaker(engine, autocommit=False, autoflush=False)

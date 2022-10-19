@@ -7,7 +7,7 @@ from .base_course_service import BaseCourseService
 from .. import constants
 import random
 from .. import tables
-from ..database import get_session
+from ..database import get_session, make_query, get_list
 from ..models.course import CourseCreate, Participants, BaseCourse, Course, CourseUsers
 
 
@@ -46,13 +46,14 @@ class CourseService(BaseCourseService):
         return self.session.execute(statement).scalars().first()
 
     def get_courses(self, user_id: int) -> List[Course]:
-        courses = self.session.query(tables.Course).join(tables.Participants).filter(
-            tables.Course.id == tables.Participants.course_id,
-            tables.Participants.user_id == user_id
-        ).all()
-        print(courses)
-        for course in courses:
+        courses_dict_arr = get_list("SELECT id, name, course_code, img FROM courses "
+                                    "INNER JOIN participants p on courses.id = p.course_id"
+                                    + f" AND p.user_id = {user_id}")
+        courses = []
+        for course in courses_dict_arr:
+            course = tables.Course(**course)
             course.participants = self.get_participants(course.id)
+            courses.append(course)
         return courses
 
     def create(self, user_id: int, course_data: BaseCourse) -> Course:
