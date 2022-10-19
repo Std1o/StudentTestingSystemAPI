@@ -50,14 +50,13 @@ class CourseService(BaseCourseService):
         return self.session.execute(statement).scalars().first()
 
     def get_courses(self, user_id: int) -> List[Course]:
-        query = self.session.query(tables.Course)
-        query = query.filter(tables.Course.id.in_(self.get_course_ids(user_id)))
-
-        courses = []
-        for course_row in query.all():
-            course: Course = course_row
+        courses = self.session.query(tables.Course).join(tables.Participants).filter(
+            tables.Course.id == tables.Participants.course_id,
+            tables.Participants.user_id == user_id
+        ).all()
+        print(courses)
+        for course in courses:
             course.participants = self.get_participants(course.id)
-            courses.append(course)
         return courses
 
     def create(self, user_id: int, course_data: BaseCourse) -> Course:
