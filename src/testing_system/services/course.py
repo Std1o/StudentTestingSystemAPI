@@ -29,10 +29,6 @@ class CourseService(BaseCourseService):
         if not participant.is_owner:
             raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=constants.ACCESS_ERROR)
 
-    def get_course_ids(self, user_id: int) -> List[int]:
-        statement = select(tables.Participants.course_id).filter_by(user_id=user_id)
-        return self.session.execute(statement).scalars().all()
-
     def get_participants_ids(self, course_id: int) -> List[int]:
         statement = select(tables.Participants.user_id).filter_by(course_id=course_id)
         return self.session.execute(statement).scalars().all()
