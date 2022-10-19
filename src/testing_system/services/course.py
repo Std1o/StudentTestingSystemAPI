@@ -80,12 +80,12 @@ class CourseService(BaseCourseService):
         return course
 
     def _get(self, user_id: int, course_id: int) -> Course:
-        query = self.session.query(tables.Course)
-        query = query.filter(tables.Course.id.in_(self.get_course_ids(user_id)))
-        course = query.filter_by(id=course_id).first()
+        course = self.session.query(tables.Course).join(tables.Participants).filter(
+            tables.Course.id == course_id,
+            tables.Participants.user_id == user_id
+        ).first()
         if not course:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
-        course: Course = course
         course.participants = self.get_participants(course.id)
         return course
 
