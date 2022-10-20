@@ -33,13 +33,9 @@ class CourseService(BaseCourseService):
         participants = get_list("SELECT user_id FROM participants where course_id=?", int, course_id)
         return participants
 
-    def get_participants_from_table(self, course_id: int) -> List[tables.Participants]:
-        statement = select(tables.Participants).filter_by(course_id=course_id)
-        return self.session.execute(statement).scalars().all()
-
     def get_course_by_code(self, course_code: str) -> tables.Course:
-        statement = select(tables.Course).filter_by(course_code=course_code)
-        return self.session.execute(statement).scalars().first()
+        course = make_query("SELECT * FROM courses where course_code=? LIMIT 1", course_code)
+        return Course(**course)
 
     def get_participant(self, participant_id: int, course_id) -> tables.Participants:
         statement = select(tables.Participants).filter_by(user_id=participant_id, course_id=course_id)
@@ -96,11 +92,6 @@ class CourseService(BaseCourseService):
             setattr(course, field, value)
         self.session.commit()
         return course
-
-    def delete_participants(self, course_id: int):
-        for participant in self.get_participants_from_table(course_id):
-            self.session.delete(participant)
-            self.session.commit()
 
     def delete(self, user_id: int, course_id: int):
         self.check_accessibility(user_id, course_id)
