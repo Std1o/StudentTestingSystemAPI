@@ -30,9 +30,8 @@ class CourseService(BaseCourseService):
             raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=constants.ACCESS_ERROR)
 
     def get_participants_ids(self, course_id: int) -> List[int]:
-        # participants = get_list("SELECT user_id FROM participants where course_id=?", course_id)
-        statement = select(tables.Participants.user_id).filter_by(course_id=course_id)
-        return self.session.execute(statement).scalars().all()
+        participants = get_list("SELECT user_id FROM participants where course_id=?", int, course_id)
+        return participants
 
     def get_participants_from_table(self, course_id: int) -> List[tables.Participants]:
         statement = select(tables.Participants).filter_by(course_id=course_id)

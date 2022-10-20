@@ -3,9 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="92b7f236-a5d9-4998-a0b9-55e63b873691" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/database.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/testing_system/database.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/testing_system/database.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/testing_system/models/course.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/testing_system/models/course.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/testing_system/models/tables.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/testing_system/models/tables.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/testing_system/services/course.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/testing_system/services/course.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -216,6 +215,7 @@
       <workItem from="1666200654783" duration="166000" />
       <workItem from="1666203050841" duration="1963000" />
       <workItem from="1666205335087" duration="3829000" />
+      <workItem from="1666281362808" duration="1304000" />
     </task>
     <servers />
   </component>
@@ -234,6 +234,6 @@
     </option>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/StudentTestingSystemAPI$uvicorn.coverage" NAME="uvicorn Coverage Results" MODIFIED="1666250361894" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/StudentTestingSystemAPI$uvicorn.coverage" NAME="uvicorn Coverage Results" MODIFIED="1666282698666" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

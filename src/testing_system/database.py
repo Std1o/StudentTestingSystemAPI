@@ -17,6 +17,11 @@ def make_query(sql, *args):
 
 
 T = TypeVar("T")
+primitive = (int, str, bool, float)
+
+
+def is_primitive(thing):
+    return isinstance(thing, primitive)
 
 
 def get_list(sql, data_class: Type[T], *args):
@@ -26,7 +31,10 @@ def get_list(sql, data_class: Type[T], *args):
         data_list = []
         for row in cursor:
             data = dict((column[0], row[index]) for index, column in enumerate(cursor.description))
-            item = data_class(**data)
+            if len(data.keys()) == 1:
+                item = data[next(iter(data))]
+            else:
+                item = data_class(**data)
             data_list.append(item)
         return data_list
 
