@@ -12,6 +12,7 @@ primitive = (int, str, bool, float)
 
 def make_query(sql, data_class: Type[T] = None, *args):
     con = sqlite3.connect(settings.database_name)
+    con.execute("PRAGMA foreign_keys = ON")
     with closing(con.cursor()) as cursor:
         cursor.execute(sql, args)
         con.commit()
