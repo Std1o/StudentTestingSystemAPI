@@ -103,9 +103,9 @@ class CourseService(BaseCourseService):
         course_id = course.id
         if user_id in self.get_participants_ids(course_id):
             raise HTTPException(status_code=418, detail="You have already joined the course")
-        participants = Participants(user_id=user_id, course_id=course_id)
-        self.session.add(tables.Participants(**participants.dict()))
-        self.session.commit()
+        query = "INSERT INTO participants (user_id, course_id, is_moderator, is_owner) " \
+                "VALUES (?, ?, ?, ?)"
+        make_query(query, None, user_id, course.id, False, False)
         return self._get(user_id, course_id)
 
     def delete_participant(self, user_id: int, participant_id: int, course_id: int):
