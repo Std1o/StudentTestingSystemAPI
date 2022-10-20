@@ -1,5 +1,5 @@
 from contextlib import closing
-
+from typing import TypeVar, Type
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from .settings import settings
@@ -16,13 +16,18 @@ def make_query(sql, *args):
         return None
 
 
-def get_list(sql, *args):
+T = TypeVar("T")
+
+
+def get_list(sql, data_class: Type[T], *args):
     con = sqlite3.connect(settings.database_name)
     with closing(con.cursor()) as cursor:
         cursor.execute(sql, args)
         data_list = []
         for row in cursor:
-            data_list.append(dict((column[0], row[index]) for index, column in enumerate(cursor.description)))
+            data = dict((column[0], row[index]) for index, column in enumerate(cursor.description))
+            item = data_class(**data)
+            data_list.append(item)
         return data_list
 
 

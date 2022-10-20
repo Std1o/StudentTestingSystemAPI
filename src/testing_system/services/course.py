@@ -30,6 +30,7 @@ class CourseService(BaseCourseService):
             raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=constants.ACCESS_ERROR)
 
     def get_participants_ids(self, course_id: int) -> List[int]:
+        # participants = get_list("SELECT user_id FROM participants where course_id=?", course_id)
         statement = select(tables.Participants.user_id).filter_by(course_id=course_id)
         return self.session.execute(statement).scalars().all()
 
@@ -48,10 +49,9 @@ class CourseService(BaseCourseService):
     def get_courses(self, user_id: int) -> List[Course]:
         courses_dict_arr = get_list("SELECT id, name, course_code, img FROM courses "
                                     "INNER JOIN participants p on courses.id = p.course_id"
-                                    + f" AND p.user_id = {user_id}")
+                                    + f" AND p.user_id = {user_id}", Course)
         courses = []
         for course in courses_dict_arr:
-            course = tables.Course(**course)
             course.participants = self.get_participants(course.id)
             courses.append(course)
         return courses

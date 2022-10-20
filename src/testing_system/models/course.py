@@ -18,7 +18,7 @@ class Course(BaseCourse):
     id: int
     img: str
     course_code: str
-    participants: List[CourseUsers]
+    participants: List[CourseUsers] = []
 
     class Config:
         orm_mode = True

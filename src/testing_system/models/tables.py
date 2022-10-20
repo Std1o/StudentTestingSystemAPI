@@ -12,12 +12,14 @@ class User(BaseModel):
     class Config:
         orm_mode = True
 
-
 class Course(BaseModel):
     id: int
     name: str
     course_code: str
     img: str
+
+    class Config:
+        orm_mode = True
 
 
 class Participants(BaseModel):
