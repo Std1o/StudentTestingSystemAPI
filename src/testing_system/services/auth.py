@@ -71,10 +71,7 @@ class AuthService:
         self.session = session
 
     def get_user_by_email(self, email: str) -> Optional[User]:
-        user = make_query("SELECT * FROM users where email=? LIMIT 1", email)
-        if not user:
-            return None
-        return tables.User(**user)
+        return make_query("SELECT * FROM users where email=? LIMIT 1", tables.User, email)
 
     def reg(self, user_data: UserCreate) -> PrivateUser:
         if self.get_user_by_email(user_data.email):

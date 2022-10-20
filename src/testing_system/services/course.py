@@ -34,15 +34,11 @@ class CourseService(BaseCourseService):
         return participants
 
     def get_course_by_code(self, course_code: str) -> Optional[Course]:
-        course = make_query("SELECT * FROM courses where course_code=? LIMIT 1", course_code)
-        if not course:
-            return None
-        return Course(**course)
+        return make_query("SELECT * FROM courses where course_code=? LIMIT 1", Course, course_code)
 
     def get_participant(self, participant_id: int, course_id) -> tables.Participants:
-        participant = make_query("SELECT * FROM participants "
-                                 "where user_id=? AND course_id=? LIMIT 1", participant_id, course_id)
-        return Participants(**participant)
+        return make_query("SELECT * FROM participants "
+                          "where user_id=? AND course_id=? LIMIT 1", Participants, participant_id, course_id)
 
     def get_courses(self, user_id: int) -> List[Course]:
         courses_dict_arr = get_list("SELECT id, name, course_code, img FROM courses "
@@ -73,15 +69,15 @@ class CourseService(BaseCourseService):
 
         query = "INSERT INTO participants (user_id, course_id, is_moderator, is_owner) " \
                 "VALUES (?, ?, ?, ?)"
-        make_query(query, user_id, course.id, False, True)
+        make_query(query, None, user_id, course.id, False, True)
         course.participants = self.get_participants(course.id)
         return course
 
     def _get(self, user_id: int, course_id: int) -> Course:
-        course = self.session.query(tables.Course).join(tables.Participants).filter(
-            tables.Course.id == course_id,
-            tables.Participants.user_id == user_id
-        ).first()
+        course = make_query("SELECT id, name, course_code, img FROM courses "
+                            "INNER JOIN participants p on "
+                            + f"courses.id = {course_id} AND p.user_id = {user_id}", Course)
+
         if not course:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
         course.participants = self.get_participants(course.id)
@@ -91,11 +87,9 @@ class CourseService(BaseCourseService):
         return self._get(user_id, course_id)
 
     def update(self, user_id: int, course_id: int, course_data: BaseCourse) -> Course:
-        course = self._get(user_id, course_id)
         self.check_accessibility(user_id, course_id)
-        for field, value in course_data:
-            setattr(course, field, value)
-        self.session.commit()
+        make_query("UPDATE courses SET name = ? WHERE id = ?", None, course_data.name, course_id)
+        course = self._get(user_id, course_id)
         return course
 
     def delete(self, user_id: int, course_id: int):
