@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 from fastapi import Depends, HTTPException, status
 from sqlalchemy import select
 from sqlalchemy.orm import Session
@@ -33,8 +33,10 @@ class CourseService(BaseCourseService):
         participants = get_list("SELECT user_id FROM participants where course_id=?", int, course_id)
         return participants
 
-    def get_course_by_code(self, course_code: str) -> tables.Course:
+    def get_course_by_code(self, course_code: str) -> Optional[Course]:
         course = make_query("SELECT * FROM courses where course_code=? LIMIT 1", course_code)
+        if not course:
+            return None
         return Course(**course)
 
     def get_participant(self, participant_id: int, course_id) -> tables.Participants:
@@ -62,14 +64,16 @@ class CourseService(BaseCourseService):
         if self.get_course_by_code(course_dict['course_code']):
             course_dict['course_code'] = generate_course_code()
         course_creator = CourseCreate(**course_dict)
-        course = tables.Course(**course_creator.dict())
-        self.session.add(course)
-        self.session.commit()
+        query_course = "INSERT INTO courses (name, course_code, img) " \
+                       "VALUES (" + f'"{course_creator.name}"' + "," \
+                       + f'"{course_creator.course_code}"' + "," + f'"{course_creator.img}"'
+        query_course += ");"
+        make_query(query_course)
+        course = self.get_course_by_code(course_creator.course_code)
 
-        participant = Participants(user_id=user_id, course_id=course.id, is_owner=True)
-        self.session.add(tables.Participants(**participant.dict()))
-        self.session.commit()
-        course: Course = course
+        query = "INSERT INTO participants (user_id, course_id, is_moderator, is_owner) " \
+                "VALUES (?, ?, ?, ?)"
+        make_query(query, user_id, course.id, False, True)
         course.participants = self.get_participants(course.id)
         return course
 
