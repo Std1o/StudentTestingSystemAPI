@@ -38,8 +38,9 @@ class CourseService(BaseCourseService):
         return Course(**course)
 
     def get_participant(self, participant_id: int, course_id) -> tables.Participants:
-        statement = select(tables.Participants).filter_by(user_id=participant_id, course_id=course_id)
-        return self.session.execute(statement).scalars().first()
+        participant = make_query("SELECT * FROM participants "
+                                 "where user_id=? AND course_id=? LIMIT 1", participant_id, course_id)
+        return Participants(**participant)
 
     def get_courses(self, user_id: int) -> List[Course]:
         courses_dict_arr = get_list("SELECT id, name, course_code, img FROM courses "
