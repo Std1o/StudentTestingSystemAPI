@@ -110,7 +110,6 @@ class CourseService(BaseCourseService):
 
     def delete_participant(self, user_id: int, participant_id: int, course_id: int):
         self.check_accessibility(user_id, course_id)
-        participant = self.get_participant(participant_id, course_id)
-        self.session.delete(participant)
-        self.session.commit()
+        make_query("DELETE FROM participants "
+                   "WHERE user_id = ? AND course_id = ?", None, participant_id, course_id)
         return self.get_participants(course_id)
