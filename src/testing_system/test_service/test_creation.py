@@ -1,16 +1,11 @@
-from fastapi import Depends, HTTPException, status
-from sqlalchemy.orm import Session
 from .base_test_service import BaseTestService
-from ..database import get_session, make_query, insert_and_get_id
+from ..database import make_query, insert_and_get_id
 from ..models.test_creation import BaseTest, BaseQuestion, BaseAnswer
 from .. import tables
 import datetime
 
 
 class TestCreationService(BaseTestService):
-    def __init__(self, session: Session = Depends(get_session)):
-        super().__init__(session)
-        self.session = session
 
     def create_test(self, test_data: BaseTest):
         test = tables.Test(**dict(course_id=test_data.course_id,
