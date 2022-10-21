@@ -8,12 +8,11 @@ import datetime
 class TestCreationService(BaseTestService):
 
     def create_test(self, test_data: BaseTest):
-        test = tables.Test(**dict(course_id=test_data.course_id,
-                                  name=test_data.name,
-                                  creation_time=datetime.datetime.now().strftime("%Y-%m-%d")))
+        test = tables.Test(**dict(course_id=test_data.course_id, name=test_data.name))
         query = "INSERT INTO tests (course_id, name, creation_time) " \
-                "VALUES (?, ?, ?)"
-        test.id = insert_and_get_id(query, test.course_id, test.name, test.creation_time)
+                "VALUES (?, ?, DATE('now','localtime'))"
+        test.id = insert_and_get_id(query, test.course_id, test.name)
+        test = make_query("SELECT * FROM tests WHERE id=? LIMIT 1", tables.Test, test.id)
         return test
 
     def get_last_test_id(self, test_data: BaseTest):
