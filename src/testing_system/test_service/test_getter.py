@@ -4,7 +4,8 @@ from sqlalchemy.orm import Session
 from sqlalchemy import select
 from .base_test_service import BaseTestService
 from .. import tables
-from ..database import get_session
+from ..models import tables as tbls
+from ..database import get_session, make_query
 from ..models.test import Test, Answer, Question
 
 
@@ -45,8 +46,7 @@ class TestSearchingService(BaseTestService):
 
     def get(self, user_id: int, course_id: int, test_id: int, for_result: bool) -> Test:
         self.check_accessibility(user_id, course_id)
-        statement = select(tables.Test).filter_by(id=test_id)
-        test = self.session.execute(statement).scalars().first()
+        test = make_query("SELECT * FROM tests where id=? LIMIT 1", tbls.Test, test_id)
         if not test:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
         return self.convert_test_from_table(test, for_result)
