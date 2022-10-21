@@ -5,7 +5,6 @@ from sqlalchemy.orm import sessionmaker
 from .settings import settings
 import sqlite3
 
-
 T = TypeVar("T")
 
 
@@ -26,7 +25,7 @@ def make_query(sql, data_class: Type[T] = None, *args):
         con.commit()
         for row in cursor:
             item = _get_item(cursor, row, data_class)
-            if not item:
+            if item is None:
                 return None
             return item
         return None
