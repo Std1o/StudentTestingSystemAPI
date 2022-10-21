@@ -102,6 +102,16 @@ def main():
         """
     )
 
+    make_query(
+        """\
+        CREATE TRIGGER before_course_update BEFORE UPDATE on courses
+            WHEN NEW.id != OLD.id
+                BEGIN 
+                    SELECT RAISE(ABORT, 'id cannot be changed');
+                END;
+        """
+    )
+
 
 if __name__ == "__main__":
     main()
