@@ -17,6 +17,14 @@ def _get_item(cursor, row, data_class: Type[T] = None):
     return item
 
 
+def insert_and_get_id(sql, *args):
+    con = sqlite3.connect(settings.database_name)
+    with closing(con.cursor()) as cursor:
+        cursor.execute(sql, args)
+        con.commit()
+        return cursor.lastrowid
+
+
 def make_query(sql, data_class: Type[T] = None, *args):
     con = sqlite3.connect(settings.database_name)
     con.execute("PRAGMA foreign_keys = ON")

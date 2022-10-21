@@ -1,9 +1,9 @@
 from typing import List
 
-from fastapi import Depends, HTTPException, status
+from fastapi import HTTPException, status
 from .test_getter import TestSearchingService
 from ..models import tables
-from ..database import get_session, make_query
+from ..database import make_query
 from ..models.test import Answer, Question
 from ..models.test_result import TestResult, AnswerResult, QuestionResult
 
