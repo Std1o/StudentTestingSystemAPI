@@ -3,11 +3,11 @@ from typing import List
 from fastapi import Depends
 from sqlalchemy import select
 from .. import tables
-from testing_system.database import get_session
+from testing_system.database import get_session, get_list
 from testing_system.test_service.base_test_service import BaseTestService
 from sqlalchemy.orm import Session
 
-from ..models.test_results import TestResults
+from ..models.test_results import TestResults, TestResultsItem
 
 
 class TestResultsService(BaseTestService):
@@ -17,12 +17,12 @@ class TestResultsService(BaseTestService):
 
     def get_results_from_table(self, test_id: int, only_max_result: bool) -> List[tables.Results]:
         if only_max_result:
-            statement = select(tables.Results).filter_by(test_id=test_id).filter(
-                tables.Results.score == tables.Results.max_score
-            )
+            results = get_list("SELECT * FROM results "
+                               "WHERE test_id=? AND score=max_score", tables.Results, test_id)
         else:
-            statement = select(tables.Results).filter_by(test_id=test_id)
-        return self.session.execute(statement).scalars().all()
+            results = get_list("SELECT * FROM results "
+                               "WHERE test_id=?", tables.Results, test_id)
+        return results
 
     def get_results(self, user_id: int, course_id: int, test_id: int,
                     only_max_result: bool) -> TestResults:
@@ -31,9 +31,8 @@ class TestResultsService(BaseTestService):
         if not test_result_rows:
             return TestResults(max_score=0, results=[])
         max_score = test_result_rows[0].max_score
-        query = self.session.query(
-            tables.Results.user_id, tables.User.username,
-            tables.User.email, tables.Results.score
-        ).join(tables.Results).filter(tables.Results.test_id == test_id).all()
-        test_result = TestResults(max_score=max_score, results=query)
+        results = get_list("SELECT user_id, username, email, score FROM users "
+                           "INNER JOIN results r on users.id=user_id"
+                           + f" AND r.test_id = {test_id}", TestResultsItem)
+        test_result = TestResults(max_score=max_score, results=results)
         return test_result
