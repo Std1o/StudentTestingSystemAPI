@@ -1,8 +1,7 @@
 from sqlalchemy.orm import Session
 from fastapi import Depends
-from ..database import get_session
+from ..database import get_session, get_list
 from typing import List
-from .. import tables
 from ..models.course import CourseUsers
 
 
@@ -11,10 +10,7 @@ class BaseCourseService:
         self.session = session
 
     def get_participants(self, course_id: int) -> List[CourseUsers]:
-        users = self.session.query(
-            tables.User.email, tables.User.username, tables.Participants.user_id,
-            tables.Participants.is_moderator, tables.Participants.is_owner
-        ).join(tables.Participants).filter(
-            tables.Participants.course_id == course_id
-        ).all()
+        users = get_list("SELECT email, username, user_id, is_moderator, is_owner "
+                         "FROM users INNER JOIN participants p on users.id = p.user_id"
+                         + f" WHERE p.course_id = {course_id}", CourseUsers)
         return users
