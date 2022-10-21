@@ -1,13 +1,11 @@
 from typing import List
 
 from fastapi import Depends, HTTPException, status
-
-from testing_system.test_service.base_test_service import BaseTestService
 from sqlalchemy.orm import Session
 from sqlalchemy import select
 from .test_getter import TestSearchingService
-from .. import tables, constants
-from ..database import get_session
+from .. import tables
+from ..database import get_session, make_query
 from ..models.test import Answer, Question
 from ..models.test_result import TestResult, AnswerResult, QuestionResult
 
@@ -43,8 +41,8 @@ class TestResultService(TestSearchingService):
         return question_result
 
     def get_test_score(self, user_id: int, test_id: int) -> float:
-        statement = select(tables.Results.score).filter_by(test_id=test_id, user_id=user_id)
-        return self.session.execute(statement).scalars().first()
+        return make_query("SELECT score FROM results "
+                          "where test_id = ? AND user_id= ? ", int, test_id, user_id)
 
     def get_result(self, user_id: int, course_id: int, test_id: int) -> TestResult:
         test = self.get(user_id, course_id, test_id, True)

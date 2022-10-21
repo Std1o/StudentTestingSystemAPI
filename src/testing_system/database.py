@@ -7,7 +7,15 @@ import sqlite3
 
 
 T = TypeVar("T")
-primitive = (int, str, bool, float)
+
+
+def _get_item(cursor, row, data_class: Type[T] = None):
+    data = dict((column[0], row[index]) for index, column in enumerate(cursor.description))
+    if len(data.keys()) == 1:
+        item = data[next(iter(data))]
+    else:
+        item = data_class(**data)
+    return item
 
 
 def make_query(sql, data_class: Type[T] = None, *args):
@@ -17,15 +25,11 @@ def make_query(sql, data_class: Type[T] = None, *args):
         cursor.execute(sql, args)
         con.commit()
         for row in cursor:
-            item = dict((column[0], row[index]) for index, column in enumerate(cursor.description))
+            item = _get_item(cursor, row, data_class)
             if not item:
                 return None
-            return data_class(**item)
+            return item
         return None
-
-
-def is_primitive(thing):
-    return isinstance(thing, primitive)
 
 
 def get_list(sql, data_class: Type[T], *args):
@@ -34,11 +38,7 @@ def get_list(sql, data_class: Type[T], *args):
         cursor.execute(sql, args)
         data_list = []
         for row in cursor:
-            data = dict((column[0], row[index]) for index, column in enumerate(cursor.description))
-            if len(data.keys()) == 1:
-                item = data[next(iter(data))]
-            else:
-                item = data_class(**data)
+            item = _get_item(cursor, row, data_class)
             data_list.append(item)
         return data_list
 
