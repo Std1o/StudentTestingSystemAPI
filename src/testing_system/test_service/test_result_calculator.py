@@ -1,46 +1,34 @@
 from typing import List
-from fastapi import Depends
-from sqlalchemy.orm import Session
-
 from .test_getter import TestSearchingService
 from .. import tables
-from ..database import get_session
+from ..database import make_query, insert_and_get_id
 from ..models.test import Answer
 from ..models.test_result import TestResult, QuestionResult, AnswerResult
 from ..models.test_result_creation import QuestionResultCreation, AnswerResultCreation
-from sqlalchemy import select
 
 
 class TestResultCalculatorService(TestSearchingService):
-    def __init__(self, session: Session = Depends(get_session)):
-        super().__init__(session)
-        self.session = session
 
     def get_answer(self, answer_id: int) -> tables.Answers:
-        statement = select(tables.Answers).filter_by(id=answer_id)
-        return self.session.execute(statement).scalars().first()
+        return make_query("SELECT * FROM answers where id=?", tables.Answers, answer_id)
 
     def get_question(self, question_id: int) -> tables.Questions:
-        statement = select(tables.Questions).filter_by(id=question_id)
-        return self.session.execute(statement).scalars().first()
+        return make_query("SELECT * FROM questions where id=?", tables.Questions, question_id)
 
     def create_user_answer(self, user_id: int, answer: AnswerResultCreation):
-        answer_dict = dict(user_id=user_id, answer_id=answer.answer_id, is_selected=answer.is_selected)
-        answer_row = tables.UsersAnswers(**answer_dict)
-        self.session.add(answer_row)
-        self.session.commit()
+        query = "INSERT INTO users_answers (user_id, answer_id, is_selected) " \
+                "VALUES (?, ?, ?)"
+        insert_and_get_id(query, user_id, answer.answer_id, answer.is_selected)
 
     def create_question_result(self, user_id: int, question_id: int, score: float):
-        question_dict = dict(user_id=user_id, question_id=question_id, score=score)
-        question_row = tables.QuestionsResults(**question_dict)
-        self.session.add(question_row)
-        self.session.commit()
+        query = "INSERT INTO questions_results (user_id, question_id, score) " \
+                "VALUES (?, ?, ?)"
+        insert_and_get_id(query, user_id, question_id, score)
 
     def create_test_result(self, user_id: int, max_score: int, score: float, test_id: int):
-        test_dict = dict(user_id=user_id, test_id=test_id, max_score=max_score, score=score)
-        test_row = tables.Results(**test_dict)
-        self.session.add(test_row)
-        self.session.commit()
+        query = "INSERT INTO results (user_id, test_id, max_score, score) " \
+                "VALUES (?, ?, ?, ?)"
+        insert_and_get_id(query, user_id, test_id, max_score, score)
 
     def get_right_answers(self, answers: List[AnswerResultCreation]):
         right_answers = []
