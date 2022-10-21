@@ -35,6 +35,9 @@ class Test(BaseModel):
     name: str
     creation_time: Date
 
+    class Config:
+        orm_mode = True
+
 
 class Questions(BaseModel):
     id: int

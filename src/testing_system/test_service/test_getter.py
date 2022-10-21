@@ -22,8 +22,9 @@ class TestSearchingService(BaseTestService):
         return self.session.execute(statement).scalars().all()
 
     def convert_test_from_table(self, test: tables.Test, show_right_ans: bool) -> Test:
-        test: Test = test
-        test.questions = []
+        test_dict = dict(test)
+        test_dict["questions"] = []
+        test = Test(**test_dict)
         for question_row in self.get_questions(test.id):
             answers: List[Answer] = []
             for ans in self.get_answers(question_row.id):
