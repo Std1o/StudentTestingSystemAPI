@@ -1,9 +1,6 @@
 from contextlib import closing
 from typing import TypeVar, Type
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
 from .settings import settings
-import sqlite3
 import pymysql.cursors
 
 T = TypeVar("T")
@@ -24,14 +21,13 @@ def _get_item(cursor, row, data_class: Type[T] = None):
 
 
 def insert_and_get_id(sql, *args):
-    con = sqlite3.connect(settings.database_name)
     with closing(con.cursor()) as cursor:
         cursor.execute(sql, args)
         con.commit()
         return cursor.lastrowid
 
 
-def make_query(sql, data_class: Type[T] = None, *args):
+def make_query(sql, data_class: Type[T] = None, args=None):
     #con.execute("PRAGMA foreign_keys = ON")
     with closing(con.cursor()) as cursor:
         cursor.execute(sql, args)
@@ -45,7 +41,6 @@ def make_query(sql, data_class: Type[T] = None, *args):
 
 
 def get_list(sql, data_class: Type[T], *args):
-    con = sqlite3.connect(settings.database_name)
     with closing(con.cursor()) as cursor:
         cursor.execute(sql, args)
         data_list = []

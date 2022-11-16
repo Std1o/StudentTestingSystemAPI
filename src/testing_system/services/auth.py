@@ -67,7 +67,7 @@ class AuthService:
         return token
 
     def get_user_by_email(self, email: str) -> Optional[User]:
-        return make_query("SELECT * FROM users where email=? LIMIT 1", tables.User, email)
+        return make_query("SELECT * FROM users where email=%s LIMIT 1", tables.User, (email, ))
 
     def reg(self, user_data: UserCreate) -> PrivateUser:
         if self.get_user_by_email(user_data.email):

@@ -5,7 +5,7 @@ def main():
     make_query(
         """\
         create table users (
-        id int not null,
+        id int not null AUTO_INCREMENT,
         email varchar(50),
         username varchar(50),
         password_hash text,
@@ -18,7 +18,7 @@ def main():
     make_query(
         """\
         create table courses (
-        id int not null,
+        id int not null AUTO_INCREMENT,
         name text,
         course_code varchar(10),
         img text,
@@ -45,7 +45,7 @@ def main():
     make_query(
         """\
         create table tests (
-        id int not null,
+        id int not null AUTO_INCREMENT,
         course_id int,
         name text,
         creation_time date,
@@ -58,7 +58,7 @@ def main():
     make_query(
         """\
         create table questions (
-        id int not null,
+        id int not null AUTO_INCREMENT,
         test_id int,
         question text,
         primary key (id),
@@ -70,7 +70,7 @@ def main():
     make_query(
         """\
         create table answers (
-        id int not null,
+        id int not null AUTO_INCREMENT,
         question_id int,
         answer text,
         is_right boolean,
@@ -83,7 +83,7 @@ def main():
     make_query(
         """\
         create table users_answers (
-        id int not null,
+        id int not null AUTO_INCREMENT,
         user_id int,
         answer_id int,
         is_selected boolean,
@@ -97,7 +97,7 @@ def main():
     make_query(
         """\
         create table questions_results (
-        id int not null,
+        id int not null AUTO_INCREMENT,
         user_id int,
         question_id int,
         score float,
@@ -111,7 +111,7 @@ def main():
     make_query(
         """\
         create table results (
-        id int not null,
+        id int not null AUTO_INCREMENT,
         user_id int,
         test_id int,
         max_score int,
