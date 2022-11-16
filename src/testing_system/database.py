@@ -8,6 +8,11 @@ import pymysql.cursors
 
 T = TypeVar("T")
 
+con = pymysql.connect(
+    host=settings.db_host, port=settings.db_port,
+    user=settings.db_user, password=settings.db_password, database=settings.db_name
+)
+
 
 def _get_item(cursor, row, data_class: Type[T] = None):
     data = dict((column[0], row[index]) for index, column in enumerate(cursor.description))
@@ -27,14 +32,6 @@ def insert_and_get_id(sql, *args):
 
 
 def make_query(sql, data_class: Type[T] = None, *args):
-
-
-    # Connect to the database
-    con = pymysql.connect(host='127.0.0.1',
-                                 port=3306,
-                                 user='root',
-                                 password='mysql_pass',
-                                 database='db_name', )
     #con.execute("PRAGMA foreign_keys = ON")
     with closing(con.cursor()) as cursor:
         cursor.execute(sql, args)
@@ -56,16 +53,3 @@ def get_list(sql, data_class: Type[T], *args):
             item = _get_item(cursor, row, data_class)
             data_list.append(item)
         return data_list
-
-
-engine = create_engine(settings.database_url, connect_args={'check_same_thread': False})
-
-Session = sessionmaker(engine, autocommit=False, autoflush=False)
-
-
-def get_session() -> Session:
-    session = Session()
-    try:
-        yield session
-    finally:
-        session.close()
