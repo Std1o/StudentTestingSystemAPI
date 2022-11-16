@@ -20,7 +20,7 @@ def _get_item(cursor, row, data_class: Type[T] = None):
     return item
 
 
-def insert_and_get_id(sql, *args):
+def insert_and_get_id(sql, args=None):
     with closing(con.cursor()) as cursor:
         cursor.execute(sql, args)
         con.commit()
@@ -40,7 +40,7 @@ def make_query(sql, data_class: Type[T] = None, args=None):
         return None
 
 
-def get_list(sql, data_class: Type[T], *args):
+def get_list(sql, data_class: Type[T], args=None):
     with closing(con.cursor()) as cursor:
         cursor.execute(sql, args)
         data_list = []

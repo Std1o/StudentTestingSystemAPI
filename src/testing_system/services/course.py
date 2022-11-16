@@ -18,11 +18,11 @@ def generate_course_code() -> str:
 class CourseService:
 
     def get_participants_ids(self, course_id: int) -> List[int]:
-        participants = get_list("SELECT user_id FROM participants where course_id=?", int, course_id)
+        participants = get_list("SELECT user_id FROM participants where course_id=%s", int, (course_id,))
         return participants
 
     def get_course_by_code(self, course_code: str) -> Optional[Course]:
-        return make_query("SELECT * FROM courses where course_code=? LIMIT 1", Course, course_code)
+        return make_query("SELECT * FROM courses where course_code=%s LIMIT 1", Course, (course_code,))
 
     def get_courses(self, user_id: int) -> List[Course]:
         courses_dict_arr = get_list("SELECT id, name, course_code, img FROM courses "
@@ -52,8 +52,8 @@ class CourseService:
         course = self.get_course_by_code(course_creator.course_code)
 
         query = "INSERT INTO participants (user_id, course_id, is_moderator, is_owner) " \
-                "VALUES (?, ?, ?, ?)"
-        make_query(query, None, user_id, course.id, False, True)
+                "VALUES (%s, %s, %s, %s)"
+        make_query(query, None, (user_id, course.id, False, True,))
         course.participants = get_participants(course.id)
         return course
 
@@ -72,13 +72,13 @@ class CourseService:
 
     def update(self, user_id: int, course_id: int, course_data: BaseCourse) -> Course:
         check_accessibility(user_id, course_id)
-        make_query("UPDATE courses SET name = ? WHERE id = ?", None, course_data.name, course_id)
+        make_query("UPDATE courses SET name = %s WHERE id = %s", None, (course_data.name, course_id,))
         course = self._get(user_id, course_id)
         return course
 
     def delete(self, user_id: int, course_id: int):
         check_accessibility(user_id, course_id)
-        make_query("DELETE FROM courses WHERE id = ?", None, course_id)
+        make_query("DELETE FROM courses WHERE id = %s", None, (course_id,))
 
     def join(self, user_id: int, course_code: str) -> Course:
         course = self.get_course_by_code(course_code)
@@ -88,12 +88,12 @@ class CourseService:
         if user_id in self.get_participants_ids(course_id):
             raise HTTPException(status_code=418, detail="You have already joined the course")
         query = "INSERT INTO participants (user_id, course_id, is_moderator, is_owner) " \
-                "VALUES (?, ?, ?, ?)"
-        make_query(query, None, user_id, course.id, False, False)
+                "VALUES (%s, %s, %s, %s)"
+        make_query(query, None, (user_id, course.id, False, False,))
         return self._get(user_id, course_id)
 
     def delete_participant(self, user_id: int, participant_id: int, course_id: int):
         check_accessibility(user_id, course_id)
         make_query("DELETE FROM participants "
-                   "WHERE user_id = ? AND course_id = ?", None, participant_id, course_id)
+                   "WHERE user_id = %s AND course_id = %s", None, (participant_id, course_id,))
         return get_participants(course_id)

@@ -10,10 +10,10 @@ from ..services.base_course_service import get_participant
 class BaseTestService:
 
     def get_tests_by_course_id(self, course_id: int) -> List[tables.Test]:
-        return get_list("SELECT * FROM tests where course_id=?", tables.Test, course_id)
+        return get_list("SELECT * FROM tests where course_id=%s", tables.Test, (course_id,))
 
     def get_course_ids(self, user_id: int) -> List[int]:
-        course_ids = get_list("SELECT course_id FROM participants where user_id=?", int, user_id)
+        course_ids = get_list("SELECT course_id FROM participants where user_id=%s", int, (user_id,))
         return course_ids
 
     def check_accessibility(self, user_id: int, course_id: int):

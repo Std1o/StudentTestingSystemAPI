@@ -10,8 +10,8 @@ class CourseModeratorsService:
         participant = get_participant(moderator_id, course_id)
         if participant.is_moderator:
             raise HTTPException(status_code=418, detail="The user is already moderator")
-        make_query("UPDATE participants SET is_moderator = ? "
-                   "WHERE user_id = ? AND course_id = ?", None, True, moderator_id, course_id)
+        make_query("UPDATE participants SET is_moderator = %s "
+                   "WHERE user_id = %s AND course_id = %s", None, (True, moderator_id, course_id,))
         return get_participants(course_id)
 
     def delete_moderator(self, user_id: int, moderator_id: int, course_id: int):
@@ -19,6 +19,6 @@ class CourseModeratorsService:
         participant = get_participant(moderator_id, course_id)
         if not participant.is_moderator:
             raise HTTPException(status_code=418, detail="The user is not moderator")
-        make_query("UPDATE participants SET is_moderator = ? "
-                   "WHERE user_id = ? AND course_id = ?", None, False, moderator_id, course_id)
+        make_query("UPDATE participants SET is_moderator = %s "
+                   "WHERE user_id = %s AND course_id = %s", None, (False, moderator_id, course_id,))
         return get_participants(course_id)

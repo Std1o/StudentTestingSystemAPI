@@ -14,8 +14,8 @@ def get_participants(course_id: int) -> List[CourseUsers]:
 
 def get_participant(participant_id: int, course_id) -> Participants:
     return make_query("SELECT * FROM participants "
-                      "where user_id=? AND course_id=? LIMIT 1",
-                      Participants, participant_id, course_id)
+                      "where user_id=%s AND course_id=%s LIMIT 1",
+                      Participants, (participant_id, course_id,))
 
 
 def check_accessibility(user_id, course_id: int):
