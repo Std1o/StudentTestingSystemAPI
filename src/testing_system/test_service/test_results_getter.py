@@ -15,10 +15,10 @@ class TestResultsService(BaseTestService):
     def get_results_from_table(self, test_id: int, only_max_result: bool) -> List[tables.Results]:
         if only_max_result:
             results = get_list("SELECT * FROM results "
-                               "WHERE test_id=? AND score=max_score", tables.Results, test_id)
+                               "WHERE test_id=%s AND score=max_score", tables.Results, (test_id,))
         else:
             results = get_list("SELECT * FROM results "
-                               "WHERE test_id=?", tables.Results, test_id)
+                               "WHERE test_id=%s", tables.Results, (test_id,))
         return results
 
     def get_results(self, user_id: int, course_id: int, test_id: int,

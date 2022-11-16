@@ -10,25 +10,25 @@ from ..models.test_result_creation import QuestionResultCreation, AnswerResultCr
 class TestResultCalculatorService(TestSearchingService):
 
     def get_answer(self, answer_id: int) -> tables.Answers:
-        return make_query("SELECT * FROM answers where id=?", tables.Answers, answer_id)
+        return make_query("SELECT * FROM answers where id=%s", tables.Answers, (answer_id,))
 
     def get_question(self, question_id: int) -> tables.Questions:
-        return make_query("SELECT * FROM questions where id=?", tables.Questions, question_id)
+        return make_query("SELECT * FROM questions where id=%s", tables.Questions, (question_id,))
 
     def create_user_answer(self, user_id: int, answer: AnswerResultCreation):
         query = "INSERT INTO users_answers (user_id, answer_id, is_selected) " \
-                "VALUES (?, ?, ?)"
-        insert_and_get_id(query, user_id, answer.answer_id, answer.is_selected)
+                "VALUES (%s, %s, %s)"
+        insert_and_get_id(query, (user_id, answer.answer_id, answer.is_selected,))
 
     def create_question_result(self, user_id: int, question_id: int, score: float):
         query = "INSERT INTO questions_results (user_id, question_id, score) " \
-                "VALUES (?, ?, ?)"
-        insert_and_get_id(query, user_id, question_id, score)
+                "VALUES (%s, %s, %s)"
+        insert_and_get_id(query, (user_id, question_id, score,))
 
     def create_test_result(self, user_id: int, max_score: int, score: float, test_id: int):
         query = "INSERT INTO results (user_id, test_id, max_score, score) " \
-                "VALUES (?, ?, ?, ?)"
-        insert_and_get_id(query, user_id, test_id, max_score, score)
+                "VALUES (%s, %s, %s, %s)"
+        insert_and_get_id(query, (user_id, test_id, max_score, score,))
 
     def get_right_answers(self, answers: List[AnswerResultCreation]):
         right_answers = []

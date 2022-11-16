@@ -9,10 +9,10 @@ from ..models.test import Test, Answer, Question
 class TestSearchingService(BaseTestService):
 
     def get_questions(self, test_id: int) -> List[tables.Questions]:
-        return get_list("SELECT * FROM questions WHERE test_id=?", tables.Questions, test_id)
+        return get_list("SELECT * FROM questions WHERE test_id=%s", tables.Questions, (test_id,))
 
     def get_answers(self, question_id: int) -> List[tables.Answers]:
-        return get_list("SELECT * FROM answers WHERE question_id=?", tables.Answers, question_id)
+        return get_list("SELECT * FROM answers WHERE question_id=%s", tables.Answers, (question_id,))
 
     def convert_test_from_table(self, test: tables.Test, show_right_ans: bool) -> Test:
         test_dict = dict(test)
@@ -38,7 +38,7 @@ class TestSearchingService(BaseTestService):
 
     def get(self, user_id: int, course_id: int, test_id: int, for_result: bool) -> Test:
         self.check_accessibility(user_id, course_id)
-        test = make_query("SELECT * FROM tests WHERE id=? LIMIT 1", tables.Test, test_id)
+        test = make_query("SELECT * FROM tests WHERE id=%s LIMIT 1", tables.Test, (test_id,))
         if not test:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
         return self.convert_test_from_table(test, for_result)
