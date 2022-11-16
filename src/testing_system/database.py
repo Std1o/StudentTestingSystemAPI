@@ -4,6 +4,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from .settings import settings
 import sqlite3
+import pymysql.cursors
 
 T = TypeVar("T")
 
@@ -26,8 +27,15 @@ def insert_and_get_id(sql, *args):
 
 
 def make_query(sql, data_class: Type[T] = None, *args):
-    con = sqlite3.connect(settings.database_name)
-    con.execute("PRAGMA foreign_keys = ON")
+
+
+    # Connect to the database
+    con = pymysql.connect(host='127.0.0.1',
+                                 port=3306,
+                                 user='root',
+                                 password='mysql_pass',
+                                 database='db_name', )
+    #con.execute("PRAGMA foreign_keys = ON")
     with closing(con.cursor()) as cursor:
         cursor.execute(sql, args)
         con.commit()

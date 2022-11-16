@@ -4,100 +4,121 @@ from .database import make_query
 def main():
     make_query(
         """\
-        CREATE TABLE users(
-            id INTEGER not null primary key,
-            email VARCHAR(50) unique,
-            username VARCHAR(50),
-            password_hash VARCHAR
+        create table users (
+        id int not null,
+        email varchar(50),
+        username varchar(50),
+        password_hash text,
+        primary key (id),
+        unique (email)
         )
         """
     )
 
     make_query(
         """\
-        CREATE TABLE courses(
-            id INTEGER not null primary key,
-            name VARCHAR,
-            course_code VARCHAR unique,
-            img VARCHAR
+        create table courses (
+        id int not null,
+        name text,
+        course_code varchar(10),
+        img text,
+        primary key (id),
+        unique (course_code)
         )
         """
     )
 
     make_query(
         """\
-        CREATE TABLE participants(
-            user_id INTEGER not null references users,
-            course_id INTEGER not null references courses on delete cascade,
-            is_moderator BOOLEAN,
-            is_owner BOOLEAN,
-            primary key (user_id, course_id)
+        create table participants (
+        user_id int not null,
+        course_id int not null,
+        is_moderator boolean,
+        is_owner boolean,
+        CONSTRAINT fk1 foreign key (user_id) references users(id),
+        CONSTRAINT fk2 foreign key (course_id) references courses(id) on delete cascade,
+        primary key (user_id, course_id)
         )
         """
     )
 
     make_query(
         """\
-        CREATE TABLE tests(
-            id INTEGER not null primary key,
-            course_id INTEGER references courses on delete cascade,
-            name VARCHAR,
-            creation_time DATE
+        create table tests (
+        id int not null,
+        course_id int,
+        name text,
+        creation_time date,
+        primary key (id),
+        CONSTRAINT fk3 foreign key (course_id) references courses(id) on delete cascade
         )
         """
     )
 
     make_query(
         """\
-        CREATE TABLE questions(
-            id INTEGER not null primary key,
-            test_id INTEGER references tests on delete cascade,
-            question VARCHAR
+        create table questions (
+        id int not null,
+        test_id int,
+        question text,
+        primary key (id),
+        CONSTRAINT fk4 foreign key (test_id) references tests(id) on delete cascade
         )
         """
     )
 
     make_query(
         """\
-        CREATE TABLE answers(
-            id INTEGER not null primary key,
-            question_id INTEGER references questions on delete cascade,
-            answer VARCHAR,
-            is_right BOOLEAN
+        create table answers (
+        id int not null,
+        question_id int,
+        answer text,
+        is_right boolean,
+        primary key (id),
+        CONSTRAINT fk5 foreign key (question_id) references questions(id) on delete cascade
         )
         """
     )
 
     make_query(
         """\
-        CREATE TABLE users_answers(
-            id INTEGER not null primary key,
-            user_id INTEGER references users,
-            answer_id INTEGER references answers on delete cascade,
-            is_selected BOOLEAN
+        create table users_answers (
+        id int not null,
+        user_id int,
+        answer_id int,
+        is_selected boolean,
+        primary key (id),
+        CONSTRAINT fk6 foreign key (user_id) references users(id),
+        CONSTRAINT fk7 foreign key (answer_id) references answers(id) on delete cascade
         )
         """
     )
 
     make_query(
         """\
-        CREATE TABLE questions_results(
-            id INTEGER not null primary key,
-            user_id INTEGER references users,
-            question_id INTEGER references questions on delete cascade,
-            score FLOAT
+        create table questions_results (
+        id int not null,
+        user_id int,
+        question_id int,
+        score float,
+        primary key (id),
+        CONSTRAINT fk8 foreign key (user_id) references users(id),
+        CONSTRAINT fk9 foreign key (question_id) references questions(id) on delete cascade
         )
         """
     )
 
     make_query(
         """\
-        CREATE TABLE results(
-            id INTEGER not null primary key,
-            user_id INTEGER references users,
-            test_id INTEGER references tests on delete cascade,
-            max_score INTEGER,
-            score FLOAT
+        create table results (
+        id int not null,
+        user_id int,
+        test_id int,
+        max_score int,
+        score float,
+        primary key (id),
+        CONSTRAINT fk10 foreign key (user_id) references users(id),
+        CONSTRAINT fk11 foreign key (test_id) references tests(id) on delete cascade
         )
         """
     )
@@ -105,10 +126,12 @@ def main():
     make_query(
         """\
         CREATE TRIGGER before_course_update BEFORE UPDATE on courses
-            WHEN NEW.id != OLD.id
-                BEGIN 
-                    SELECT RAISE(ABORT, 'id cannot be changed');
-                END;
+        FOR EACH ROW
+        BEGIN
+           IF NEW.id != OLD.id THEN
+               SET NEW='id cannot be changed';
+           END IF;
+        END;
         """
     )
 

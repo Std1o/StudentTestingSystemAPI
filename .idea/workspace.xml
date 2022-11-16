@@ -2,8 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="92b7f236-a5d9-4998-a0b9-55e63b873691" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/38b259ad-23a8-4f4e-8c54-fb9a46a03393.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/38b259ad-23a8-4f4e-8c54-fb9a46a03393.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database.sqlite3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/testing_system/__main__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/testing_system/__main__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/testing_system/database.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/testing_system/database.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/testing_system/database_creator.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/testing_system/database_creator.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -38,12 +42,15 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mysql" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/SQL Dialect" value="SQLite" />
+    <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/SQL Dialect" value="MySQL&#10;SQLite" />
+    <property name="import_schema_mapping" value="&lt;schema-mapping&gt;&lt;databases&gt;&lt;list&gt;&lt;schema-mapping-item&gt;&lt;source-data-source-id&gt;38b259ad-23a8-4f4e-8c54-fb9a46a03393&lt;/source-data-source-id&gt;&lt;source-path&gt;schema/&quot;main&quot;&lt;/source-path&gt;&lt;target-data-source-id&gt;b4548b6f-b54e-4025-b0a4-a670a9d3de7c&lt;/target-data-source-id&gt;&lt;target-path&gt;schema/&quot;db_name&quot;&lt;/target-path&gt;&lt;/schema-mapping-item&gt;&lt;/list&gt;&lt;/databases&gt;&lt;/schema-mapping&gt;" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/testing_system/models" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -247,6 +254,10 @@
       <workItem from="1666373805473" duration="533000" />
       <workItem from="1666376718980" duration="303000" />
       <workItem from="1666378352940" duration="1356000" />
+      <workItem from="1668364145797" duration="2937000" />
+      <workItem from="1668582496065" duration="847000" />
+      <workItem from="1668583582013" duration="1068000" />
+      <workItem from="1668595451877" duration="1589000" />
     </task>
     <servers />
   </component>
@@ -276,6 +287,6 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/StudentTestingSystemAPI$uvicorn.coverage" NAME="uvicorn Coverage Results" MODIFIED="1666379671986" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/StudentTestingSystemAPI$uvicorn.coverage" NAME="uvicorn Coverage Results" MODIFIED="1668596928872" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

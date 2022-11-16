@@ -171,21 +171,21 @@
       <Deterministic>1</Deterministic>
     </routine>
     <routine id="72" parent="1" name="max">
+      <FunctionType>window</FunctionType>
+    </routine>
+    <routine id="73" parent="1" name="min">
+      <FunctionType>window</FunctionType>
+    </routine>
+    <routine id="74" parent="1" name="max">
       <Deterministic>1</Deterministic>
       <Variadic>1</Variadic>
     </routine>
-    <routine id="73" parent="1" name="max">
+    <routine id="75" parent="1" name="lead">
       <FunctionType>window</FunctionType>
     </routine>
-    <routine id="74" parent="1" name="min">
+    <routine id="76" parent="1" name="min">
       <Deterministic>1</Deterministic>
       <Variadic>1</Variadic>
-    </routine>
-    <routine id="75" parent="1" name="min">
-      <FunctionType>window</FunctionType>
-    </routine>
-    <routine id="76" parent="1" name="lead">
-      <FunctionType>window</FunctionType>
     </routine>
     <routine id="77" parent="1" name="lower">
       <Deterministic>1</Deterministic>
@@ -220,140 +220,140 @@
     <routine id="95" parent="1" name="cosh"/>
     <routine id="96" parent="1" name="cot"/>
     <routine id="97" parent="1" name="degrees"/>
-    <routine id="98" parent="1" name="regexp">
+    <routine id="98" parent="1" name="difference"/>
+    <routine id="99" parent="1" name="asinh"/>
+    <routine id="100" parent="1" name="regexp">
       <Variadic>1</Variadic>
     </routine>
-    <routine id="99" parent="1" name="difference"/>
-    <routine id="100" parent="1" name="asinh"/>
     <routine id="101" parent="1" name="charindex"/>
-    <routine id="102" parent="1" name="fts5_rowid">
-      <Variadic>1</Variadic>
-    </routine>
-    <routine id="103" parent="1" name="median">
+    <routine id="102" parent="1" name="median">
       <FunctionType>aggregate</FunctionType>
     </routine>
-    <routine id="104" parent="1" name="acosh"/>
-    <routine id="105" parent="1" name="fts5_source_id"/>
-    <routine id="106" parent="1" name="highlight">
+    <routine id="103" parent="1" name="acosh"/>
+    <routine id="104" parent="1" name="fts5_source_id"/>
+    <routine id="105" parent="1" name="padc"/>
+    <routine id="106" parent="1" name="fts5_rowid">
       <Variadic>1</Variadic>
     </routine>
-    <routine id="107" parent="1" name="padc"/>
-    <routine id="108" parent="1" name="proper"/>
-    <routine id="109" parent="1" name="rtreenode"/>
-    <routine id="110" parent="1" name="rtreecheck">
+    <routine id="107" parent="1" name="proper"/>
+    <routine id="108" parent="1" name="rtreenode"/>
+    <routine id="109" parent="1" name="fts5_decode"/>
+    <routine id="110" parent="1" name="highlight">
       <Variadic>1</Variadic>
     </routine>
-    <routine id="111" parent="1" name="fts5_decode"/>
-    <routine id="112" parent="1" name="variance">
+    <routine id="111" parent="1" name="variance">
       <FunctionType>aggregate</FunctionType>
     </routine>
-    <routine id="113" parent="1" name="matchinfo"/>
-    <routine id="114" parent="1" name="json_valid">
+    <routine id="112" parent="1" name="matchinfo"/>
+    <routine id="113" parent="1" name="json_valid">
       <Deterministic>1</Deterministic>
+    </routine>
+    <routine id="114" parent="1" name="rtreecheck">
+      <Variadic>1</Variadic>
     </routine>
     <routine id="115" parent="1" name="square"/>
     <routine id="116" parent="1" name="optimize"/>
     <routine id="117" parent="1" name="tan"/>
-    <routine id="118" parent="1" name="snippet">
-      <Variadic>1</Variadic>
-    </routine>
-    <routine id="119" parent="1" name="asin"/>
-    <routine id="120" parent="1" name="sqrt"/>
-    <routine id="121" parent="1" name="fts3_tokenizer"/>
-    <routine id="122" parent="1" name="upper_quartile">
+    <routine id="118" parent="1" name="asin"/>
+    <routine id="119" parent="1" name="sqrt"/>
+    <routine id="120" parent="1" name="fts3_tokenizer"/>
+    <routine id="121" parent="1" name="upper_quartile">
       <FunctionType>aggregate</FunctionType>
     </routine>
-    <routine id="123" parent="1" name="sinh"/>
+    <routine id="122" parent="1" name="sinh"/>
+    <routine id="123" parent="1" name="snippet">
+      <Variadic>1</Variadic>
+    </routine>
     <routine id="124" parent="1" name="radians"/>
-    <routine id="125" parent="1" name="fts5_expr_tcl">
+    <routine id="125" parent="1" name="fts5"/>
+    <routine id="126" parent="1" name="power"/>
+    <routine id="127" parent="1" name="exp"/>
+    <routine id="128" parent="1" name="match"/>
+    <routine id="129" parent="1" name="json_array_length">
+      <Deterministic>1</Deterministic>
+    </routine>
+    <routine id="130" parent="1" name="fts5_expr_tcl">
       <Variadic>1</Variadic>
     </routine>
-    <routine id="126" parent="1" name="fts5"/>
-    <routine id="127" parent="1" name="json_insert">
+    <routine id="131" parent="1" name="json_patch">
+      <Deterministic>1</Deterministic>
+    </routine>
+    <routine id="132" parent="1" name="json_insert">
       <Deterministic>1</Deterministic>
       <Variadic>1</Variadic>
-    </routine>
-    <routine id="128" parent="1" name="power"/>
-    <routine id="129" parent="1" name="exp"/>
-    <routine id="130" parent="1" name="match"/>
-    <routine id="131" parent="1" name="json_array_length">
-      <Deterministic>1</Deterministic>
-    </routine>
-    <routine id="132" parent="1" name="json_patch">
-      <Deterministic>1</Deterministic>
     </routine>
     <routine id="133" parent="1" name="cos"/>
-    <routine id="134" parent="1" name="json_set">
-      <Deterministic>1</Deterministic>
-      <Variadic>1</Variadic>
-    </routine>
-    <routine id="135" parent="1" name="atn2"/>
-    <routine id="136" parent="1" name="json_object">
-      <Deterministic>1</Deterministic>
-      <Variadic>1</Variadic>
-    </routine>
-    <routine id="137" parent="1" name="fts5_expr">
-      <Variadic>1</Variadic>
-    </routine>
-    <routine id="138" parent="1" name="json_array">
-      <Deterministic>1</Deterministic>
-      <Variadic>1</Variadic>
-    </routine>
-    <routine id="139" parent="1" name="json_group_array">
+    <routine id="134" parent="1" name="atn2"/>
+    <routine id="135" parent="1" name="json_group_array">
       <Deterministic>1</Deterministic>
       <FunctionType>window</FunctionType>
     </routine>
-    <routine id="140" parent="1" name="sin"/>
-    <routine id="141" parent="1" name="fts5_isalnum">
-      <Variadic>1</Variadic>
-    </routine>
-    <routine id="142" parent="1" name="offsets"/>
-    <routine id="143" parent="1" name="json">
+    <routine id="136" parent="1" name="sin"/>
+    <routine id="137" parent="1" name="offsets"/>
+    <routine id="138" parent="1" name="json">
       <Deterministic>1</Deterministic>
     </routine>
-    <routine id="144" parent="1" name="stdev">
+    <routine id="139" parent="1" name="stdev">
       <FunctionType>aggregate</FunctionType>
     </routine>
-    <routine id="145" parent="1" name="fts5_fold">
-      <Variadic>1</Variadic>
-    </routine>
-    <routine id="146" parent="1" name="bm25">
-      <Variadic>1</Variadic>
-    </routine>
-    <routine id="147" parent="1" name="atan2"/>
-    <routine id="148" parent="1" name="json_extract">
+    <routine id="140" parent="1" name="atan2"/>
+    <routine id="141" parent="1" name="json_set">
       <Deterministic>1</Deterministic>
       <Variadic>1</Variadic>
     </routine>
-    <routine id="149" parent="1" name="reverse"/>
-    <routine id="150" parent="1" name="atanh"/>
-    <routine id="151" parent="1" name="json_group_object">
+    <routine id="142" parent="1" name="reverse"/>
+    <routine id="143" parent="1" name="json_object">
+      <Deterministic>1</Deterministic>
+      <Variadic>1</Variadic>
+    </routine>
+    <routine id="144" parent="1" name="fts5_expr">
+      <Variadic>1</Variadic>
+    </routine>
+    <routine id="145" parent="1" name="json_array">
+      <Deterministic>1</Deterministic>
+      <Variadic>1</Variadic>
+    </routine>
+    <routine id="146" parent="1" name="atanh"/>
+    <routine id="147" parent="1" name="json_group_object">
       <Deterministic>1</Deterministic>
       <FunctionType>window</FunctionType>
     </routine>
-    <routine id="152" parent="1" name="rtreedepth"/>
-    <routine id="153" parent="1" name="json_quote">
+    <routine id="148" parent="1" name="fts5_isalnum">
+      <Variadic>1</Variadic>
+    </routine>
+    <routine id="149" parent="1" name="rtreedepth"/>
+    <routine id="150" parent="1" name="json_quote">
       <Deterministic>1</Deterministic>
     </routine>
-    <routine id="154" parent="1" name="rightstr"/>
-    <routine id="155" parent="1" name="json_remove">
+    <routine id="151" parent="1" name="rightstr"/>
+    <routine id="152" parent="1" name="fts5_fold">
+      <Variadic>1</Variadic>
+    </routine>
+    <routine id="153" parent="1" name="bm25">
+      <Variadic>1</Variadic>
+    </routine>
+    <routine id="154" parent="1" name="tanh"/>
+    <routine id="155" parent="1" name="json_extract">
       <Deterministic>1</Deterministic>
       <Variadic>1</Variadic>
     </routine>
-    <routine id="156" parent="1" name="tanh"/>
-    <routine id="157" parent="1" name="json_type">
+    <routine id="156" parent="1" name="json_type">
       <Deterministic>1</Deterministic>
     </routine>
-    <routine id="158" parent="1" name="mode">
+    <routine id="157" parent="1" name="mode">
       <FunctionType>aggregate</FunctionType>
     </routine>
-    <routine id="159" parent="1" name="json_replace">
+    <routine id="158" parent="1" name="acos"/>
+    <routine id="159" parent="1" name="fts5_decode_none"/>
+    <routine id="160" parent="1" name="atan"/>
+    <routine id="161" parent="1" name="json_remove">
       <Deterministic>1</Deterministic>
       <Variadic>1</Variadic>
     </routine>
-    <routine id="160" parent="1" name="acos"/>
-    <routine id="161" parent="1" name="fts5_decode_none"/>
-    <routine id="162" parent="1" name="atan"/>
+    <routine id="162" parent="1" name="json_replace">
+      <Deterministic>1</Deterministic>
+      <Variadic>1</Variadic>
+    </routine>
     <routine id="163" parent="1" name="lag">
       <FunctionType>window</FunctionType>
     </routine>
@@ -720,29 +720,29 @@
     <argument id="286" parent="72">
       <ArgumentDirection>R</ArgumentDirection>
     </argument>
-    <argument id="287" parent="73">
-      <ArgumentDirection>R</ArgumentDirection>
-    </argument>
-    <argument id="288" parent="73">
+    <argument id="287" parent="72">
       <Position>1</Position>
     </argument>
-    <argument id="289" parent="74">
+    <argument id="288" parent="73">
       <ArgumentDirection>R</ArgumentDirection>
     </argument>
-    <argument id="290" parent="75">
+    <argument id="289" parent="73">
+      <Position>1</Position>
+    </argument>
+    <argument id="290" parent="74">
       <ArgumentDirection>R</ArgumentDirection>
     </argument>
     <argument id="291" parent="75">
-      <Position>1</Position>
-    </argument>
-    <argument id="292" parent="76">
       <ArgumentDirection>R</ArgumentDirection>
     </argument>
-    <argument id="293" parent="76">
+    <argument id="292" parent="75">
       <Position>1</Position>
     </argument>
-    <argument id="294" parent="76">
+    <argument id="293" parent="75">
       <Position>2</Position>
+    </argument>
+    <argument id="294" parent="76">
+      <ArgumentDirection>R</ArgumentDirection>
     </argument>
     <argument id="295" parent="77">
       <ArgumentDirection>R</ArgumentDirection>
@@ -888,20 +888,20 @@
     <argument id="342" parent="98">
       <ArgumentDirection>R</ArgumentDirection>
     </argument>
-    <argument id="343" parent="99">
-      <ArgumentDirection>R</ArgumentDirection>
-    </argument>
-    <argument id="344" parent="99">
+    <argument id="343" parent="98">
       <Position>1</Position>
     </argument>
-    <argument id="345" parent="99">
+    <argument id="344" parent="98">
       <Position>2</Position>
     </argument>
-    <argument id="346" parent="100">
+    <argument id="345" parent="99">
       <ArgumentDirection>R</ArgumentDirection>
     </argument>
-    <argument id="347" parent="100">
+    <argument id="346" parent="99">
       <Position>1</Position>
+    </argument>
+    <argument id="347" parent="100">
+      <ArgumentDirection>R</ArgumentDirection>
     </argument>
     <argument id="348" parent="101">
       <ArgumentDirection>R</ArgumentDirection>
@@ -915,77 +915,77 @@
     <argument id="351" parent="102">
       <ArgumentDirection>R</ArgumentDirection>
     </argument>
-    <argument id="352" parent="103">
-      <ArgumentDirection>R</ArgumentDirection>
+    <argument id="352" parent="102">
+      <Position>1</Position>
     </argument>
     <argument id="353" parent="103">
-      <Position>1</Position>
-    </argument>
-    <argument id="354" parent="104">
       <ArgumentDirection>R</ArgumentDirection>
     </argument>
-    <argument id="355" parent="104">
+    <argument id="354" parent="103">
       <Position>1</Position>
+    </argument>
+    <argument id="355" parent="104">
+      <ArgumentDirection>R</ArgumentDirection>
     </argument>
     <argument id="356" parent="105">
       <ArgumentDirection>R</ArgumentDirection>
     </argument>
-    <argument id="357" parent="106">
-      <ArgumentDirection>R</ArgumentDirection>
-    </argument>
-    <argument id="358" parent="107">
-      <ArgumentDirection>R</ArgumentDirection>
-    </argument>
-    <argument id="359" parent="107">
+    <argument id="357" parent="105">
       <Position>1</Position>
+    </argument>
+    <argument id="358" parent="105">
+      <Position>2</Position>
+    </argument>
+    <argument id="359" parent="106">
+      <ArgumentDirection>R</ArgumentDirection>
     </argument>
     <argument id="360" parent="107">
-      <Position>2</Position>
-    </argument>
-    <argument id="361" parent="108">
       <ArgumentDirection>R</ArgumentDirection>
+    </argument>
+    <argument id="361" parent="107">
+      <Position>1</Position>
     </argument>
     <argument id="362" parent="108">
-      <Position>1</Position>
-    </argument>
-    <argument id="363" parent="109">
       <ArgumentDirection>R</ArgumentDirection>
     </argument>
-    <argument id="364" parent="109">
+    <argument id="363" parent="108">
       <Position>1</Position>
+    </argument>
+    <argument id="364" parent="108">
+      <Position>2</Position>
     </argument>
     <argument id="365" parent="109">
+      <ArgumentDirection>R</ArgumentDirection>
+    </argument>
+    <argument id="366" parent="109">
+      <Position>1</Position>
+    </argument>
+    <argument id="367" parent="109">
       <Position>2</Position>
     </argument>
-    <argument id="366" parent="110">
+    <argument id="368" parent="110">
       <ArgumentDirection>R</ArgumentDirection>
-    </argument>
-    <argument id="367" parent="111">
-      <ArgumentDirection>R</ArgumentDirection>
-    </argument>
-    <argument id="368" parent="111">
-      <Position>1</Position>
     </argument>
     <argument id="369" parent="111">
-      <Position>2</Position>
-    </argument>
-    <argument id="370" parent="112">
       <ArgumentDirection>R</ArgumentDirection>
+    </argument>
+    <argument id="370" parent="111">
+      <Position>1</Position>
     </argument>
     <argument id="371" parent="112">
-      <Position>1</Position>
-    </argument>
-    <argument id="372" parent="113">
       <ArgumentDirection>R</ArgumentDirection>
+    </argument>
+    <argument id="372" parent="112">
+      <Position>1</Position>
     </argument>
     <argument id="373" parent="113">
-      <Position>1</Position>
-    </argument>
-    <argument id="374" parent="114">
       <ArgumentDirection>R</ArgumentDirection>
     </argument>
-    <argument id="375" parent="114">
+    <argument id="374" parent="113">
       <Position>1</Position>
+    </argument>
+    <argument id="375" parent="114">
+      <ArgumentDirection>R</ArgumentDirection>
     </argument>
     <argument id="376" parent="115">
       <ArgumentDirection>R</ArgumentDirection>
@@ -1008,35 +1008,35 @@
     <argument id="382" parent="118">
       <ArgumentDirection>R</ArgumentDirection>
     </argument>
-    <argument id="383" parent="119">
-      <ArgumentDirection>R</ArgumentDirection>
+    <argument id="383" parent="118">
+      <Position>1</Position>
     </argument>
     <argument id="384" parent="119">
-      <Position>1</Position>
-    </argument>
-    <argument id="385" parent="120">
       <ArgumentDirection>R</ArgumentDirection>
+    </argument>
+    <argument id="385" parent="119">
+      <Position>1</Position>
     </argument>
     <argument id="386" parent="120">
-      <Position>1</Position>
-    </argument>
-    <argument id="387" parent="121">
       <ArgumentDirection>R</ArgumentDirection>
+    </argument>
+    <argument id="387" parent="120">
+      <Position>1</Position>
     </argument>
     <argument id="388" parent="121">
-      <Position>1</Position>
-    </argument>
-    <argument id="389" parent="122">
       <ArgumentDirection>R</ArgumentDirection>
+    </argument>
+    <argument id="389" parent="121">
+      <Position>1</Position>
     </argument>
     <argument id="390" parent="122">
-      <Position>1</Position>
-    </argument>
-    <argument id="391" parent="123">
       <ArgumentDirection>R</ArgumentDirection>
     </argument>
-    <argument id="392" parent="123">
+    <argument id="391" parent="122">
       <Position>1</Position>
+    </argument>
+    <argument id="392" parent="123">
+      <ArgumentDirection>R</ArgumentDirection>
     </argument>
     <argument id="393" parent="124">
       <ArgumentDirection>R</ArgumentDirection>
@@ -1047,53 +1047,53 @@
     <argument id="395" parent="125">
       <ArgumentDirection>R</ArgumentDirection>
     </argument>
-    <argument id="396" parent="126">
-      <ArgumentDirection>R</ArgumentDirection>
+    <argument id="396" parent="125">
+      <Position>1</Position>
     </argument>
     <argument id="397" parent="126">
-      <Position>1</Position>
-    </argument>
-    <argument id="398" parent="127">
       <ArgumentDirection>R</ArgumentDirection>
     </argument>
-    <argument id="399" parent="128">
-      <ArgumentDirection>R</ArgumentDirection>
-    </argument>
-    <argument id="400" parent="128">
+    <argument id="398" parent="126">
       <Position>1</Position>
     </argument>
-    <argument id="401" parent="128">
+    <argument id="399" parent="126">
       <Position>2</Position>
     </argument>
-    <argument id="402" parent="129">
+    <argument id="400" parent="127">
       <ArgumentDirection>R</ArgumentDirection>
     </argument>
-    <argument id="403" parent="129">
+    <argument id="401" parent="127">
       <Position>1</Position>
     </argument>
-    <argument id="404" parent="130">
+    <argument id="402" parent="128">
       <ArgumentDirection>R</ArgumentDirection>
     </argument>
-    <argument id="405" parent="130">
+    <argument id="403" parent="128">
       <Position>1</Position>
     </argument>
-    <argument id="406" parent="130">
+    <argument id="404" parent="128">
       <Position>2</Position>
     </argument>
-    <argument id="407" parent="131">
+    <argument id="405" parent="129">
+      <ArgumentDirection>R</ArgumentDirection>
+    </argument>
+    <argument id="406" parent="129">
+      <Position>1</Position>
+    </argument>
+    <argument id="407" parent="130">
       <ArgumentDirection>R</ArgumentDirection>
     </argument>
     <argument id="408" parent="131">
-      <Position>1</Position>
-    </argument>
-    <argument id="409" parent="132">
       <ArgumentDirection>R</ArgumentDirection>
     </argument>
-    <argument id="410" parent="132">
+    <argument id="409" parent="131">
       <Position>1</Position>
     </argument>
-    <argument id="411" parent="132">
+    <argument id="410" parent="131">
       <Position>2</Position>
+    </argument>
+    <argument id="411" parent="132">
+      <ArgumentDirection>R</ArgumentDirection>
     </argument>
     <argument id="412" parent="133">
       <ArgumentDirection>R</ArgumentDirection>
@@ -1104,161 +1104,161 @@
     <argument id="414" parent="134">
       <ArgumentDirection>R</ArgumentDirection>
     </argument>
-    <argument id="415" parent="135">
-      <ArgumentDirection>R</ArgumentDirection>
-    </argument>
-    <argument id="416" parent="135">
+    <argument id="415" parent="134">
       <Position>1</Position>
+    </argument>
+    <argument id="416" parent="134">
+      <Position>2</Position>
     </argument>
     <argument id="417" parent="135">
+      <ArgumentDirection>R</ArgumentDirection>
+    </argument>
+    <argument id="418" parent="135">
+      <Position>1</Position>
+    </argument>
+    <argument id="419" parent="136">
+      <ArgumentDirection>R</ArgumentDirection>
+    </argument>
+    <argument id="420" parent="136">
+      <Position>1</Position>
+    </argument>
+    <argument id="421" parent="137">
+      <ArgumentDirection>R</ArgumentDirection>
+    </argument>
+    <argument id="422" parent="137">
+      <Position>1</Position>
+    </argument>
+    <argument id="423" parent="138">
+      <ArgumentDirection>R</ArgumentDirection>
+    </argument>
+    <argument id="424" parent="138">
+      <Position>1</Position>
+    </argument>
+    <argument id="425" parent="139">
+      <ArgumentDirection>R</ArgumentDirection>
+    </argument>
+    <argument id="426" parent="139">
+      <Position>1</Position>
+    </argument>
+    <argument id="427" parent="140">
+      <ArgumentDirection>R</ArgumentDirection>
+    </argument>
+    <argument id="428" parent="140">
+      <Position>1</Position>
+    </argument>
+    <argument id="429" parent="140">
       <Position>2</Position>
     </argument>
-    <argument id="418" parent="136">
+    <argument id="430" parent="141">
       <ArgumentDirection>R</ArgumentDirection>
     </argument>
-    <argument id="419" parent="137">
+    <argument id="431" parent="142">
       <ArgumentDirection>R</ArgumentDirection>
     </argument>
-    <argument id="420" parent="138">
-      <ArgumentDirection>R</ArgumentDirection>
-    </argument>
-    <argument id="421" parent="139">
-      <ArgumentDirection>R</ArgumentDirection>
-    </argument>
-    <argument id="422" parent="139">
+    <argument id="432" parent="142">
       <Position>1</Position>
     </argument>
-    <argument id="423" parent="140">
+    <argument id="433" parent="143">
       <ArgumentDirection>R</ArgumentDirection>
     </argument>
-    <argument id="424" parent="140">
+    <argument id="434" parent="144">
+      <ArgumentDirection>R</ArgumentDirection>
+    </argument>
+    <argument id="435" parent="145">
+      <ArgumentDirection>R</ArgumentDirection>
+    </argument>
+    <argument id="436" parent="146">
+      <ArgumentDirection>R</ArgumentDirection>
+    </argument>
+    <argument id="437" parent="146">
       <Position>1</Position>
     </argument>
-    <argument id="425" parent="141">
+    <argument id="438" parent="147">
       <ArgumentDirection>R</ArgumentDirection>
     </argument>
-    <argument id="426" parent="142">
-      <ArgumentDirection>R</ArgumentDirection>
-    </argument>
-    <argument id="427" parent="142">
+    <argument id="439" parent="147">
       <Position>1</Position>
     </argument>
-    <argument id="428" parent="143">
-      <ArgumentDirection>R</ArgumentDirection>
-    </argument>
-    <argument id="429" parent="143">
-      <Position>1</Position>
-    </argument>
-    <argument id="430" parent="144">
-      <ArgumentDirection>R</ArgumentDirection>
-    </argument>
-    <argument id="431" parent="144">
-      <Position>1</Position>
-    </argument>
-    <argument id="432" parent="145">
-      <ArgumentDirection>R</ArgumentDirection>
-    </argument>
-    <argument id="433" parent="146">
-      <ArgumentDirection>R</ArgumentDirection>
-    </argument>
-    <argument id="434" parent="147">
-      <ArgumentDirection>R</ArgumentDirection>
-    </argument>
-    <argument id="435" parent="147">
-      <Position>1</Position>
-    </argument>
-    <argument id="436" parent="147">
+    <argument id="440" parent="147">
       <Position>2</Position>
     </argument>
-    <argument id="437" parent="148">
+    <argument id="441" parent="148">
       <ArgumentDirection>R</ArgumentDirection>
     </argument>
-    <argument id="438" parent="149">
+    <argument id="442" parent="149">
       <ArgumentDirection>R</ArgumentDirection>
     </argument>
-    <argument id="439" parent="149">
+    <argument id="443" parent="149">
       <Position>1</Position>
     </argument>
-    <argument id="440" parent="150">
+    <argument id="444" parent="150">
       <ArgumentDirection>R</ArgumentDirection>
     </argument>
-    <argument id="441" parent="150">
+    <argument id="445" parent="150">
       <Position>1</Position>
     </argument>
-    <argument id="442" parent="151">
+    <argument id="446" parent="151">
       <ArgumentDirection>R</ArgumentDirection>
     </argument>
-    <argument id="443" parent="151">
+    <argument id="447" parent="151">
       <Position>1</Position>
     </argument>
-    <argument id="444" parent="151">
+    <argument id="448" parent="151">
       <Position>2</Position>
     </argument>
-    <argument id="445" parent="152">
+    <argument id="449" parent="152">
       <ArgumentDirection>R</ArgumentDirection>
     </argument>
-    <argument id="446" parent="152">
-      <Position>1</Position>
-    </argument>
-    <argument id="447" parent="153">
+    <argument id="450" parent="153">
       <ArgumentDirection>R</ArgumentDirection>
-    </argument>
-    <argument id="448" parent="153">
-      <Position>1</Position>
-    </argument>
-    <argument id="449" parent="154">
-      <ArgumentDirection>R</ArgumentDirection>
-    </argument>
-    <argument id="450" parent="154">
-      <Position>1</Position>
     </argument>
     <argument id="451" parent="154">
-      <Position>2</Position>
-    </argument>
-    <argument id="452" parent="155">
       <ArgumentDirection>R</ArgumentDirection>
     </argument>
-    <argument id="453" parent="156">
+    <argument id="452" parent="154">
+      <Position>1</Position>
+    </argument>
+    <argument id="453" parent="155">
       <ArgumentDirection>R</ArgumentDirection>
     </argument>
     <argument id="454" parent="156">
-      <Position>1</Position>
-    </argument>
-    <argument id="455" parent="157">
       <ArgumentDirection>R</ArgumentDirection>
+    </argument>
+    <argument id="455" parent="156">
+      <Position>1</Position>
     </argument>
     <argument id="456" parent="157">
-      <Position>1</Position>
-    </argument>
-    <argument id="457" parent="158">
       <ArgumentDirection>R</ArgumentDirection>
+    </argument>
+    <argument id="457" parent="157">
+      <Position>1</Position>
     </argument>
     <argument id="458" parent="158">
-      <Position>1</Position>
-    </argument>
-    <argument id="459" parent="159">
       <ArgumentDirection>R</ArgumentDirection>
     </argument>
-    <argument id="460" parent="160">
-      <ArgumentDirection>R</ArgumentDirection>
-    </argument>
-    <argument id="461" parent="160">
+    <argument id="459" parent="158">
       <Position>1</Position>
     </argument>
-    <argument id="462" parent="161">
+    <argument id="460" parent="159">
       <ArgumentDirection>R</ArgumentDirection>
     </argument>
-    <argument id="463" parent="161">
+    <argument id="461" parent="159">
       <Position>1</Position>
     </argument>
-    <argument id="464" parent="161">
+    <argument id="462" parent="159">
       <Position>2</Position>
     </argument>
-    <argument id="465" parent="162">
+    <argument id="463" parent="160">
+      <ArgumentDirection>R</ArgumentDirection>
+    </argument>
+    <argument id="464" parent="160">
+      <Position>1</Position>
+    </argument>
+    <argument id="465" parent="161">
       <ArgumentDirection>R</ArgumentDirection>
     </argument>
     <argument id="466" parent="162">
-      <Position>1</Position>
+      <ArgumentDirection>R</ArgumentDirection>
     </argument>
     <argument id="467" parent="163">
       <ArgumentDirection>R</ArgumentDirection>
@@ -1402,36 +1402,42 @@
       <ColNames>course_code</ColNames>
       <UnderlyingIndexName>sqlite_autoindex_courses_1</UnderlyingIndexName>
     </key>
-    <column id="514" parent="493" name="user_id">
+    <trigger id="514" parent="492" name="before_course_update">
+      <Condition>NEW.id != OLD.id</Condition>
+      <Events>U</Events>
+      <SourceTextLength>202</SourceTextLength>
+      <Turn>before-row</Turn>
+    </trigger>
+    <column id="515" parent="493" name="user_id">
       <DataType>INTEGER|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="515" parent="493" name="course_id">
+    <column id="516" parent="493" name="course_id">
       <DataType>INTEGER|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="516" parent="493" name="is_moderator">
+    <column id="517" parent="493" name="is_moderator">
       <DataType>BOOLEAN|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="517" parent="493" name="is_owner">
+    <column id="518" parent="493" name="is_owner">
       <DataType>BOOLEAN|0s</DataType>
       <Position>4</Position>
     </column>
-    <foreign-key id="518" parent="493">
+    <foreign-key id="519" parent="493">
       <ColNames>user_id</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>users</RefTableName>
     </foreign-key>
-    <foreign-key id="519" parent="493">
+    <foreign-key id="520" parent="493">
       <ColNames>course_id</ColNames>
       <OnDelete>cascade</OnDelete>
       <RefColNames>id</RefColNames>
       <RefTableName>courses</RefTableName>
     </foreign-key>
-    <index id="520" parent="493" name="sqlite_autoindex_participants_1">
+    <index id="521" parent="493" name="sqlite_autoindex_participants_1">
       <ColNames>user_id
 course_id</ColNames>
       <ColumnCollations>
@@ -1439,210 +1445,210 @@ course_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Unique>1</Unique>
     </index>
-    <key id="521" parent="493">
+    <key id="522" parent="493">
       <ColNames>user_id
 course_id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>sqlite_autoindex_participants_1</UnderlyingIndexName>
     </key>
-    <column id="522" parent="494" name="id">
+    <column id="523" parent="494" name="id">
       <DataType>INTEGER|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="523" parent="494" name="test_id">
+    <column id="524" parent="494" name="test_id">
       <DataType>INTEGER|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="524" parent="494" name="question">
+    <column id="525" parent="494" name="question">
       <DataType>VARCHAR|0s</DataType>
       <Position>3</Position>
     </column>
-    <foreign-key id="525" parent="494">
+    <foreign-key id="526" parent="494">
       <ColNames>test_id</ColNames>
       <OnDelete>cascade</OnDelete>
       <RefColNames>id</RefColNames>
       <RefTableName>tests</RefTableName>
     </foreign-key>
-    <key id="526" parent="494">
+    <key id="527" parent="494">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="527" parent="495" name="id">
+    <column id="528" parent="495" name="id">
       <DataType>INTEGER|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="528" parent="495" name="user_id">
+    <column id="529" parent="495" name="user_id">
       <DataType>INTEGER|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="529" parent="495" name="question_id">
+    <column id="530" parent="495" name="question_id">
       <DataType>INTEGER|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="530" parent="495" name="score">
+    <column id="531" parent="495" name="score">
       <DataType>FLOAT|0s</DataType>
       <Position>4</Position>
     </column>
-    <foreign-key id="531" parent="495">
+    <foreign-key id="532" parent="495">
       <ColNames>user_id</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>users</RefTableName>
     </foreign-key>
-    <foreign-key id="532" parent="495">
+    <foreign-key id="533" parent="495">
       <ColNames>question_id</ColNames>
       <OnDelete>cascade</OnDelete>
       <RefColNames>id</RefColNames>
       <RefTableName>questions</RefTableName>
     </foreign-key>
-    <key id="533" parent="495">
+    <key id="534" parent="495">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="534" parent="496" name="id">
+    <column id="535" parent="496" name="id">
       <DataType>INTEGER|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="535" parent="496" name="user_id">
+    <column id="536" parent="496" name="user_id">
       <DataType>INTEGER|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="536" parent="496" name="test_id">
+    <column id="537" parent="496" name="test_id">
       <DataType>INTEGER|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="537" parent="496" name="max_score">
+    <column id="538" parent="496" name="max_score">
       <DataType>INTEGER|0s</DataType>
       <Position>4</Position>
     </column>
-    <column id="538" parent="496" name="score">
+    <column id="539" parent="496" name="score">
       <DataType>FLOAT|0s</DataType>
       <Position>5</Position>
     </column>
-    <foreign-key id="539" parent="496">
+    <foreign-key id="540" parent="496">
       <ColNames>user_id</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>users</RefTableName>
     </foreign-key>
-    <foreign-key id="540" parent="496">
+    <foreign-key id="541" parent="496">
       <ColNames>test_id</ColNames>
       <OnDelete>cascade</OnDelete>
       <RefColNames>id</RefColNames>
       <RefTableName>tests</RefTableName>
     </foreign-key>
-    <key id="541" parent="496">
+    <key id="542" parent="496">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="542" parent="497" name="type">
+    <column id="543" parent="497" name="type">
       <DataType>text|0s</DataType>
       <Position>1</Position>
     </column>
-    <column id="543" parent="497" name="name">
+    <column id="544" parent="497" name="name">
       <DataType>text|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="544" parent="497" name="tbl_name">
+    <column id="545" parent="497" name="tbl_name">
       <DataType>text|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="545" parent="497" name="rootpage">
+    <column id="546" parent="497" name="rootpage">
       <DataType>int|0s</DataType>
       <Position>4</Position>
     </column>
-    <column id="546" parent="497" name="sql">
+    <column id="547" parent="497" name="sql">
       <DataType>text|0s</DataType>
       <Position>5</Position>
     </column>
-    <column id="547" parent="498" name="id">
+    <column id="548" parent="498" name="id">
       <DataType>INTEGER|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="548" parent="498" name="course_id">
+    <column id="549" parent="498" name="course_id">
       <DataType>INTEGER|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="549" parent="498" name="name">
+    <column id="550" parent="498" name="name">
       <DataType>VARCHAR|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="550" parent="498" name="creation_time">
+    <column id="551" parent="498" name="creation_time">
       <DataType>DATE|0s</DataType>
       <Position>4</Position>
     </column>
-    <foreign-key id="551" parent="498">
+    <foreign-key id="552" parent="498">
       <ColNames>course_id</ColNames>
       <OnDelete>cascade</OnDelete>
       <RefColNames>id</RefColNames>
       <RefTableName>courses</RefTableName>
     </foreign-key>
-    <key id="552" parent="498">
+    <key id="553" parent="498">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="553" parent="499" name="id">
+    <column id="554" parent="499" name="id">
       <DataType>INTEGER|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="554" parent="499" name="email">
+    <column id="555" parent="499" name="email">
       <DataType>VARCHAR(50)|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="555" parent="499" name="username">
+    <column id="556" parent="499" name="username">
       <DataType>VARCHAR(50)|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="556" parent="499" name="password_hash">
+    <column id="557" parent="499" name="password_hash">
       <DataType>VARCHAR|0s</DataType>
       <Position>4</Position>
     </column>
-    <index id="557" parent="499" name="sqlite_autoindex_users_1">
+    <index id="558" parent="499" name="sqlite_autoindex_users_1">
       <ColNames>email</ColNames>
       <ColumnCollations></ColumnCollations>
       <NameSurrogate>1</NameSurrogate>
       <Unique>1</Unique>
     </index>
-    <key id="558" parent="499">
+    <key id="559" parent="499">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="559" parent="499">
+    <key id="560" parent="499">
       <ColNames>email</ColNames>
       <UnderlyingIndexName>sqlite_autoindex_users_1</UnderlyingIndexName>
     </key>
-    <column id="560" parent="500" name="id">
+    <column id="561" parent="500" name="id">
       <DataType>INTEGER|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="561" parent="500" name="user_id">
+    <column id="562" parent="500" name="user_id">
       <DataType>INTEGER|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="562" parent="500" name="answer_id">
+    <column id="563" parent="500" name="answer_id">
       <DataType>INTEGER|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="563" parent="500" name="is_selected">
+    <column id="564" parent="500" name="is_selected">
       <DataType>BOOLEAN|0s</DataType>
       <Position>4</Position>
     </column>
-    <foreign-key id="564" parent="500">
+    <foreign-key id="565" parent="500">
       <ColNames>user_id</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>users</RefTableName>
     </foreign-key>
-    <foreign-key id="565" parent="500">
+    <foreign-key id="566" parent="500">
       <ColNames>answer_id</ColNames>
       <OnDelete>cascade</OnDelete>
       <RefColNames>id</RefColNames>
       <RefTableName>answers</RefTableName>
     </foreign-key>
-    <key id="566" parent="500">
+    <key id="567" parent="500">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
