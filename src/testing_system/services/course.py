@@ -3,7 +3,7 @@ from fastapi import Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from .base_course_service import get_participants, check_accessibility
 import random
-from ..database import get_session, make_query, get_list
+from ..database import make_query, get_list
 from ..models.course import CourseCreate, Participants, BaseCourse, Course, CourseUsers
 
 
@@ -16,8 +16,6 @@ def generate_course_code() -> str:
 
 
 class CourseService:
-    def __init__(self, session: Session = Depends(get_session)):
-        self.session = session
 
     def get_participants_ids(self, course_id: int) -> List[int]:
         participants = get_list("SELECT user_id FROM participants where course_id=?", int, course_id)

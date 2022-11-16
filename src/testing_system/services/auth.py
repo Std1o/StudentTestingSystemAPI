@@ -5,10 +5,9 @@ from fastapi import HTTPException, status, Depends
 from fastapi.security import OAuth2PasswordBearer
 from passlib.hash import bcrypt
 from pydantic import ValidationError
-from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from ..database import get_session, make_query
+from ..database import make_query
 from ..models.auth import User, UserCreate, PrivateUser
 from ..models.tables import User
 from ..settings import settings
@@ -66,9 +65,6 @@ class AuthService:
         }
         token = jwt.encode(payload, settings.jwt_sercret, algorithm=settings.jwt_algorithm)
         return token
-
-    def __init__(self, session: Session = Depends(get_session)):
-        self.session = session
 
     def get_user_by_email(self, email: str) -> Optional[User]:
         return make_query("SELECT * FROM users where email=? LIMIT 1", tables.User, email)

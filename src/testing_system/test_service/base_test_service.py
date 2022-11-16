@@ -2,15 +2,12 @@ from typing import List
 from fastapi import Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from .. import constants
-from ..database import get_session, get_list
+from ..database import get_list
 from ..models import tables
 from ..services.base_course_service import get_participant
 
 
 class BaseTestService:
-
-    def __init__(self, session: Session = Depends(get_session)):
-        self.session = session
 
     def get_tests_by_course_id(self, course_id: int) -> List[tables.Test]:
         return get_list("SELECT * FROM tests where course_id=?", tables.Test, course_id)
