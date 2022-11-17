@@ -147,6 +147,15 @@ def main():
         """
     )
 
+    make_query(
+        """\
+        CREATE VIEW detailed_result
+        AS SELECT user_id, username, email, score, test_id
+        FROM users, results
+        WHERE users.id=results.user_id;
+        """
+    )
+
 
 if __name__ == "__main__":
     main()
