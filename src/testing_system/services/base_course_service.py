@@ -20,6 +20,6 @@ def get_participant(participant_id: int, course_id) -> Participants:
 
 # is_course_owner
 def check_accessibility(user_id, course_id: int):
-    participant = get_participant(user_id, course_id)
-    if not participant.is_owner:
+    is_owner = make_query(f"SELECT isCourseOwner({user_id}, {course_id});", int)
+    if not is_owner:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=constants.ACCESS_ERROR)

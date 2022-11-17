@@ -141,7 +141,7 @@ def main():
         RETURNS BOOLEAN DETERMINISTIC
         BEGIN
             DECLARE isOwner BOOLEAN;
-            SELECT is_owner INTO isOwner FROM participants WHERE user_id=userId AND course_id=courseId;
+            SET isOwner = (SELECT is_owner FROM participants WHERE user_id=userId AND course_id=courseId);
             RETURN isOwner;
         END;
         """
