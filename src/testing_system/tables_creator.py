@@ -135,6 +135,18 @@ def main():
         """
     )
 
+    make_query(
+        """\
+        CREATE FUNCTION isCourseOwner (userId INT, courseId INT)
+        RETURNS BOOLEAN DETERMINISTIC
+        BEGIN
+            DECLARE isOwner BOOLEAN;
+            SELECT is_owner INTO isOwner FROM participants WHERE user_id=userId AND course_id=courseId;
+            RETURN isOwner;
+        END;
+        """
+    )
+
 
 if __name__ == "__main__":
     main()

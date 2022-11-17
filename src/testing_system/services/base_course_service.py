@@ -18,6 +18,7 @@ def get_participant(participant_id: int, course_id) -> Participants:
                       Participants, (participant_id, course_id,))
 
 
+# is_course_owner
 def check_accessibility(user_id, course_id: int):
     participant = get_participant(user_id, course_id)
     if not participant.is_owner:

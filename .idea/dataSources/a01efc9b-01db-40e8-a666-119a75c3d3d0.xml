@@ -976,372 +976,390 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Host>localhost</Host>
       <Plugin>caching_sha2_password</Plugin>
     </user>
-    <table id="285" parent="280" name="answers">
+    <routine id="285" parent="280" name="isCourseOwner">
+      <Definer>root@localhost</Definer>
+      <Deterministic>1</Deterministic>
+      <RoutineKind>function</RoutineKind>
+      <SourceTextLength>186</SourceTextLength>
+    </routine>
+    <table id="286" parent="280" name="answers">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="286" parent="280" name="courses">
+    <table id="287" parent="280" name="courses">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="287" parent="280" name="participants">
+    <table id="288" parent="280" name="participants">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="288" parent="280" name="questions">
+    <table id="289" parent="280" name="questions">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="289" parent="280" name="questions_results">
+    <table id="290" parent="280" name="questions_results">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="290" parent="280" name="results">
+    <table id="291" parent="280" name="results">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="291" parent="280" name="tests">
+    <table id="292" parent="280" name="tests">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="292" parent="280" name="users">
+    <table id="293" parent="280" name="users">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="293" parent="280" name="users_answers">
+    <table id="294" parent="280" name="users_answers">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <column id="294" parent="285" name="id">
+    <argument id="295" parent="285">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>tinyint(1)|0s</DataType>
+    </argument>
+    <argument id="296" parent="285" name="userId">
+      <DataType>int|0s</DataType>
+      <Position>1</Position>
+    </argument>
+    <argument id="297" parent="285" name="courseId">
+      <DataType>int|0s</DataType>
+      <Position>2</Position>
+    </argument>
+    <column id="298" parent="286" name="id">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="295" parent="285" name="question_id">
+    <column id="299" parent="286" name="question_id">
       <DataType>int|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="296" parent="285" name="answer">
+    <column id="300" parent="286" name="answer">
       <DataType>text|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="297" parent="285" name="is_right">
+    <column id="301" parent="286" name="is_right">
       <DataType>tinyint(1)|0s</DataType>
       <Position>4</Position>
     </column>
-    <foreign-key id="298" parent="285" name="fk5">
+    <foreign-key id="302" parent="286" name="fk5">
       <ColNames>question_id</ColNames>
       <OnDelete>cascade</OnDelete>
       <RefColNames>id</RefColNames>
       <RefTableName>questions</RefTableName>
     </foreign-key>
-    <index id="299" parent="285" name="fk5">
+    <index id="303" parent="286" name="fk5">
       <ColNames>question_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="300" parent="285" name="PRIMARY">
+    <key id="304" parent="286" name="PRIMARY">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <column id="301" parent="286" name="id">
+    <column id="305" parent="287" name="id">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="302" parent="286" name="name">
+    <column id="306" parent="287" name="name">
       <DataType>text|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="303" parent="286" name="course_code">
+    <column id="307" parent="287" name="course_code">
       <DataType>varchar(10)|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="304" parent="286" name="img">
+    <column id="308" parent="287" name="img">
       <DataType>text|0s</DataType>
       <Position>4</Position>
     </column>
-    <index id="305" parent="286" name="course_code">
+    <index id="309" parent="287" name="course_code">
       <ColNames>course_code</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="306" parent="286" name="PRIMARY">
+    <key id="310" parent="287" name="PRIMARY">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <key id="307" parent="286" name="course_code">
+    <key id="311" parent="287" name="course_code">
       <ColNames>course_code</ColNames>
       <UnderlyingIndexName>course_code</UnderlyingIndexName>
     </key>
-    <trigger id="308" parent="286" name="before_course_update">
+    <trigger id="312" parent="287" name="before_course_update">
       <Definer>root@localhost</Definer>
       <Events>U</Events>
       <SourceTextLength>119</SourceTextLength>
       <Turn>before-row</Turn>
     </trigger>
-    <column id="309" parent="287" name="user_id">
+    <column id="313" parent="288" name="user_id">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="310" parent="287" name="course_id">
+    <column id="314" parent="288" name="course_id">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="311" parent="287" name="is_moderator">
+    <column id="315" parent="288" name="is_moderator">
       <DataType>tinyint(1)|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="312" parent="287" name="is_owner">
+    <column id="316" parent="288" name="is_owner">
       <DataType>tinyint(1)|0s</DataType>
       <Position>4</Position>
     </column>
-    <foreign-key id="313" parent="287" name="fk1">
+    <foreign-key id="317" parent="288" name="fk1">
       <ColNames>user_id</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>users</RefTableName>
     </foreign-key>
-    <foreign-key id="314" parent="287" name="fk2">
+    <foreign-key id="318" parent="288" name="fk2">
       <ColNames>course_id</ColNames>
       <OnDelete>cascade</OnDelete>
       <RefColNames>id</RefColNames>
       <RefTableName>courses</RefTableName>
     </foreign-key>
-    <index id="315" parent="287" name="fk2">
+    <index id="319" parent="288" name="fk2">
       <ColNames>course_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="316" parent="287" name="PRIMARY">
+    <key id="320" parent="288" name="PRIMARY">
       <ColNames>user_id
 course_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <column id="317" parent="288" name="id">
+    <column id="321" parent="289" name="id">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="318" parent="288" name="test_id">
+    <column id="322" parent="289" name="test_id">
       <DataType>int|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="319" parent="288" name="question">
+    <column id="323" parent="289" name="question">
       <DataType>text|0s</DataType>
       <Position>3</Position>
     </column>
-    <foreign-key id="320" parent="288" name="fk4">
+    <foreign-key id="324" parent="289" name="fk4">
       <ColNames>test_id</ColNames>
       <OnDelete>cascade</OnDelete>
       <RefColNames>id</RefColNames>
       <RefTableName>tests</RefTableName>
     </foreign-key>
-    <index id="321" parent="288" name="fk4">
+    <index id="325" parent="289" name="fk4">
       <ColNames>test_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="322" parent="288" name="PRIMARY">
+    <key id="326" parent="289" name="PRIMARY">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <column id="323" parent="289" name="id">
+    <column id="327" parent="290" name="id">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="324" parent="289" name="user_id">
+    <column id="328" parent="290" name="user_id">
       <DataType>int|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="325" parent="289" name="question_id">
+    <column id="329" parent="290" name="question_id">
       <DataType>int|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="326" parent="289" name="score">
+    <column id="330" parent="290" name="score">
       <DataType>float|0s</DataType>
       <Position>4</Position>
     </column>
-    <foreign-key id="327" parent="289" name="fk8">
+    <foreign-key id="331" parent="290" name="fk8">
       <ColNames>user_id</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>users</RefTableName>
     </foreign-key>
-    <foreign-key id="328" parent="289" name="fk9">
+    <foreign-key id="332" parent="290" name="fk9">
       <ColNames>question_id</ColNames>
       <OnDelete>cascade</OnDelete>
       <RefColNames>id</RefColNames>
       <RefTableName>questions</RefTableName>
     </foreign-key>
-    <index id="329" parent="289" name="fk8">
+    <index id="333" parent="290" name="fk8">
       <ColNames>user_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="330" parent="289" name="fk9">
+    <index id="334" parent="290" name="fk9">
       <ColNames>question_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="331" parent="289" name="PRIMARY">
+    <key id="335" parent="290" name="PRIMARY">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <column id="332" parent="290" name="id">
+    <column id="336" parent="291" name="id">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="333" parent="290" name="user_id">
+    <column id="337" parent="291" name="user_id">
       <DataType>int|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="334" parent="290" name="test_id">
+    <column id="338" parent="291" name="test_id">
       <DataType>int|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="335" parent="290" name="max_score">
+    <column id="339" parent="291" name="max_score">
       <DataType>int|0s</DataType>
       <Position>4</Position>
     </column>
-    <column id="336" parent="290" name="score">
+    <column id="340" parent="291" name="score">
       <DataType>float|0s</DataType>
       <Position>5</Position>
     </column>
-    <foreign-key id="337" parent="290" name="fk10">
+    <foreign-key id="341" parent="291" name="fk10">
       <ColNames>user_id</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>users</RefTableName>
     </foreign-key>
-    <foreign-key id="338" parent="290" name="fk11">
+    <foreign-key id="342" parent="291" name="fk11">
       <ColNames>test_id</ColNames>
       <OnDelete>cascade</OnDelete>
       <RefColNames>id</RefColNames>
       <RefTableName>tests</RefTableName>
     </foreign-key>
-    <index id="339" parent="290" name="fk10">
+    <index id="343" parent="291" name="fk10">
       <ColNames>user_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="340" parent="290" name="fk11">
+    <index id="344" parent="291" name="fk11">
       <ColNames>test_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="341" parent="290" name="PRIMARY">
+    <key id="345" parent="291" name="PRIMARY">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <column id="342" parent="291" name="id">
+    <column id="346" parent="292" name="id">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="343" parent="291" name="course_id">
+    <column id="347" parent="292" name="course_id">
       <DataType>int|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="344" parent="291" name="name">
+    <column id="348" parent="292" name="name">
       <DataType>text|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="345" parent="291" name="creation_time">
+    <column id="349" parent="292" name="creation_time">
       <DataType>date|0s</DataType>
       <Position>4</Position>
     </column>
-    <foreign-key id="346" parent="291" name="fk3">
+    <foreign-key id="350" parent="292" name="fk3">
       <ColNames>course_id</ColNames>
       <OnDelete>cascade</OnDelete>
       <RefColNames>id</RefColNames>
       <RefTableName>courses</RefTableName>
     </foreign-key>
-    <index id="347" parent="291" name="fk3">
+    <index id="351" parent="292" name="fk3">
       <ColNames>course_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="348" parent="291" name="PRIMARY">
+    <key id="352" parent="292" name="PRIMARY">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <column id="349" parent="292" name="id">
+    <column id="353" parent="293" name="id">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="350" parent="292" name="email">
+    <column id="354" parent="293" name="email">
       <DataType>varchar(50)|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="351" parent="292" name="username">
+    <column id="355" parent="293" name="username">
       <DataType>varchar(50)|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="352" parent="292" name="password_hash">
+    <column id="356" parent="293" name="password_hash">
       <DataType>text|0s</DataType>
       <Position>4</Position>
     </column>
-    <index id="353" parent="292" name="email">
+    <index id="357" parent="293" name="email">
       <ColNames>email</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="354" parent="292" name="PRIMARY">
+    <key id="358" parent="293" name="PRIMARY">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <key id="355" parent="292" name="email">
+    <key id="359" parent="293" name="email">
       <ColNames>email</ColNames>
       <UnderlyingIndexName>email</UnderlyingIndexName>
     </key>
-    <column id="356" parent="293" name="id">
+    <column id="360" parent="294" name="id">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="357" parent="293" name="user_id">
+    <column id="361" parent="294" name="user_id">
       <DataType>int|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="358" parent="293" name="answer_id">
+    <column id="362" parent="294" name="answer_id">
       <DataType>int|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="359" parent="293" name="is_selected">
+    <column id="363" parent="294" name="is_selected">
       <DataType>tinyint(1)|0s</DataType>
       <Position>4</Position>
     </column>
-    <foreign-key id="360" parent="293" name="fk6">
+    <foreign-key id="364" parent="294" name="fk6">
       <ColNames>user_id</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>users</RefTableName>
     </foreign-key>
-    <foreign-key id="361" parent="293" name="fk7">
+    <foreign-key id="365" parent="294" name="fk7">
       <ColNames>answer_id</ColNames>
       <OnDelete>cascade</OnDelete>
       <RefColNames>id</RefColNames>
       <RefTableName>answers</RefTableName>
     </foreign-key>
-    <index id="362" parent="293" name="fk6">
+    <index id="366" parent="294" name="fk6">
       <ColNames>user_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="363" parent="293" name="fk7">
+    <index id="367" parent="294" name="fk7">
       <ColNames>answer_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="364" parent="293" name="PRIMARY">
+    <key id="368" parent="294" name="PRIMARY">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
