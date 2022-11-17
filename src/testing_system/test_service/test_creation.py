@@ -9,7 +9,7 @@ class TestCreationService(BaseTestService):
     def create_test(self, test_data: BaseTest):
         test = tables.Test(**dict(course_id=test_data.course_id, name=test_data.name))
         query = "INSERT INTO tests (course_id, name, creation_time) " \
-                "VALUES (%s, %s, DATE('now','localtime'))"
+                "VALUES (%s, %s, CURDATE())"
         test.id = insert_and_get_id(query, (test.course_id, test.name,))
         test = make_query("SELECT * FROM tests WHERE id=%s LIMIT 1", tables.Test, (test.id,))
         return test
