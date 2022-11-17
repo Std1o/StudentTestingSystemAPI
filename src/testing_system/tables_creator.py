@@ -114,6 +114,7 @@ def main():
         id int not null AUTO_INCREMENT,
         user_id int,
         test_id int,
+        passing_time date,
         max_score int,
         score float,
         primary key (id),

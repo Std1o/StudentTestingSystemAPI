@@ -26,8 +26,8 @@ class TestResultCalculatorService(TestSearchingService):
         insert_and_get_id(query, (user_id, question_id, score,))
 
     def create_test_result(self, user_id: int, max_score: int, score: float, test_id: int):
-        query = "INSERT INTO results (user_id, test_id, max_score, score) " \
-                "VALUES (%s, %s, %s, %s)"
+        query = "INSERT INTO results (user_id, test_id, passing_time, max_score, score) " \
+                "VALUES (%s, %s, CURDATE(), %s, %s)"
         insert_and_get_id(query, (user_id, test_id, max_score, score,))
 
     def get_right_answers(self, answers: List[AnswerResultCreation]):

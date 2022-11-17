@@ -1229,170 +1229,174 @@ course_id</ColNames>
       <DataType>int|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="340" parent="291" name="max_score">
-      <DataType>int|0s</DataType>
+    <column id="340" parent="291" name="passing_time">
+      <DataType>date|0s</DataType>
       <Position>4</Position>
     </column>
-    <column id="341" parent="291" name="score">
-      <DataType>float|0s</DataType>
+    <column id="341" parent="291" name="max_score">
+      <DataType>int|0s</DataType>
       <Position>5</Position>
     </column>
-    <foreign-key id="342" parent="291" name="fk10">
+    <column id="342" parent="291" name="score">
+      <DataType>float|0s</DataType>
+      <Position>6</Position>
+    </column>
+    <foreign-key id="343" parent="291" name="fk10">
       <ColNames>user_id</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>users</RefTableName>
     </foreign-key>
-    <foreign-key id="343" parent="291" name="fk11">
+    <foreign-key id="344" parent="291" name="fk11">
       <ColNames>test_id</ColNames>
       <OnDelete>cascade</OnDelete>
       <RefColNames>id</RefColNames>
       <RefTableName>tests</RefTableName>
     </foreign-key>
-    <index id="344" parent="291" name="fk10">
+    <index id="345" parent="291" name="fk10">
       <ColNames>user_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="345" parent="291" name="fk11">
+    <index id="346" parent="291" name="fk11">
       <ColNames>test_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="346" parent="291" name="PRIMARY">
+    <key id="347" parent="291" name="PRIMARY">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <column id="347" parent="292" name="id">
+    <column id="348" parent="292" name="id">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="348" parent="292" name="course_id">
+    <column id="349" parent="292" name="course_id">
       <DataType>int|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="349" parent="292" name="name">
+    <column id="350" parent="292" name="name">
       <DataType>text|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="350" parent="292" name="creation_time">
+    <column id="351" parent="292" name="creation_time">
       <DataType>date|0s</DataType>
       <Position>4</Position>
     </column>
-    <foreign-key id="351" parent="292" name="fk3">
+    <foreign-key id="352" parent="292" name="fk3">
       <ColNames>course_id</ColNames>
       <OnDelete>cascade</OnDelete>
       <RefColNames>id</RefColNames>
       <RefTableName>courses</RefTableName>
     </foreign-key>
-    <index id="352" parent="292" name="fk3">
+    <index id="353" parent="292" name="fk3">
       <ColNames>course_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="353" parent="292" name="PRIMARY">
+    <key id="354" parent="292" name="PRIMARY">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <column id="354" parent="293" name="id">
+    <column id="355" parent="293" name="id">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="355" parent="293" name="email">
+    <column id="356" parent="293" name="email">
       <DataType>varchar(50)|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="356" parent="293" name="username">
+    <column id="357" parent="293" name="username">
       <DataType>varchar(50)|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="357" parent="293" name="password_hash">
+    <column id="358" parent="293" name="password_hash">
       <DataType>text|0s</DataType>
       <Position>4</Position>
     </column>
-    <index id="358" parent="293" name="email">
+    <index id="359" parent="293" name="email">
       <ColNames>email</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="359" parent="293" name="PRIMARY">
+    <key id="360" parent="293" name="PRIMARY">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <key id="360" parent="293" name="email">
+    <key id="361" parent="293" name="email">
       <ColNames>email</ColNames>
       <UnderlyingIndexName>email</UnderlyingIndexName>
     </key>
-    <column id="361" parent="294" name="id">
+    <column id="362" parent="294" name="id">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="362" parent="294" name="user_id">
+    <column id="363" parent="294" name="user_id">
       <DataType>int|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="363" parent="294" name="answer_id">
+    <column id="364" parent="294" name="answer_id">
       <DataType>int|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="364" parent="294" name="is_selected">
+    <column id="365" parent="294" name="is_selected">
       <DataType>tinyint(1)|0s</DataType>
       <Position>4</Position>
     </column>
-    <foreign-key id="365" parent="294" name="fk6">
+    <foreign-key id="366" parent="294" name="fk6">
       <ColNames>user_id</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>users</RefTableName>
     </foreign-key>
-    <foreign-key id="366" parent="294" name="fk7">
+    <foreign-key id="367" parent="294" name="fk7">
       <ColNames>answer_id</ColNames>
       <OnDelete>cascade</OnDelete>
       <RefColNames>id</RefColNames>
       <RefTableName>answers</RefTableName>
     </foreign-key>
-    <index id="367" parent="294" name="fk6">
+    <index id="368" parent="294" name="fk6">
       <ColNames>user_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="368" parent="294" name="fk7">
+    <index id="369" parent="294" name="fk7">
       <ColNames>answer_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="369" parent="294" name="PRIMARY">
+    <key id="370" parent="294" name="PRIMARY">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <column id="370" parent="295" name="course_id">
+    <column id="371" parent="295" name="course_id">
       <DataType>int|0s</DataType>
       <Position>1</Position>
     </column>
-    <column id="371" parent="295" name="user_id">
+    <column id="372" parent="295" name="user_id">
       <DataType>int|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="372" parent="295" name="username">
+    <column id="373" parent="295" name="username">
       <DataType>varchar(50)|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="373" parent="295" name="email">
+    <column id="374" parent="295" name="email">
       <DataType>varchar(50)|0s</DataType>
       <Position>4</Position>
     </column>
-    <column id="374" parent="295" name="score">
+    <column id="375" parent="295" name="score">
       <DataType>float|0s</DataType>
       <Position>5</Position>
     </column>
-    <column id="375" parent="295" name="max_score">
+    <column id="376" parent="295" name="max_score">
       <DataType>int|0s</DataType>
       <Position>6</Position>
     </column>
-    <column id="376" parent="295" name="test_id">
+    <column id="377" parent="295" name="test_id">
       <DataType>int|0s</DataType>
       <Position>7</Position>
     </column>
