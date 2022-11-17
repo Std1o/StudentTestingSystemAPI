@@ -150,9 +150,9 @@ def main():
     make_query(
         """\
         CREATE VIEW rating_view
-        AS SELECT user_id, username, email, score, max_score, test_id
-        FROM users, results
-        WHERE users.id=results.user_id;
+        AS SELECT course_id, user_id, username, email, score, max_score, test_id
+        FROM users, results, tests
+        WHERE users.id=results.user_id AND tests.id=results.test_id;
         """
     )
 

@@ -1020,7 +1020,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     </table>
     <view id="295" parent="280" name="rating_view">
       <Definer>root@localhost</Definer>
-      <SourceTextLength>439</SourceTextLength>
+      <SourceTextLength>598</SourceTextLength>
     </view>
     <argument id="296" parent="285">
       <ArgumentDirection>R</ArgumentDirection>
@@ -1368,29 +1368,33 @@ course_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <column id="370" parent="295" name="user_id">
+    <column id="370" parent="295" name="course_id">
       <DataType>int|0s</DataType>
       <Position>1</Position>
     </column>
-    <column id="371" parent="295" name="username">
-      <DataType>varchar(50)|0s</DataType>
+    <column id="371" parent="295" name="user_id">
+      <DataType>int|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="372" parent="295" name="email">
+    <column id="372" parent="295" name="username">
       <DataType>varchar(50)|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="373" parent="295" name="score">
-      <DataType>float|0s</DataType>
+    <column id="373" parent="295" name="email">
+      <DataType>varchar(50)|0s</DataType>
       <Position>4</Position>
     </column>
-    <column id="374" parent="295" name="max_score">
-      <DataType>int|0s</DataType>
+    <column id="374" parent="295" name="score">
+      <DataType>float|0s</DataType>
       <Position>5</Position>
     </column>
-    <column id="375" parent="295" name="test_id">
+    <column id="375" parent="295" name="max_score">
       <DataType>int|0s</DataType>
       <Position>6</Position>
+    </column>
+    <column id="376" parent="295" name="test_id">
+      <DataType>int|0s</DataType>
+      <Position>7</Position>
     </column>
   </database-model>
 </dataSource>
