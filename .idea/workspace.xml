@@ -46,11 +46,12 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/SQL Dialect" value="MySQL&#10;SQLite" />
     <property name="import_schema_mapping" value="&lt;schema-mapping&gt;&lt;databases&gt;&lt;list&gt;&lt;schema-mapping-item&gt;&lt;source-data-source-id&gt;38b259ad-23a8-4f4e-8c54-fb9a46a03393&lt;/source-data-source-id&gt;&lt;source-path&gt;schema/&quot;main&quot;&lt;/source-path&gt;&lt;target-data-source-id&gt;b4548b6f-b54e-4025-b0a4-a670a9d3de7c&lt;/target-data-source-id&gt;&lt;target-path&gt;schema/&quot;db_name&quot;&lt;/target-path&gt;&lt;/schema-mapping-item&gt;&lt;/list&gt;&lt;/databases&gt;&lt;/schema-mapping&gt;" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/testing_system" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/testing_system/services" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/testing_system/services" />
       <recent name="$PROJECT_DIR$/src/testing_system" />
       <recent name="$PROJECT_DIR$/src/testing_system/models" />
       <recent name="$PROJECT_DIR$/src/testing_system/api" />
@@ -274,6 +275,7 @@
       <workItem from="1668711776612" duration="529000" />
       <workItem from="1668712865050" duration="74000" />
       <workItem from="1668767189212" duration="440000" />
+      <workItem from="1668771525839" duration="1366000" />
     </task>
     <servers />
   </component>
@@ -303,6 +305,6 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/StudentTestingSystemAPI$uvicorn.coverage" NAME="uvicorn Coverage Results" MODIFIED="1668767540878" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/StudentTestingSystemAPI$uvicorn.coverage" NAME="uvicorn Coverage Results" MODIFIED="1668772923744" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
