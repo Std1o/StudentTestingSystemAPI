@@ -1020,7 +1020,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     </table>
     <view id="295" parent="280" name="rating_view">
       <Definer>root@localhost</Definer>
-      <SourceTextLength>598</SourceTextLength>
+      <SourceTextLength>658</SourceTextLength>
     </view>
     <argument id="296" parent="285">
       <ArgumentDirection>R</ArgumentDirection>
@@ -1399,6 +1399,10 @@ course_id</ColNames>
     <column id="377" parent="295" name="test_id">
       <DataType>int|0s</DataType>
       <Position>7</Position>
+    </column>
+    <column id="378" parent="295" name="passing_time">
+      <DataType>date|0s</DataType>
+      <Position>8</Position>
     </column>
   </database-model>
 </dataSource>
