@@ -1,14 +1,9 @@
 from typing import List
 from pydantic import BaseModel
 
-
-class TestResultsItem(BaseModel):
-    user_id: int
-    username: str
-    email: str
-    score: float
+from testing_system.models.tables import Rating
 
 
 class TestResults(BaseModel):
-    results: List[TestResultsItem]
+    results: List[Rating]
     max_score: int

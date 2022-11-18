@@ -72,3 +72,12 @@ class Results(BaseModel):
     test_id: int
     max_score: int
     score: float
+
+
+class Rating(BaseModel):
+    user_id: int
+    username: str
+    email: str
+    score: float
+    max_score: int
+    passing_time: Date

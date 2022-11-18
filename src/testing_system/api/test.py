@@ -1,3 +1,4 @@
+from sqlite3 import Date
 from typing import List
 from fastapi import APIRouter, Depends, Response, status
 from testing_system.models.test import Test, BaseTest
@@ -69,6 +70,19 @@ def get_result(course_id: int, test_id: int, user: User = Depends(get_current_us
 
 
 @router.get('/results/{test_id}', response_model=TestResults)
-def get_results(course_id: int, test_id: int, user: User = Depends(get_current_user),
-                service: TestResultsService = Depends(), only_max_result: bool = False):
-    return service.get_results(user.id, course_id, test_id, only_max_result)
+def get_results(course_id: int, test_id: int,
+                only_max_result: bool = None,
+                username: str = None, email: str = None,
+                upper_bound: int = None, lower_bound: int = None, score_equals: int = None,
+                date_from: Date = None, date_to: Date = None,
+                order_by_score: bool = False, order_by_score_desc: bool = None,
+                order_by_date: bool = False, order_by_date_desc: bool = None,
+                user: User = Depends(get_current_user),
+                service: TestResultsService = Depends()):
+    return service.get_results(
+        user.id, course_id, test_id, only_max_result, username, email,
+        upper_bound, lower_bound, score_equals,
+        date_from, date_to,
+        order_by_score, order_by_score_desc,
+        order_by_date, order_by_date_desc
+    )
