@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 from fastapi import Depends
 from sqlalchemy import select
@@ -8,7 +8,7 @@ from sqlalchemy.orm import Session
 from sqlite3 import Date
 
 from ..models import tables
-from ..models.test_results import TestResults
+from ..models.test_results import TestResults, OrderingEnum
 
 
 class TestResultsService(BaseTestService):
@@ -17,8 +17,7 @@ class TestResultsService(BaseTestService):
                                username: str = None, email: str = None,
                                upper_bound: int = None, lower_bound: int = None, score_equals: int = None,
                                date_from: Date = None, date_to: Date = None,
-                               order_by_score: bool = False, order_by_score_desc: bool = None,
-                               order_by_date: bool = False, order_by_date_desc: bool = None) -> List[tables.Results]:
+                               ordering: Optional[OrderingEnum] = None) -> List[tables.Results]:
         query = f"SELECT * from rating_view WHERE test_id={test_id}"
         if only_max_result:
             query += " AND score=max_score"
@@ -40,14 +39,14 @@ class TestResultsService(BaseTestService):
             query += f" AND score = {score_equals}"
 
         # ORDERING
-        if order_by_score:
-            query += "ORDER BY score"
-        elif order_by_score_desc:
-            query += "ORDER BY score desc"
-        elif order_by_date:
-            query += "ORDER BY score date"
-        elif order_by_date_desc:
-            query += "ORDER BY score date desc"
+        if ordering == OrderingEnum.SCORE:
+            query += " ORDER BY score"
+        elif ordering == OrderingEnum.SCORE_DESC:
+            query += " ORDER BY score desc"
+        elif ordering == OrderingEnum.DATE:
+            query += " ORDER BY score date"
+        elif ordering == OrderingEnum.DATE_DESC:
+            query += " ORDER BY score date desc"
 
         query += ";"
         return get_list(query, tables.Rating)
@@ -57,15 +56,12 @@ class TestResultsService(BaseTestService):
                     username: str = None, email: str = None,
                     upper_bound: int = None, lower_bound: int = None, score_equals: int = None,
                     date_from: Date = None, date_to: Date = None,
-                    order_by_score: bool = False, order_by_score_desc: bool = None,
-                    order_by_date: bool = False, order_by_date_desc: bool = None) -> TestResults:
+                    ordering: Optional[OrderingEnum] = None) -> TestResults:
         self.check_for_moderator_rights(user_id, course_id)
         test_result_rows = self.get_results_from_table(
             test_id, only_max_result, username, email,
             upper_bound, lower_bound, score_equals,
-            date_from, date_to,
-            order_by_score, order_by_score_desc,
-            order_by_date, order_by_date_desc
+            date_from, date_to, ordering
         )
         if not test_result_rows:
             return TestResults(max_score=0, results=[])

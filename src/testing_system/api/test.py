@@ -1,13 +1,12 @@
 from sqlite3 import Date
-from typing import List
+from typing import List, Optional
 from fastapi import APIRouter, Depends, Response, status
 from testing_system.models.test import Test, BaseTest
 from testing_system.models.auth import User
 from testing_system.models.test_result import TestResult
 from testing_system.models.test_result_creation import QuestionResultCreation
-from testing_system.models.test_results import TestResults
+from testing_system.models.test_results import TestResults, OrderingEnum
 from testing_system.services.auth import get_current_user
-from testing_system.services.course import CourseService
 from testing_system.test_service.result_getter import TestResultService
 from testing_system.test_service.test_getter import TestSearchingService
 from testing_system.test_service.test_creation import TestCreationService
@@ -75,14 +74,11 @@ def get_results(course_id: int, test_id: int,
                 username: str = None, email: str = None,
                 upper_bound: int = None, lower_bound: int = None, score_equals: int = None,
                 date_from: Date = None, date_to: Date = None,
-                order_by_score: bool = False, order_by_score_desc: bool = None,
-                order_by_date: bool = False, order_by_date_desc: bool = None,
+                ordering: Optional[OrderingEnum] = None,
                 user: User = Depends(get_current_user),
                 service: TestResultsService = Depends()):
     return service.get_results(
         user.id, course_id, test_id, only_max_result, username, email,
         upper_bound, lower_bound, score_equals,
-        date_from, date_to,
-        order_by_score, order_by_score_desc,
-        order_by_date, order_by_date_desc
+        date_from, date_to, ordering
     )
