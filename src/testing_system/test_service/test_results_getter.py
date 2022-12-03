@@ -30,9 +30,9 @@ class TestResultsService(BaseTestService):
         if date_to and not date_from:
             query += f" AND passing_time BETWEEN '{date_to}' AND '{date_to}'"
         if upper_bound:
-            query += f" AND score < {upper_bound}"
+            query += f" AND score <= {upper_bound}"
         if lower_bound:
-            query += f" AND score > {lower_bound}"
+            query += f" AND score >= {lower_bound}"
         if score_equals:
             query += f" AND score = {score_equals}"
 
