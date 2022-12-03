@@ -42,9 +42,9 @@ class TestResultsService(BaseTestService):
         elif ordering == OrderingEnum.SCORE_DESC:
             query += " ORDER BY score desc"
         elif ordering == OrderingEnum.DATE:
-            query += " ORDER BY score date"
+            query += " ORDER BY passing_time"
         elif ordering == OrderingEnum.DATE_DESC:
-            query += " ORDER BY score date desc"
+            query += " ORDER BY passing_time desc"
 
         query += ";"
         return get_list(query, tables.Rating)
