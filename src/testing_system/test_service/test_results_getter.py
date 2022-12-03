@@ -15,7 +15,7 @@ class TestResultsService(BaseTestService):
 
     def get_results_from_table(self, test_id: int, only_max_result: bool = None,
                                search_prefix: str = None,
-                               upper_bound: int = None, lower_bound: int = None, score_equals: int = None,
+                               upper_bound: float = None, lower_bound: float = None, score_equals: float = None,
                                date_from: Date = None, date_to: Date = None,
                                ordering: Optional[OrderingEnum] = None) -> List[tables.Results]:
         query = f"SELECT * from rating_view WHERE test_id={test_id}"
@@ -52,7 +52,7 @@ class TestResultsService(BaseTestService):
     def get_results(self, user_id: int, course_id: int, test_id: int,
                     only_max_result: bool = None,
                     search_prefix: str = None,
-                    upper_bound: int = None, lower_bound: int = None, score_equals: int = None,
+                    upper_bound: float = None, lower_bound: float = None, score_equals: float = None,
                     date_from: Date = None, date_to: Date = None,
                     ordering: Optional[OrderingEnum] = None) -> TestResults:
         self.check_for_moderator_rights(user_id, course_id)
