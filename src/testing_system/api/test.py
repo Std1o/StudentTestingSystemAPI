@@ -74,7 +74,7 @@ def get_results(course_id: int, test_id: int,
                 user: User = Depends(get_current_user),
                 service: TestResultsService = Depends()):
     return service.get_results(
-        user.id, course_id, test_id, params.only_max_result, params.username, params.email,
+        user.id, course_id, test_id, params.only_max_result, params.search_prefix,
         params.upper_bound, params.lower_bound, params.score_equals,
         params.date_from, params.date_to, params.ordering
     )

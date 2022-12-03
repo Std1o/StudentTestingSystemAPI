@@ -9,8 +9,7 @@ from testing_system.models.test_results import OrderingEnum
 
 class TestResultsRequest(BaseModel):
     only_max_result: bool = None
-    username: str = None
-    email: str = None
+    search_prefix: str = None
     upper_bound: int = None
     lower_bound: int = None
     score_equals: int = None
