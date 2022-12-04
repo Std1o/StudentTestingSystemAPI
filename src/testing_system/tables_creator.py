@@ -130,7 +130,7 @@ def main():
         FOR EACH ROW
         BEGIN
            IF NEW.id != OLD.id THEN
-               SET NEW='id cannot be changed';
+               SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'id cannot be changed';
            END IF;
         END;
         """
