@@ -1,6 +1,6 @@
 from contextlib import closing
 from typing import TypeVar, Type
-from pymysql.err import InterfaceError
+from pymysql.err import InterfaceError, OperationalError, InternalError
 
 from .settings import settings
 import pymysql.cursors
@@ -39,7 +39,11 @@ def make_query(sql, data_class: Type[T] = None, args=None):
             make_query(sql, data_class, args)
             return None
         if con.open:
-            con.commit()
+            try:
+                 con.commit()
+            except InternalError:
+                reconnect()
+                make_query(sql, data_class, args)
         for row in cursor:
             item = _get_item(cursor, row, data_class)
             if item is None:
@@ -50,7 +54,12 @@ def make_query(sql, data_class: Type[T] = None, args=None):
 
 def get_list(sql, data_class: Type[T], args=None):
     with closing(con.cursor()) as cursor:
-        cursor.execute(sql, args)
+        try:
+            cursor.execute(sql, args)
+        except OperationalError:
+            reconnect()
+            get_list(sql, data_class, args)
+            return None
         data_list = []
         for row in cursor:
             item = _get_item(cursor, row, data_class)
