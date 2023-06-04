@@ -85,9 +85,3 @@ class Results(Base):
     passing_time = sa.Column(sa.Date)
     max_score = sa.Column(sa.Integer)
     score = sa.Column(sa.Float)
-
-
-rating_view = select(Results.user_id, User.username, User.email, Results.score,
-                     Results.max_score, Results.test_id, Results.passing_time) \
-    .where(User.id == Results.user_id and Test.id == Results.test_id)
-create_view('rating_view', rating_view, Base.metadata)
