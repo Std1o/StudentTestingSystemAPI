@@ -1,7 +1,7 @@
 from typing import List
 from fastapi import Depends
 from sqlalchemy.orm import Session
-
+import datetime
 from .test_getter import TestSearchingService
 from .. import tables
 from ..database import get_session
@@ -37,7 +37,8 @@ class TestResultCalculatorService(TestSearchingService):
         self.session.commit()
 
     def create_test_result(self, user_id: int, max_score: int, score: float, test_id: int):
-        test_dict = dict(user_id=user_id, test_id=test_id, max_score=max_score, score=score)
+        test_dict = dict(user_id=user_id, test_id=test_id, passing_time=datetime.datetime.now(),
+                         max_score=max_score, score=score)
         test_row = tables.Results(**test_dict)
         self.session.add(test_row)
         self.session.commit()
