@@ -2,7 +2,7 @@ from sqlite3 import Date
 from typing import List, Optional
 
 from fastapi import Depends
-from sqlalchemy import select, func, or_
+from sqlalchemy import select, func, or_, desc
 from .. import tables
 from testing_system.database import get_session
 from testing_system.test_service.base_test_service import BaseTestService
@@ -21,13 +21,13 @@ class TestResultsService(BaseTestService):
                                upper_bound: float = None, lower_bound: float = None, score_equals: float = None,
                                date_from: Date = None, date_to: Date = None,
                                ordering: Optional[OrderingEnum] = None) -> List[Rating]:
-        query = f""
         rating_query = self.session.query(
             tables.Results.user_id, tables.User.username, tables.User.email, tables.Results.score,
             tables.Results.max_score, tables.Results.test_id, tables.Results.passing_time
         ).join(tables.Participants).filter(
             tables.User.id == tables.Results.user_id,
-            tables.Test.id == tables.Results.test_id
+            tables.Test.id == tables.Results.test_id,
+            tables.Test.id == test_id
         )
         if only_max_result:
             rating_query = rating_query.filter(tables.Results.score == tables.Results.max_score)
@@ -49,15 +49,14 @@ class TestResultsService(BaseTestService):
 
         # ORDERING
         if ordering == OrderingEnum.SCORE:
-            query += " ORDER BY score"
+            rating_query = rating_query.order_by(tables.Results.score)
         elif ordering == OrderingEnum.SCORE_DESC:
-            query += " ORDER BY score desc"
+            rating_query = rating_query.order_by(desc(tables.Results.score))
         elif ordering == OrderingEnum.DATE:
-            query += " ORDER BY passing_time"
+            rating_query = rating_query.order_by(tables.Results.passing_time)
         elif ordering == OrderingEnum.DATE_DESC:
-            query += " ORDER BY passing_time desc"
+            rating_query = rating_query.order_by(desc(tables.Results.passing_time))
 
-        query += ";"
         return rating_query.all()
 
     def get_results(self, user_id: int, course_id: int, test_id: int,
