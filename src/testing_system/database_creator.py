@@ -1,5 +1,3 @@
-import uvicorn
-from .settings import settings
 from .database import engine
 from .tables import Base
 

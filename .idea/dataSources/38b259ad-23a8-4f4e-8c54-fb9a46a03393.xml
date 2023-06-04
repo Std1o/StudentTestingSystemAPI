@@ -1462,307 +1462,338 @@
     <table id="520" parent="176" name="tests"/>
     <table id="521" parent="176" name="users"/>
     <table id="522" parent="176" name="users_answers"/>
-    <column id="523" parent="513" name="id">
+    <view id="523" parent="176" name="rating_view">
+      <SourceTextLength>244</SourceTextLength>
+    </view>
+    <column id="524" parent="513" name="id">
       <DasType>INTEGER|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="524" parent="513" name="question_id">
+    <column id="525" parent="513" name="question_id">
       <DasType>INTEGER|0s</DasType>
       <Position>2</Position>
     </column>
-    <column id="525" parent="513" name="answer">
+    <column id="526" parent="513" name="answer">
       <DasType>VARCHAR|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="526" parent="513" name="is_right">
+    <column id="527" parent="513" name="is_right">
       <DasType>BOOLEAN|0s</DasType>
       <Position>4</Position>
     </column>
-    <foreign-key id="527" parent="513">
+    <foreign-key id="528" parent="513">
       <ColNames>question_id</ColNames>
       <OnDelete>cascade</OnDelete>
       <RefColNames>id</RefColNames>
       <RefTableName>questions</RefTableName>
     </foreign-key>
-    <key id="528" parent="513">
+    <key id="529" parent="513">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="529" parent="514" name="id">
+    <column id="530" parent="514" name="id">
       <DasType>INTEGER|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="530" parent="514" name="name">
+    <column id="531" parent="514" name="name">
       <DasType>VARCHAR|0s</DasType>
       <Position>2</Position>
     </column>
-    <column id="531" parent="514" name="course_code">
+    <column id="532" parent="514" name="course_code">
       <DasType>VARCHAR|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="532" parent="514" name="img">
+    <column id="533" parent="514" name="img">
       <DasType>VARCHAR|0s</DasType>
       <Position>4</Position>
     </column>
-    <index id="533" parent="514" name="sqlite_autoindex_courses_1">
+    <index id="534" parent="514" name="sqlite_autoindex_courses_1">
       <ColNames>course_code</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Unique>1</Unique>
     </index>
-    <key id="534" parent="514">
+    <key id="535" parent="514">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="535" parent="514">
+    <key id="536" parent="514">
       <ColNames>course_code</ColNames>
       <UnderlyingIndexName>sqlite_autoindex_courses_1</UnderlyingIndexName>
     </key>
-    <column id="536" parent="515" name="user_id">
+    <column id="537" parent="515" name="user_id">
       <DasType>INTEGER|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="537" parent="515" name="course_id">
+    <column id="538" parent="515" name="course_id">
       <DasType>INTEGER|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="538" parent="515" name="is_moderator">
+    <column id="539" parent="515" name="is_moderator">
       <DasType>BOOLEAN|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="539" parent="515" name="is_owner">
+    <column id="540" parent="515" name="is_owner">
       <DasType>BOOLEAN|0s</DasType>
       <Position>4</Position>
     </column>
-    <foreign-key id="540" parent="515">
+    <foreign-key id="541" parent="515">
       <ColNames>user_id</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>users</RefTableName>
     </foreign-key>
-    <foreign-key id="541" parent="515">
+    <foreign-key id="542" parent="515">
       <ColNames>course_id</ColNames>
       <OnDelete>cascade</OnDelete>
       <RefColNames>id</RefColNames>
       <RefTableName>courses</RefTableName>
     </foreign-key>
-    <index id="542" parent="515" name="sqlite_autoindex_participants_1">
+    <index id="543" parent="515" name="sqlite_autoindex_participants_1">
       <ColNames>user_id
 course_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Unique>1</Unique>
     </index>
-    <key id="543" parent="515">
+    <key id="544" parent="515">
       <ColNames>user_id
 course_id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>sqlite_autoindex_participants_1</UnderlyingIndexName>
     </key>
-    <column id="544" parent="516" name="id">
+    <column id="545" parent="516" name="id">
       <DasType>INTEGER|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="545" parent="516" name="test_id">
+    <column id="546" parent="516" name="test_id">
       <DasType>INTEGER|0s</DasType>
       <Position>2</Position>
     </column>
-    <column id="546" parent="516" name="question">
+    <column id="547" parent="516" name="question">
       <DasType>VARCHAR|0s</DasType>
       <Position>3</Position>
     </column>
-    <foreign-key id="547" parent="516">
+    <foreign-key id="548" parent="516">
       <ColNames>test_id</ColNames>
       <OnDelete>cascade</OnDelete>
       <RefColNames>id</RefColNames>
       <RefTableName>tests</RefTableName>
     </foreign-key>
-    <key id="548" parent="516">
+    <key id="549" parent="516">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="549" parent="517" name="id">
+    <column id="550" parent="517" name="id">
       <DasType>INTEGER|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="550" parent="517" name="user_id">
+    <column id="551" parent="517" name="user_id">
       <DasType>INTEGER|0s</DasType>
       <Position>2</Position>
     </column>
-    <column id="551" parent="517" name="question_id">
+    <column id="552" parent="517" name="question_id">
       <DasType>INTEGER|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="552" parent="517" name="score">
+    <column id="553" parent="517" name="score">
       <DasType>FLOAT|0s</DasType>
       <Position>4</Position>
     </column>
-    <foreign-key id="553" parent="517">
+    <foreign-key id="554" parent="517">
       <ColNames>user_id</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>users</RefTableName>
     </foreign-key>
-    <foreign-key id="554" parent="517">
+    <foreign-key id="555" parent="517">
       <ColNames>question_id</ColNames>
       <OnDelete>cascade</OnDelete>
       <RefColNames>id</RefColNames>
       <RefTableName>questions</RefTableName>
     </foreign-key>
-    <key id="555" parent="517">
+    <key id="556" parent="517">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="556" parent="518" name="id">
+    <column id="557" parent="518" name="id">
       <DasType>INTEGER|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="557" parent="518" name="user_id">
+    <column id="558" parent="518" name="user_id">
       <DasType>INTEGER|0s</DasType>
       <Position>2</Position>
     </column>
-    <column id="558" parent="518" name="test_id">
+    <column id="559" parent="518" name="test_id">
       <DasType>INTEGER|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="559" parent="518" name="passing_time">
+    <column id="560" parent="518" name="passing_time">
       <DasType>DATE|0s</DasType>
       <Position>4</Position>
     </column>
-    <column id="560" parent="518" name="max_score">
+    <column id="561" parent="518" name="max_score">
       <DasType>INTEGER|0s</DasType>
       <Position>5</Position>
     </column>
-    <column id="561" parent="518" name="score">
+    <column id="562" parent="518" name="score">
       <DasType>FLOAT|0s</DasType>
       <Position>6</Position>
     </column>
-    <foreign-key id="562" parent="518">
+    <foreign-key id="563" parent="518">
       <ColNames>user_id</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>users</RefTableName>
     </foreign-key>
-    <foreign-key id="563" parent="518">
+    <foreign-key id="564" parent="518">
       <ColNames>test_id</ColNames>
       <OnDelete>cascade</OnDelete>
       <RefColNames>id</RefColNames>
       <RefTableName>tests</RefTableName>
     </foreign-key>
-    <key id="564" parent="518">
+    <key id="565" parent="518">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="565" parent="519" name="type">
+    <column id="566" parent="519" name="type">
       <DasType>TEXT|0s</DasType>
       <Position>1</Position>
     </column>
-    <column id="566" parent="519" name="name">
+    <column id="567" parent="519" name="name">
       <DasType>TEXT|0s</DasType>
       <Position>2</Position>
     </column>
-    <column id="567" parent="519" name="tbl_name">
+    <column id="568" parent="519" name="tbl_name">
       <DasType>TEXT|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="568" parent="519" name="rootpage">
+    <column id="569" parent="519" name="rootpage">
       <DasType>INT|0s</DasType>
       <Position>4</Position>
     </column>
-    <column id="569" parent="519" name="sql">
+    <column id="570" parent="519" name="sql">
       <DasType>TEXT|0s</DasType>
       <Position>5</Position>
     </column>
-    <column id="570" parent="520" name="id">
+    <column id="571" parent="520" name="id">
       <DasType>INTEGER|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="571" parent="520" name="course_id">
+    <column id="572" parent="520" name="course_id">
       <DasType>INTEGER|0s</DasType>
       <Position>2</Position>
     </column>
-    <column id="572" parent="520" name="name">
+    <column id="573" parent="520" name="name">
       <DasType>VARCHAR|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="573" parent="520" name="creation_time">
+    <column id="574" parent="520" name="creation_time">
       <DasType>DATE|0s</DasType>
       <Position>4</Position>
     </column>
-    <foreign-key id="574" parent="520">
+    <foreign-key id="575" parent="520">
       <ColNames>course_id</ColNames>
       <OnDelete>cascade</OnDelete>
       <RefColNames>id</RefColNames>
       <RefTableName>courses</RefTableName>
     </foreign-key>
-    <key id="575" parent="520">
+    <key id="576" parent="520">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="576" parent="521" name="id">
+    <column id="577" parent="521" name="id">
       <DasType>INTEGER|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="577" parent="521" name="email">
+    <column id="578" parent="521" name="email">
       <DasType>TEXT|0s</DasType>
       <Position>2</Position>
     </column>
-    <column id="578" parent="521" name="username">
+    <column id="579" parent="521" name="username">
       <DasType>TEXT|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="579" parent="521" name="password_hash">
+    <column id="580" parent="521" name="password_hash">
       <DasType>TEXT|0s</DasType>
       <Position>4</Position>
     </column>
-    <index id="580" parent="521" name="sqlite_autoindex_users_1">
+    <index id="581" parent="521" name="sqlite_autoindex_users_1">
       <ColNames>email</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Unique>1</Unique>
     </index>
-    <key id="581" parent="521">
+    <key id="582" parent="521">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="582" parent="521">
+    <key id="583" parent="521">
       <ColNames>email</ColNames>
       <UnderlyingIndexName>sqlite_autoindex_users_1</UnderlyingIndexName>
     </key>
-    <column id="583" parent="522" name="id">
+    <column id="584" parent="522" name="id">
       <DasType>INTEGER|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="584" parent="522" name="user_id">
+    <column id="585" parent="522" name="user_id">
       <DasType>INTEGER|0s</DasType>
       <Position>2</Position>
     </column>
-    <column id="585" parent="522" name="answer_id">
+    <column id="586" parent="522" name="answer_id">
       <DasType>INTEGER|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="586" parent="522" name="is_selected">
+    <column id="587" parent="522" name="is_selected">
       <DasType>BOOLEAN|0s</DasType>
       <Position>4</Position>
     </column>
-    <foreign-key id="587" parent="522">
+    <foreign-key id="588" parent="522">
       <ColNames>user_id</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>users</RefTableName>
     </foreign-key>
-    <foreign-key id="588" parent="522">
+    <foreign-key id="589" parent="522">
       <ColNames>answer_id</ColNames>
       <OnDelete>cascade</OnDelete>
       <RefColNames>id</RefColNames>
       <RefTableName>answers</RefTableName>
     </foreign-key>
-    <key id="589" parent="522">
+    <key id="590" parent="522">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
+    <column id="591" parent="523" name="user_id">
+      <DasType>INTEGER|0s</DasType>
+      <Position>1</Position>
+    </column>
+    <column id="592" parent="523" name="username">
+      <DasType>TEXT|0s</DasType>
+      <Position>2</Position>
+    </column>
+    <column id="593" parent="523" name="email">
+      <DasType>TEXT|0s</DasType>
+      <Position>3</Position>
+    </column>
+    <column id="594" parent="523" name="score">
+      <DasType>FLOAT|0s</DasType>
+      <Position>4</Position>
+    </column>
+    <column id="595" parent="523" name="max_score">
+      <DasType>INTEGER|0s</DasType>
+      <Position>5</Position>
+    </column>
+    <column id="596" parent="523" name="test_id">
+      <DasType>INTEGER|0s</DasType>
+      <Position>6</Position>
+    </column>
+    <column id="597" parent="523" name="passing_time">
+      <DasType>DATE|0s</DasType>
+      <Position>7</Position>
+    </column>
   </database-model>
 </dataSource>

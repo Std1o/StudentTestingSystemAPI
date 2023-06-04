@@ -11,7 +11,7 @@ sqlalchemy = "*"
 python-jose = "*"
 passlib = {extras = ["bcrypt"], version = "*"}
 python-multipart = "*"
-jose = "*"
+sqlalchemy-utils = "*"
 
 [dev-packages]
 

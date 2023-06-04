@@ -1,5 +1,7 @@
 import sqlalchemy as sa
+from sqlalchemy import select, and_
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy_utils import create_view
 
 Base = declarative_base()
 
@@ -64,6 +66,7 @@ class UsersAnswers(Base):
     answer_id = sa.Column(sa.Integer, sa.ForeignKey(Answers.id, ondelete='CASCADE'))
     is_selected = sa.Column(sa.Boolean)
 
+
 class QuestionsResults(Base):
     __tablename__ = 'questions_results'
 
@@ -82,3 +85,9 @@ class Results(Base):
     passing_time = sa.Column(sa.Date)
     max_score = sa.Column(sa.Integer)
     score = sa.Column(sa.Float)
+
+
+rating_view = select(Results.user_id, User.username, User.email, Results.score,
+                     Results.max_score, Results.test_id, Results.passing_time) \
+    .where(and_(User.id == Results.user_id), and_(Test.id == Results.test_id))
+create_view('rating_view', rating_view, Base.metadata)
