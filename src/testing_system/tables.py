@@ -79,5 +79,6 @@ class Results(Base):
     id = sa.Column(sa.Integer, primary_key=True)
     user_id = sa.Column(sa.Integer, sa.ForeignKey(User.id))
     test_id = sa.Column(sa.Integer, sa.ForeignKey(Test.id, ondelete='CASCADE'))
+    passing_time = sa.Column(sa.Date)
     max_score = sa.Column(sa.Integer)
     score = sa.Column(sa.Float)
