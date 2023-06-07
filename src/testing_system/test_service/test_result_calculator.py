@@ -57,15 +57,13 @@ class TestResultCalculatorService(TestSearchingService):
         global_score: float = 0
         for question in questions:
             score: float = 0
-            ans_score = len(self.get_right_answers(question.answers)) / len(question.answers)
+            ans_score = 1 / len(question.answers)
             for answer_result in question.answers:
                 if save:
                     self.create_user_answer(user_id, answer_result)
                 answer = self.get_answer(answer_result.answer_id)
                 if answer.is_right == answer_result.is_selected:
                     score += ans_score
-                else:
-                    score -= ans_score
                 if score < 0:
                     score = 0
             global_score += score
@@ -89,7 +87,7 @@ class TestResultCalculatorService(TestSearchingService):
         questions: List[QuestionResult] = []
         for question_in in questions_in:
             score: float = 0
-            ans_score = len(self.get_right_answers(question_in.answers)) / len(question_in.answers)
+            ans_score = 1 / len(question_in.answers)
             answers: List[AnswerResult] = []
             for answer_in in question_in.answers:
                 table_ans = self.get_answer(answer_in.answer_id)
@@ -103,8 +101,6 @@ class TestResultCalculatorService(TestSearchingService):
                 answers.append(AnswerResult(**answer_result_dict))
                 if answer.is_right == answer_in.is_selected:
                     score += ans_score
-                else:
-                    score -= ans_score
                 if score < 0:
                     score = 0
             global_score += score
