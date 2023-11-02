@@ -24,7 +24,7 @@ class TestResultsService(BaseTestService):
         rating_query = self.session.query(
             tables.Results.user_id, tables.User.username, tables.User.email, tables.Results.score,
             tables.Results.max_score, tables.Results.test_id, tables.Results.passing_time
-        ).join(tables.Participants).filter(
+        ).filter(
             tables.User.id == tables.Results.user_id,
             tables.Test.id == tables.Results.test_id,
             tables.Test.id == test_id
