@@ -45,7 +45,9 @@ class TestResultsService(BaseTestService):
         if lower_bound:
             rating_query = rating_query.filter(tables.Results.score >= lower_bound)
         if score_equals:
-            rating_query = rating_query.filter(tables.Results.score == score_equals)
+            rating_query = rating_query.filter(
+                func.round(tables.Results.score, 2) == round(score_equals, 2)
+            )
 
         # ORDERING
         if ordering == OrderingEnum.SCORE:
