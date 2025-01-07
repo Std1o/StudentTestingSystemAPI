@@ -1,19 +1,20 @@
 from typing import List
-from fastapi import APIRouter, Depends, Response, status
-from testing_system.models.test import Test, BaseTest
-from testing_system.models.auth import User
-from testing_system.models.test_result import TestResult
-from testing_system.models.test_result_creation import QuestionResultCreation
-from testing_system.models.test_results import TestResults
-from testing_system.models.test_results_request import TestResultsRequest
-from testing_system.services.auth import get_current_user
-from testing_system.services.course import CourseService
-from testing_system.test_service.result_getter import TestResultService
-from testing_system.test_service.test_getter import TestSearchingService
-from testing_system.test_service.test_creation import TestCreationService
-from testing_system.test_service.test_deletion import TestDeletionService
-from testing_system.test_service.test_result_calculator import TestResultCalculatorService
-from testing_system.test_service.test_results_getter import TestResultsService
+from fastapi import APIRouter, Depends, Response, status,WebSocket,WebSocketDisconnect,HTTPException
+from   models.test import Test, BaseTest
+from fastapi.security import OAuth2PasswordBearer
+from   models.auth import User
+from   models.test_result import TestResult
+from   models.test_result_creation import QuestionResultCreation
+from   models.test_results import TestResults
+from   models.test_results_request import TestResultsRequest
+from   services.auth import get_current_user
+from   services.course import CourseService
+from   test_service.result_getter import TestResultService
+from   test_service.test_getter import TestSearchingService
+from   test_service.test_creation import TestCreationService
+from   test_service.test_deletion import TestDeletionService
+from   test_service.test_result_calculator import TestResultCalculatorService
+from   test_service.test_results_getter import TestResultsService
 
 router = APIRouter(prefix='/tests')
 
@@ -79,3 +80,44 @@ def get_results(course_id: int, test_id: int,
         params.upper_bound, params.lower_bound, params.score_equals,
         params.date_from, params.date_to, params.ordering
     )
+
+@router.websocket('/ws/results/{test_id}')
+async def get_results_via_websocket(websocket: WebSocket, 
+                                    test_id: int, 
+                                    course_id: int):
+    await websocket.accept()
+
+    # Создаем зависимости вручную
+    service = TestResultsService()  # Инициализируйте как это нужно вашему проекту
+    user = None
+
+    try:
+        # Извлекаем токен из заголовков WebSocket-запроса
+        token = websocket.headers.get("Authorization")
+        if not token or not token.startswith("Bearer "):
+            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid or missing token")
+        
+        token = token.split(" ")[1]  # Убираем "Bearer"
+        
+        # Аутентификация пользователя
+        user = get_current_user(token)
+
+        while True:
+            # Получаем параметры запроса от клиента
+            params_data = await websocket.receive_json()
+            params = TestResultsRequest(**params_data)
+
+            # Получаем результаты
+            results = service.get_results(
+                user.id, course_id, test_id, params.only_max_result, params.search_prefix,
+                params.upper_bound, params.lower_bound, params.score_equals,
+                params.date_from, params.date_to, params.ordering
+            )
+
+            # Отправляем данные клиенту
+            await websocket.send_json(results.dict())
+    except WebSocketDisconnect:
+        print(f"WebSocket connection closed for test_id={test_id}.")
+    except Exception as e:
+        await websocket.close(code=status.WS_1008_POLICY_VIOLATION)
+        print(f"Error in WebSocket connection: {e}")
