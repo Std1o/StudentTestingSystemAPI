@@ -105,9 +105,13 @@ async def get_results_via_websocket(websocket: WebSocket,
         while True:
             # Получаем параметры запроса от клиента
             params_data = await websocket.receive_json()
+            print(params_data)
+            print(type(params_data))
             params = TestResultsRequest(**params_data)
 
             # Получаем результаты
+            print("beibe")
+            print(type(params))
             results = service.get_results(
                 user.id, course_id, test_id, params.only_max_result, params.search_prefix,
                 params.upper_bound, params.lower_bound, params.score_equals,
