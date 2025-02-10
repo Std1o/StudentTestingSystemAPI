@@ -82,13 +82,13 @@ def get_results(course_id: int, test_id: int,
     )
 
 @router.websocket('/ws/results/{test_id}')
-async def get_results_via_websocket(websocket: WebSocket, 
-                                    test_id: int, 
-                                    course_id: int):
+async def get_results_via_websocket(websocket: WebSocket,
+                                    test_id: int,
+                                    course_id: int,
+                                    service: TestResultsService = Depends()):
     await websocket.accept()
 
-    # Создаем зависимости вручную
-    service = TestResultsService()  # Инициализируйте как это нужно вашему проекту
+    # _______ ____a___ab_ _`cg_cn# x__f______`c_b_ ___ mb_ _c___ __h__c _`___bc
     user = None
 
     try:
@@ -114,10 +114,13 @@ async def get_results_via_websocket(websocket: WebSocket,
                 params.upper_bound, params.lower_bound, params.score_equals,
                 params.date_from, params.date_to, params.ordering
             )
-            print("after  get_results")
-
             # Отправляем данные клиенту
-            await websocket.send_json(results.dict())
+            data = results.dict()
+            new_data = data.copy()
+            new_data["results"] = [
+                {**item, "passing_time": str(item["passing_time"])} for item in data.get("results", [])
+            ]
+            await websocket.send_json(new_data)
     except WebSocketDisconnect:
         print(f"WebSocket connection closed for test_id={test_id}.")
     except Exception as e:
