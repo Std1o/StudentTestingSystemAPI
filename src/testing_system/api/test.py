@@ -1,20 +1,18 @@
 from typing import List
-from fastapi import APIRouter, Depends, Response, status,WebSocket,WebSocketDisconnect,HTTPException
-from   models.test import Test, BaseTest
-from fastapi.security import OAuth2PasswordBearer
-from   models.auth import User
-from   models.test_result import TestResult
-from   models.test_result_creation import QuestionResultCreation
-from   models.test_results import TestResults
-from   models.test_results_request import TestResultsRequest
-from   services.auth import get_current_user
-from   services.course import CourseService
-from   test_service.result_getter import TestResultService
-from   test_service.test_getter import TestSearchingService
-from   test_service.test_creation import TestCreationService
-from   test_service.test_deletion import TestDeletionService
-from   test_service.test_result_calculator import TestResultCalculatorService
-from   test_service.test_results_getter import TestResultsService
+from fastapi import APIRouter, Depends, Response, status, WebSocket, WebSocketDisconnect, HTTPException
+from testing_system.models.auth import User
+from testing_system.models.test import Test, BaseTest
+from testing_system.models.test_result import TestResult
+from testing_system.models.test_result_creation import QuestionResultCreation
+from testing_system.models.test_results import TestResults
+from testing_system.models.test_results_request import TestResultsRequest
+from testing_system.services.auth import get_current_user
+from testing_system.test_service.result_getter import TestResultService
+from testing_system.test_service.test_creation import TestCreationService
+from testing_system.test_service.test_deletion import TestDeletionService
+from testing_system.test_service.test_getter import TestSearchingService
+from testing_system.test_service.test_result_calculator import TestResultCalculatorService
+from testing_system.test_service.test_results_getter import TestResultsService
 
 router = APIRouter(prefix='/tests')
 
