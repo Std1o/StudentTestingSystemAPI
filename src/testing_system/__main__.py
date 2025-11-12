@@ -3,7 +3,7 @@ from .settings import settings
 
 
 def main():
-    uvicorn.run('testing_system.app:app',
+    uvicorn.run('src.testing_system.app:app',
                 host=settings.server_host,
                 port=settings.server_port,
                 reload=True)
