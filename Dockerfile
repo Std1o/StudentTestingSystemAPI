@@ -17,7 +17,8 @@ COPY ./Pipfile ./Pipfile.lock /code/
 # Устанавливаем зависимости из Pipfile.lock
 RUN pip install pipenv && \
     pipenv sync --system && \
-    pip install sqlalchemy-utils
+    pip install sqlalchemy-utils && \
+    pip install websockets
 
 COPY ./src /code/src
 COPY ./images /code/images
