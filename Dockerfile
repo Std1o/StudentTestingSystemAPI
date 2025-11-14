@@ -18,7 +18,8 @@ COPY ./Pipfile ./Pipfile.lock /code/
 RUN pip install pipenv && \
     pipenv sync --system && \
     pip install sqlalchemy-utils && \
-    pip install websockets
+    pip install websockets && \
+    pip install gigachat
 
 COPY ./src /code/src
 COPY ./images /code/images
