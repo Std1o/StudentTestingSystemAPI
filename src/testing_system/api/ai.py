@@ -5,7 +5,7 @@ from gigachat import GigaChat
 
 router = APIRouter(prefix='/ai')
 
-@router.get('/', response_model=str)
+@router.get('/get_ai_question', response_model=str)
 async def get_ai_question(request: str):
     giga = GigaChat(
         credentials="api_key",
