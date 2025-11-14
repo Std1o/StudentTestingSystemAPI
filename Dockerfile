@@ -22,7 +22,8 @@ RUN pip install pipenv && \
 
 COPY ./src /code/src
 COPY ./images /code/images
-COPY ./database.sqlite3 /code/
+COPY ./www.testingsystem.ru.crt /code/
+COPY ./www.testingsystem.ru.key /code/
 
 # Добавляем src в PYTHONPATH
 ENV PYTHONPATH=/code/src
