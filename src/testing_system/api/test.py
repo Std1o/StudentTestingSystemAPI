@@ -67,6 +67,11 @@ def get_result(course_id: int, test_id: int, user: User = Depends(get_current_us
                service: TestResultService = Depends()):
     return service.get_result(user.id, course_id, test_id)
 
+@router.get('/get_participant_result/{test_id}', response_model=TestResult)
+def get_participant_result(course_id: int, test_id: int, participant_id, user: User = Depends(get_current_user),
+               service: TestResultService = Depends()):
+    return service.get_participant_result(user.id, course_id, test_id, participant_id)
+
 
 @router.post('/results/{test_id}', response_model=TestResults)
 def get_results(course_id: int, test_id: int,

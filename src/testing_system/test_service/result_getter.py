@@ -61,3 +61,8 @@ class TestResultService(TestSearchingService):
                                  max_score=len(questions),
                                  score=score)
         return test_result
+
+    def get_participant_result(self, user_id: int, course_id: int, test_id: int, participant_id: int) -> TestResult:
+        self.check_for_moderator_rights(user_id=user_id, course_id=course_id)
+        return self.get_result(participant_id, course_id, test_id)
+

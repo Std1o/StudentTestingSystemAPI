@@ -2,3 +2,4 @@
 .idea/workspace.xml
 *.pyc
 /venv
+__pycache__/
