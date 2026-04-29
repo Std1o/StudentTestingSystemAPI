@@ -61,6 +61,11 @@ def delete_test(course_id: int, test_id: int, user: User = Depends(get_current_u
     service.delete(user.id, course_id, test_id)
     return Response(status_code=status.HTTP_204_NO_CONTENT)
 
+@router.delete('/')
+def delete_tests(service: TestDeletionService = Depends()):
+    service.delete_tests()
+    return Response(status_code=status.HTTP_204_NO_CONTENT)
+
 
 @router.get('/result/{test_id}', response_model=TestResult)
 def get_result(course_id: int, test_id: int, user: User = Depends(get_current_user),

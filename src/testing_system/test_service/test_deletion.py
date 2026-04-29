@@ -1,3 +1,5 @@
+from datetime import datetime, timedelta
+
 from fastapi import Depends
 from testing_system.test_service.test_getter import TestSearchingService
 from sqlalchemy.orm import Session
@@ -19,4 +21,14 @@ class TestDeletionService(TestSearchingService):
         self.check_for_moderator_rights(user_id, course_id)
         test_row = self.get_test(test_id)
         self.session.delete(test_row)
+        self.session.commit()
+
+    def delete_tests(self):
+        one_week_ago = datetime.now().date() - timedelta(days=7)
+
+        # Удаляем тесты
+        deleted_count = self.session.query(tables.Test).filter(
+            tables.Test.creation_time < one_week_ago
+        ).delete()
+
         self.session.commit()
